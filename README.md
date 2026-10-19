@@ -1,5 +1,7 @@
 # FinWhiz
 
+**Live app:** [FinWhiz on Replit](https://fin-whiz.replit.app/)
+
 Choose **OpenAI** or **Nebius Token Factory** in the top-bar AI provider selector. Selection applies to ingestion, semantic chunking, embeddings, reranking and research. See [provider setup and index commands](docs/AI_PROVIDERS.md). Each provider uses a separate compatible Pinecone embedding space; existing OpenAI documents are preserved.
 
 Financial Document Intelligence for investment analysts. A JavaScript frontend, Node API and background workers answer questions over uploaded SEC filings using table-aware hybrid retrieval and Pinecone. PostgreSQL is not used. Research starts empty and populates only after ingestion completes.
