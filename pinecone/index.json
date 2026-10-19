@@ -1,0 +1,18 @@
+{
+  "name": "finwhiz-filings-v1",
+  "vector_type": "dense",
+  "dimension": 1536,
+  "metric": "cosine",
+  "spec": {
+    "serverless": {
+      "cloud": "aws",
+      "region": "us-east-1"
+    }
+  },
+  "deletion_protection": "enabled",
+  "tags": {
+    "application": "finwhiz",
+    "embedding-model": "text-embedding-3-large",
+    "embedding-dimensions": "1536"
+  }
+}

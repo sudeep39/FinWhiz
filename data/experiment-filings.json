@@ -1,0 +1,216 @@
+{
+  "asOf": "2026-10-18",
+  "retrievedAt": "2026-10-18T23:56:27.224Z",
+  "source": "SEC EDGAR submissions API",
+  "definition": "Latest distinct fiscal reporting periods filed by the as-of date; active experiment uses eight for NVDA and TSLA, archived issuers retain four. 10-K covers the year including Q4, not standalone Q4 results. Amendments excluded.",
+  "companies": [
+    {
+      "rank": 1,
+      "name": "NVIDIA",
+      "tickers": [
+        "NVDA"
+      ],
+      "cik": "0001045810",
+      "secName": "NVIDIA CORP",
+      "sourceUrl": "https://data.sec.gov/submissions/CIK0001045810.json",
+      "filings": [
+        {
+          "form": "10-Q",
+          "reportDate": "2026-07-26",
+          "filingDate": "2026-08-26",
+          "accession": "0001045810-26-000075",
+          "document": "nvda-20260726.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/0001045810-26-000075-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2026-04-26",
+          "filingDate": "2026-05-20",
+          "accession": "0001045810-26-000052",
+          "document": "nvda-20260426.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/0001045810-26-000052-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-K",
+          "reportDate": "2026-01-25",
+          "filingDate": "2026-02-25",
+          "accession": "0001045810-26-000021",
+          "document": "nvda-20260125.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/0001045810-26-000021-index.html",
+          "coverage": "Annual report (includes fiscal Q4)"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2025-10-26",
+          "filingDate": "2025-11-19",
+          "accession": "0001045810-25-000230",
+          "document": "nvda-20251026.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/0001045810-25-000230-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2025-07-27",
+          "filingDate": "2025-08-27",
+          "accession": "0001045810-25-000209",
+          "document": "nvda-20250727.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/0001045810-25-000209-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2025-04-27",
+          "filingDate": "2025-05-28",
+          "accession": "0001045810-25-000116",
+          "document": "nvda-20250427.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/nvda-20250427.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/0001045810-25-000116-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-K",
+          "reportDate": "2025-01-26",
+          "filingDate": "2025-02-26",
+          "accession": "0001045810-25-000023",
+          "document": "nvda-20250126.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/0001045810-25-000023-index.html",
+          "coverage": "Annual report (includes fiscal Q4)"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2024-10-27",
+          "filingDate": "2024-11-20",
+          "accession": "0001045810-24-000316",
+          "document": "nvda-20241027.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000316/nvda-20241027.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000316/0001045810-24-000316-index.html",
+          "coverage": "Quarterly report"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "name": "Tesla",
+      "tickers": [
+        "TSLA"
+      ],
+      "cik": "0001318605",
+      "secName": "Tesla, Inc.",
+      "sourceUrl": "https://data.sec.gov/submissions/CIK0001318605.json",
+      "filings": [
+        {
+          "form": "10-Q",
+          "reportDate": "2026-06-30",
+          "filingDate": "2026-07-23",
+          "accession": "0001628280-26-049270",
+          "document": "tsla-20260630.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026049270/tsla-20260630.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026049270/0001628280-26-049270-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2026-03-31",
+          "filingDate": "2026-04-23",
+          "accession": "0001628280-26-026673",
+          "document": "tsla-20260331.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026026673/tsla-20260331.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026026673/0001628280-26-026673-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-K",
+          "reportDate": "2025-12-31",
+          "filingDate": "2026-01-29",
+          "accession": "0001628280-26-003952",
+          "document": "tsla-20251231.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/0001628280-26-003952-index.html",
+          "coverage": "Annual report (includes fiscal Q4)"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2025-09-30",
+          "filingDate": "2025-10-23",
+          "accession": "0001628280-25-045968",
+          "document": "tsla-20250930.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025045968/tsla-20250930.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025045968/0001628280-25-045968-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2025-06-30",
+          "filingDate": "2025-07-24",
+          "accession": "0001628280-25-035806",
+          "document": "tsla-20250630.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025035806/tsla-20250630.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025035806/0001628280-25-035806-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2025-03-31",
+          "filingDate": "2025-04-23",
+          "accession": "0001628280-25-018911",
+          "document": "tsla-20250331.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025018911/tsla-20250331.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025018911/0001628280-25-018911-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-K",
+          "reportDate": "2024-12-31",
+          "filingDate": "2025-01-30",
+          "accession": "0001628280-25-003063",
+          "document": "tsla-20241231.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025003063/tsla-20241231.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025003063/0001628280-25-003063-index.html",
+          "coverage": "Annual report (includes fiscal Q4)"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2024-09-30",
+          "filingDate": "2024-10-24",
+          "accession": "0001628280-24-043486",
+          "document": "tsla-20240930.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828024043486/tsla-20240930.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828024043486/0001628280-24-043486-index.html",
+          "coverage": "Quarterly report"
+        }
+      ]
+    }
+  ],
+  "experiment": {
+    "use_case": "Financial Document Intelligence",
+    "persona": "Investment analyst",
+    "tickers": [
+      "NVDA",
+      "TSLA"
+    ],
+    "periods_per_company": 8,
+    "as_of": "2026-10-18",
+    "retrieval_pattern": "table-aware hybrid",
+    "run_id": "nvda-tsla-8q-v1",
+    "planned_retrieval": {
+      "dense_candidates": 20,
+      "keyword_candidates": 20,
+      "fusion": "reciprocal rank fusion",
+      "rerank_candidates": 20,
+      "final_evidence": 5
+    },
+    "proposed_targets_not_measured": {
+      "faithfulness_percent": 95,
+      "p95_answer_latency_seconds": 15,
+      "evaluation_questions": 32
+    }
+  }
+}

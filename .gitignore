@@ -1,0 +1,20 @@
+__pycache__/
+*.py[cod]
+.venv/
+.cache/
+.runtime/
+.runtime-*/
+node_modules/
+artifacts/
+.backups/
+release/
+data/embeddings/
+data/chunks/
+data/parsed/
+data/parents/
+# Preserve downloaded sources locally; restore them with npm run download.
+data/filings/*/*.html
+data/filings/*/*.htm
+.env
+.env.*
+!.env.example

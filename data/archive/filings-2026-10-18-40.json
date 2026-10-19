@@ -1,0 +1,529 @@
+{
+  "asOf": "2026-10-18",
+  "retrievedAt": "2026-10-18T05:26:27.951Z",
+  "source": "SEC EDGAR submissions API",
+  "definition": "Latest four distinct fiscal reporting periods filed by the as-of date; 10-K represents the annual filing covering Q4, not standalone Q4 results. Amendments excluded.",
+  "companies": [
+    {
+      "rank": 1,
+      "name": "NVIDIA",
+      "tickers": [
+        "NVDA"
+      ],
+      "cik": "0001045810",
+      "secName": "NVIDIA CORP",
+      "sourceUrl": "https://data.sec.gov/submissions/CIK0001045810.json",
+      "filings": [
+        {
+          "form": "10-Q",
+          "reportDate": "2026-07-26",
+          "filingDate": "2026-08-26",
+          "accession": "0001045810-26-000075",
+          "document": "nvda-20260726.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/0001045810-26-000075-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2026-04-26",
+          "filingDate": "2026-05-20",
+          "accession": "0001045810-26-000052",
+          "document": "nvda-20260426.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/0001045810-26-000052-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-K",
+          "reportDate": "2026-01-25",
+          "filingDate": "2026-02-25",
+          "accession": "0001045810-26-000021",
+          "document": "nvda-20260125.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/0001045810-26-000021-index.html",
+          "coverage": "Annual report (includes fiscal Q4)"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2025-10-26",
+          "filingDate": "2025-11-19",
+          "accession": "0001045810-25-000230",
+          "document": "nvda-20251026.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/0001045810-25-000230-index.html",
+          "coverage": "Quarterly report"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "name": "Apple",
+      "tickers": [
+        "AAPL"
+      ],
+      "cik": "0000320193",
+      "secName": "Apple Inc.",
+      "sourceUrl": "https://data.sec.gov/submissions/CIK0000320193.json",
+      "filings": [
+        {
+          "form": "10-Q",
+          "reportDate": "2026-06-27",
+          "filingDate": "2026-07-31",
+          "accession": "0000320193-26-000020",
+          "document": "aapl-20260627.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/0000320193-26-000020-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2026-03-28",
+          "filingDate": "2026-05-01",
+          "accession": "0000320193-26-000013",
+          "document": "aapl-20260328.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000013/aapl-20260328.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000013/0000320193-26-000013-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2025-12-27",
+          "filingDate": "2026-01-30",
+          "accession": "0000320193-26-000006",
+          "document": "aapl-20251227.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000006/aapl-20251227.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000006/0000320193-26-000006-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-K",
+          "reportDate": "2025-09-27",
+          "filingDate": "2025-10-31",
+          "accession": "0000320193-25-000079",
+          "document": "aapl-20250927.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/0000320193-25-000079-index.html",
+          "coverage": "Annual report (includes fiscal Q4)"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "name": "Microsoft",
+      "tickers": [
+        "MSFT"
+      ],
+      "cik": "0000789019",
+      "secName": "MICROSOFT CORP",
+      "sourceUrl": "https://data.sec.gov/submissions/CIK0000789019.json",
+      "filings": [
+        {
+          "form": "10-K",
+          "reportDate": "2026-06-30",
+          "filingDate": "2026-07-29",
+          "accession": "0001193125-26-323660",
+          "document": "msft-20260630.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/0001193125-26-323660-index.html",
+          "coverage": "Annual report (includes fiscal Q4)"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2026-03-31",
+          "filingDate": "2026-04-29",
+          "accession": "0001193125-26-191507",
+          "document": "msft-20260331.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526191507/msft-20260331.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526191507/0001193125-26-191507-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2025-12-31",
+          "filingDate": "2026-01-28",
+          "accession": "0001193125-26-027207",
+          "document": "msft-20251231.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526027207/msft-20251231.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526027207/0001193125-26-027207-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2025-09-30",
+          "filingDate": "2025-10-29",
+          "accession": "0001193125-25-256321",
+          "document": "msft-20250930.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312525256321/msft-20250930.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312525256321/0001193125-25-256321-index.html",
+          "coverage": "Quarterly report"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "name": "Alphabet",
+      "tickers": [
+        "GOOGL",
+        "GOOG"
+      ],
+      "cik": "0001652044",
+      "secName": "Alphabet Inc.",
+      "sourceUrl": "https://data.sec.gov/submissions/CIK0001652044.json",
+      "filings": [
+        {
+          "form": "10-Q",
+          "reportDate": "2026-06-30",
+          "filingDate": "2026-07-23",
+          "accession": "0001652044-26-000071",
+          "document": "goog-20260630.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000071/goog-20260630.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000071/0001652044-26-000071-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2026-03-31",
+          "filingDate": "2026-04-30",
+          "accession": "0001652044-26-000048",
+          "document": "goog-20260331.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000048/goog-20260331.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000048/0001652044-26-000048-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-K",
+          "reportDate": "2025-12-31",
+          "filingDate": "2026-02-05",
+          "accession": "0001652044-26-000018",
+          "document": "goog-20251231.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/0001652044-26-000018-index.html",
+          "coverage": "Annual report (includes fiscal Q4)"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2025-09-30",
+          "filingDate": "2025-10-30",
+          "accession": "0001652044-25-000091",
+          "document": "goog-20250930.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204425000091/goog-20250930.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204425000091/0001652044-25-000091-index.html",
+          "coverage": "Quarterly report"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "name": "Amazon",
+      "tickers": [
+        "AMZN"
+      ],
+      "cik": "0001018724",
+      "secName": "AMAZON COM INC",
+      "sourceUrl": "https://data.sec.gov/submissions/CIK0001018724.json",
+      "filings": [
+        {
+          "form": "10-Q",
+          "reportDate": "2026-06-30",
+          "filingDate": "2026-07-31",
+          "accession": "0001018724-26-000026",
+          "document": "amzn-20260630.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000026/amzn-20260630.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000026/0001018724-26-000026-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2026-03-31",
+          "filingDate": "2026-04-30",
+          "accession": "0001018724-26-000014",
+          "document": "amzn-20260331.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000014/amzn-20260331.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000014/0001018724-26-000014-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-K",
+          "reportDate": "2025-12-31",
+          "filingDate": "2026-02-06",
+          "accession": "0001018724-26-000004",
+          "document": "amzn-20251231.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/0001018724-26-000004-index.html",
+          "coverage": "Annual report (includes fiscal Q4)"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2025-09-30",
+          "filingDate": "2025-10-31",
+          "accession": "0001018724-25-000123",
+          "document": "amzn-20250930.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872425000123/amzn-20250930.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872425000123/0001018724-25-000123-index.html",
+          "coverage": "Quarterly report"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "name": "Broadcom",
+      "tickers": [
+        "AVGO"
+      ],
+      "cik": "0001730168",
+      "secName": "Broadcom Inc.",
+      "sourceUrl": "https://data.sec.gov/submissions/CIK0001730168.json",
+      "filings": [
+        {
+          "form": "10-Q",
+          "reportDate": "2026-08-02",
+          "filingDate": "2026-09-10",
+          "accession": "0001730168-26-000080",
+          "document": "avgo-20260802.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000080/avgo-20260802.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000080/0001730168-26-000080-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2026-05-03",
+          "filingDate": "2026-06-09",
+          "accession": "0001730168-26-000054",
+          "document": "avgo-20260503.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000054/avgo-20260503.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000054/0001730168-26-000054-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2026-02-01",
+          "filingDate": "2026-03-11",
+          "accession": "0001730168-26-000016",
+          "document": "avgo-20260201.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000016/avgo-20260201.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000016/0001730168-26-000016-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-K",
+          "reportDate": "2025-11-02",
+          "filingDate": "2025-12-18",
+          "accession": "0001730168-25-000121",
+          "document": "avgo-20251102.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000121/avgo-20251102.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000121/0001730168-25-000121-index.html",
+          "coverage": "Annual report (includes fiscal Q4)"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "name": "Meta Platforms",
+      "tickers": [
+        "META"
+      ],
+      "cik": "0001326801",
+      "secName": "Meta Platforms, Inc.",
+      "sourceUrl": "https://data.sec.gov/submissions/CIK0001326801.json",
+      "filings": [
+        {
+          "form": "10-Q",
+          "reportDate": "2026-06-30",
+          "filingDate": "2026-07-30",
+          "accession": "0001628280-26-050705",
+          "document": "meta-20260630.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026050705/meta-20260630.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026050705/0001628280-26-050705-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2026-03-31",
+          "filingDate": "2026-04-30",
+          "accession": "0001628280-26-028526",
+          "document": "meta-20260331.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028526/meta-20260331.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028526/0001628280-26-028526-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-K",
+          "reportDate": "2025-12-31",
+          "filingDate": "2026-01-29",
+          "accession": "0001628280-26-003942",
+          "document": "meta-20251231.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026003942/meta-20251231.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026003942/0001628280-26-003942-index.html",
+          "coverage": "Annual report (includes fiscal Q4)"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2025-09-30",
+          "filingDate": "2025-10-30",
+          "accession": "0001628280-25-047240",
+          "document": "meta-20250930.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1326801/000162828025047240/meta-20250930.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828025047240/0001628280-25-047240-index.html",
+          "coverage": "Quarterly report"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "name": "Tesla",
+      "tickers": [
+        "TSLA"
+      ],
+      "cik": "0001318605",
+      "secName": "Tesla, Inc.",
+      "sourceUrl": "https://data.sec.gov/submissions/CIK0001318605.json",
+      "filings": [
+        {
+          "form": "10-Q",
+          "reportDate": "2026-06-30",
+          "filingDate": "2026-07-23",
+          "accession": "0001628280-26-049270",
+          "document": "tsla-20260630.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026049270/tsla-20260630.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026049270/0001628280-26-049270-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2026-03-31",
+          "filingDate": "2026-04-23",
+          "accession": "0001628280-26-026673",
+          "document": "tsla-20260331.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026026673/tsla-20260331.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026026673/0001628280-26-026673-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-K",
+          "reportDate": "2025-12-31",
+          "filingDate": "2026-01-29",
+          "accession": "0001628280-26-003952",
+          "document": "tsla-20251231.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/0001628280-26-003952-index.html",
+          "coverage": "Annual report (includes fiscal Q4)"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2025-09-30",
+          "filingDate": "2025-10-23",
+          "accession": "0001628280-25-045968",
+          "document": "tsla-20250930.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025045968/tsla-20250930.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025045968/0001628280-25-045968-index.html",
+          "coverage": "Quarterly report"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "name": "Berkshire Hathaway",
+      "tickers": [
+        "BRK.B"
+      ],
+      "cik": "0001067983",
+      "secName": "BERKSHIRE HATHAWAY INC",
+      "sourceUrl": "https://data.sec.gov/submissions/CIK0001067983.json",
+      "filings": [
+        {
+          "form": "10-Q",
+          "reportDate": "2026-06-30",
+          "filingDate": "2026-08-10",
+          "accession": "0001193125-26-341032",
+          "document": "brka-20260630.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/0001193125-26-341032-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2026-03-31",
+          "filingDate": "2026-05-04",
+          "accession": "0001193125-26-202243",
+          "document": "brka-20260331.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526202243/brka-20260331.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526202243/0001193125-26-202243-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-K",
+          "reportDate": "2025-12-31",
+          "filingDate": "2026-03-02",
+          "accession": "0001193125-26-083899",
+          "document": "brka-20251231.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/0001193125-26-083899-index.html",
+          "coverage": "Annual report (includes fiscal Q4)"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2025-09-30",
+          "filingDate": "2025-11-03",
+          "accession": "0001193125-25-261548",
+          "document": "brka-20250930.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1067983/000119312525261548/brka-20250930.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/1067983/000119312525261548/0001193125-25-261548-index.html",
+          "coverage": "Quarterly report"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "name": "JPMorgan Chase",
+      "tickers": [
+        "JPM"
+      ],
+      "cik": "0000019617",
+      "secName": "JPMORGAN CHASE & CO",
+      "sourceUrl": "https://data.sec.gov/submissions/CIK0000019617.json",
+      "filings": [
+        {
+          "form": "10-Q",
+          "reportDate": "2026-06-30",
+          "filingDate": "2026-08-06",
+          "accession": "0001628280-26-054343",
+          "document": "jpm-20260630.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026054343/jpm-20260630.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/19617/000162828026054343/0001628280-26-054343-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2026-03-31",
+          "filingDate": "2026-05-01",
+          "accession": "0001628280-26-029344",
+          "document": "jpm-20260331.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026029344/jpm-20260331.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/19617/000162828026029344/0001628280-26-029344-index.html",
+          "coverage": "Quarterly report"
+        },
+        {
+          "form": "10-K",
+          "reportDate": "2025-12-31",
+          "filingDate": "2026-02-13",
+          "accession": "0001628280-26-008131",
+          "document": "jpm-20251231.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/0001628280-26-008131-index.html",
+          "coverage": "Annual report (includes fiscal Q4)"
+        },
+        {
+          "form": "10-Q",
+          "reportDate": "2025-09-30",
+          "filingDate": "2025-11-04",
+          "accession": "0001628280-25-048859",
+          "document": "jpm-20250930.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828025048859/jpm-20250930.htm",
+          "indexUrl": "https://www.sec.gov/Archives/edgar/data/19617/000162828025048859/0001628280-25-048859-index.html",
+          "coverage": "Quarterly report"
+        }
+      ]
+    }
+  ]
+}

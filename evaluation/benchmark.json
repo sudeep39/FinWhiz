@@ -1,0 +1,1177 @@
+[
+  {
+    "id": "B01",
+    "pattern": "quarterly-table",
+    "question": "What total revenue does NVDA report for the three-month quarter ended 2026-07-26? State currency and scale; distinguish quarterly from YTD values.",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2026-07-26"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "NVDA",
+        "reportDate": "2026-07-26",
+        "accession": "0001045810-26-000075",
+        "sourceSha256": "2c314690781f67d2b9139a60e5bb485fe2eb153ae8385b2b0e6cbd74505b6b56",
+        "contains": [
+          "Total revenue",
+          "96,221"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+        "sourceQuote": "| Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended |  | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended\n | Jul 26, 2026 | Jul 26, 2026 | Jul 26, 2026 |  | Jul 27, 2025 | Jul 27, 2025 | Jul 27, 2025 |  | Jul 26, 2026 | Jul 26, 2026 | Jul 26, 2026 |  | Jul 27, 2025 | Jul 27, 2025 | Jul 27, 2025\n | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions)\nTotal revenue | $ | 96,221 |  |  | $ | 46,743 |  |  | $ | 177,837 |  |  | $ | 90,805 |"
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B02",
+    "pattern": "quarterly-table",
+    "question": "What total revenue does NVDA report for the three-month quarter ended 2026-04-26? State currency and scale; distinguish quarterly from YTD values.",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2026-04-26"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "NVDA",
+        "reportDate": "2026-04-26",
+        "accession": "0001045810-26-000052",
+        "sourceSha256": "71ed8308519466e2bf2d4b0757b05426c16efccbfe12d6eba25fd96b8efc638e",
+        "contains": [
+          "Total revenue",
+          "81,615"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426.htm",
+        "sourceQuote": "| Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended\n | Apr 26, 2026 | Apr 26, 2026 | Apr 26, 2026 |  | Apr 27, 2025 | Apr 27, 2025 | Apr 27, 2025\n | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions)\nTotal revenue | $ | 81,615 |  |  | $ | 44,062 |"
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B03",
+    "pattern": "annual-table",
+    "question": "What total revenue does NVDA report for the full fiscal year ended 2026-01-25? State currency and scale; distinguish quarterly from YTD values.",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2026-01-25"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "NVDA",
+        "reportDate": "2026-01-25",
+        "accession": "0001045810-26-000021",
+        "sourceSha256": "cd8363c5f64dfb7398df38a902b2e68fc6765b78443c7d5cc698c6a586318485",
+        "contains": [
+          "Total revenue",
+          "215,938"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "sourceQuote": "| Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended\n | Jan 25, 2026 | Jan 25, 2026 | Jan 25, 2026 |  | Jan 26, 2025 | Jan 26, 2025 | Jan 26, 2025 |  | Jan 28, 2024 | Jan 28, 2024 | Jan 28, 2024\nGeographic Revenue based upon Customer Headquarters Location (1): | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions)\nTotal revenue | $ | 215,938 |  |  | $ | 130,497 |  |  | $ | 60,922 |"
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B04",
+    "pattern": "quarterly-table",
+    "question": "What total revenue does NVDA report for the three-month quarter ended 2025-10-26? State currency and scale; distinguish quarterly from YTD values.",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2025-10-26"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "NVDA",
+        "reportDate": "2025-10-26",
+        "accession": "0001045810-25-000230",
+        "sourceSha256": "c18238f7190f676e288e9c96b4e9b43cf1a1b1a9e162cf4cef3114ef3d3923b5",
+        "contains": [
+          "Total revenue",
+          "57,006"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm",
+        "sourceQuote": "| Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended |  | Nine Months Ended | Nine Months Ended | Nine Months Ended | Nine Months Ended | Nine Months Ended | Nine Months Ended | Nine Months Ended\n | Oct 26, 2025 | Oct 26, 2025 | Oct 26, 2025 |  | Oct 27, 2024 | Oct 27, 2024 | Oct 27, 2024 |  | Oct 26, 2025 | Oct 26, 2025 | Oct 26, 2025 |  | Oct 27, 2024 | Oct 27, 2024 | Oct 27, 2024\n | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions)\nTotal revenue | $ | 57,006 |  |  | $ | 35,082 |  |  | $ | 147,811 |  |  | $ | 91,166 |"
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B05",
+    "pattern": "quarterly-table",
+    "question": "What total revenue does NVDA report for the three-month quarter ended 2025-07-27? State currency and scale; distinguish quarterly from YTD values.",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2025-07-27"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "NVDA",
+        "reportDate": "2025-07-27",
+        "accession": "0001045810-25-000209",
+        "sourceSha256": "7701bf9f6ffa9d95ca82d7ce583a50b7ef7e306e386c08600a2f91ce66fc5715",
+        "contains": [
+          "Total revenue",
+          "46,743"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm",
+        "sourceQuote": "| Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended |  | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended\n | Jul 27, 2025 | Jul 27, 2025 | Jul 27, 2025 |  | Jul 28, 2024 | Jul 28, 2024 | Jul 28, 2024 |  | Jul 27, 2025 | Jul 27, 2025 | Jul 27, 2025 |  | Jul 28, 2024 | Jul 28, 2024 | Jul 28, 2024\n | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions)\nTotal revenue | $ | 46,743 |  |  | $ | 30,040 |  |  | $ | 90,805 |  |  | $ | 56,084 |"
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B06",
+    "pattern": "quarterly-table",
+    "question": "What total revenue does NVDA report for the three-month quarter ended 2025-04-27? State currency and scale; distinguish quarterly from YTD values.",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2025-04-27"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "NVDA",
+        "reportDate": "2025-04-27",
+        "accession": "0001045810-25-000116",
+        "sourceSha256": "711f7de9bd27adbc4e82bc975d5ee47c1fc37ec3a15eb0d7c3af05a00f28bb5c",
+        "contains": [
+          "Total revenue",
+          "44,062"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/nvda-20250427.htm",
+        "sourceQuote": "| Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended\n | Apr 27, 2025 | Apr 27, 2025 | Apr 27, 2025 |  | Apr 28, 2024 | Apr 28, 2024 | Apr 28, 2024\n | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions)\nTotal revenue | $ | 44,062 |  |  | $ | 26,044 |"
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B07",
+    "pattern": "annual-table",
+    "question": "What total revenue does NVDA report for the full fiscal year ended 2025-01-26? State currency and scale; distinguish quarterly from YTD values.",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2025-01-26"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "NVDA",
+        "reportDate": "2025-01-26",
+        "accession": "0001045810-25-000023",
+        "sourceSha256": "4e3a3dab1ae0009442ff1066a68637e66854f7e9f6a502f503024ae706840043",
+        "contains": [
+          "Total revenue",
+          "130,497"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
+        "sourceQuote": "| Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended\n | Jan 26, 2025 | Jan 26, 2025 | Jan 26, 2025 |  | Jan 28, 2024 | Jan 28, 2024 | Jan 28, 2024 |  | Jan 29, 2023 | Jan 29, 2023 | Jan 29, 2023\nGeographic Revenue based upon Customer Billing Location: | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions)\nTotal revenue | $ | 130,497 |  |  | $ | 60,922 |  |  | $ | 26,974 |"
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B08",
+    "pattern": "quarterly-table",
+    "question": "What total revenue does NVDA report for the three-month quarter ended 2024-10-27? State currency and scale; distinguish quarterly from YTD values.",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2024-10-27"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "NVDA",
+        "reportDate": "2024-10-27",
+        "accession": "0001045810-24-000316",
+        "sourceSha256": "b269c48624aa69c2e092845bfa669f43e34f7b03e0b254f5a9005ad29dccac4a",
+        "contains": [
+          "Total revenue",
+          "35,082"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000316/nvda-20241027.htm",
+        "sourceQuote": "| Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended |  | Nine Months Ended | Nine Months Ended | Nine Months Ended | Nine Months Ended | Nine Months Ended | Nine Months Ended | Nine Months Ended\n | Oct 27, 2024 | Oct 27, 2024 | Oct 27, 2024 |  | Oct 29, 2023 | Oct 29, 2023 | Oct 29, 2023 |  | Oct 27, 2024 | Oct 27, 2024 | Oct 27, 2024 |  | Oct 29, 2023 | Oct 29, 2023 | Oct 29, 2023\n | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions)\nTotal revenue | $ | 35,082 |  |  | $ | 18,120 |  |  | $ | 91,166 |  |  | $ | 38,819 |"
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B09",
+    "pattern": "quarterly-table",
+    "question": "What total revenue does TSLA report for the three-month quarter ended 2026-06-30? State currency and scale; distinguish quarterly from YTD values.",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2026-06-30"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "TSLA",
+        "reportDate": "2026-06-30",
+        "accession": "0001628280-26-049270",
+        "sourceSha256": "f0b7bb0866f29ed758dec0b8d5ddf168baaa02efde6bd8097514e6546f555c1c",
+        "contains": [
+          "Total revenues",
+          "28,236"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026049270/tsla-20260630.htm",
+        "sourceQuote": "| Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30,\n | 2026 | 2026 | 2026 |  | 2025 | 2025 | 2025 | 2026 | 2026 | 2026 |  | 2025 | 2025 | 2025\nRevenues |  |  |  |  |  |  |  |  |  |  |  |  |  | \nTotal revenues | 28,236 | 28,236 |  |  | 22,496 | 22,496 |  | 50,623 | 50,623 |  |  | 41,831 | 41,831 | "
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B10",
+    "pattern": "quarterly-table",
+    "question": "What total revenue does TSLA report for the three-month quarter ended 2026-03-31? State currency and scale; distinguish quarterly from YTD values.",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2026-03-31"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "TSLA",
+        "reportDate": "2026-03-31",
+        "accession": "0001628280-26-026673",
+        "sourceSha256": "22dad42a6a9d638eecdae2bea13093e698264a9decdc4ef361d347fb616fa8bd",
+        "contains": [
+          "Total revenues",
+          "22,387"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026026673/tsla-20260331.htm",
+        "sourceQuote": "| Three Months Ended March 31, | Three Months Ended March 31, | Three Months Ended March 31, | Three Months Ended March 31, | Three Months Ended March 31, | Three Months Ended March 31, | Three Months Ended March 31,\n | 2026 | 2026 | 2026 |  | 2025 | 2025 | 2025\nRevenues |  |  |  |  |  |  | \nTotal revenues | 22,387 | 22,387 |  |  | 19,335 | 19,335 | "
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B11",
+    "pattern": "annual-table",
+    "question": "What total revenue does TSLA report for the full fiscal year ended 2025-12-31? State currency and scale; distinguish quarterly from YTD values.",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2025-12-31"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "TSLA",
+        "reportDate": "2025-12-31",
+        "accession": "0001628280-26-003952",
+        "sourceSha256": "919e3acf7c3b73f5e54d16b3f8e9f906a5e9c7854a64ffd833e4e3d0eda159c3",
+        "contains": [
+          "Total revenues",
+          "94,827"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+        "sourceQuote": "| Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change\n(Dollars in millions) | 2025 | 2025 | 2025 |  | 2024 | 2024 | 2024 |  | 2023 | 2023 | 2023 | $ | $ | $ |  | % | % | $ | $ | $ |  | % | %\nAutomotive sales | $ | 65,821 |  |  | $ | 72,480 |  |  | $ | 78,509 |  | $ | (6,659) |  |  | (9) | % | $ | (6,029) |  |  | (8) | %\nTotal revenues | $ | 94,827 |  |  | $ | 97,690 |  |  | $ | 96,773 |  | $ | (2,863) |  |  | (3) | % | $ | 917 |  |  | 1 | %"
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B12",
+    "pattern": "quarterly-table",
+    "question": "What total revenue does TSLA report for the three-month quarter ended 2025-09-30? State currency and scale; distinguish quarterly from YTD values.",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2025-09-30"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "TSLA",
+        "reportDate": "2025-09-30",
+        "accession": "0001628280-25-045968",
+        "sourceSha256": "4feafff8f6db6abbd45ca04d5fe118b080ef79f997def08ec1dc99d4a79cb136",
+        "contains": [
+          "Total revenues",
+          "28,095"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025045968/tsla-20250930.htm",
+        "sourceQuote": "| Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30,\n | 2025 | 2025 | 2025 |  | 2024 | 2024 | 2024 | 2025 | 2025 | 2025 |  | 2024 | 2024 | 2024\nRevenues |  |  |  |  |  |  |  |  |  |  |  |  |  | \nTotal revenues | 28,095 | 28,095 |  |  | 25,182 | 25,182 |  | 69,926 | 69,926 |  |  | 71,983 | 71,983 | "
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B13",
+    "pattern": "quarterly-table",
+    "question": "What total revenue does TSLA report for the three-month quarter ended 2025-06-30? State currency and scale; distinguish quarterly from YTD values.",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2025-06-30"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "TSLA",
+        "reportDate": "2025-06-30",
+        "accession": "0001628280-25-035806",
+        "sourceSha256": "d6c0ed742e6cac9b111a3cfcc9bef5bd618de748cc85c053b9e07c4143195b15",
+        "contains": [
+          "Total revenues",
+          "22,496"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025035806/tsla-20250630.htm",
+        "sourceQuote": "| Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30,\n | 2025 | 2025 | 2025 |  | 2024 | 2024 | 2024 | 2025 | 2025 | 2025 |  | 2024 | 2024 | 2024\nRevenues |  |  |  |  |  |  |  |  |  |  |  |  |  | \nTotal revenues | 22,496 | 22,496 |  |  | 25,500 | 25,500 |  | 41,831 | 41,831 |  |  | 46,801 | 46,801 | "
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B14",
+    "pattern": "quarterly-table",
+    "question": "What total revenue does TSLA report for the three-month quarter ended 2025-03-31? State currency and scale; distinguish quarterly from YTD values.",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2025-03-31"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "TSLA",
+        "reportDate": "2025-03-31",
+        "accession": "0001628280-25-018911",
+        "sourceSha256": "f453360c982ff9cc63e836ad8084def9742e03070c07e18daf7a5fc0d3155c45",
+        "contains": [
+          "Total revenues",
+          "19,335"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025018911/tsla-20250331.htm",
+        "sourceQuote": "| Three Months Ended March 31, | Three Months Ended March 31, | Three Months Ended March 31, | Three Months Ended March 31, | Three Months Ended March 31, | Three Months Ended March 31, | Three Months Ended March 31,\n | 2025 | 2025 | 2025 |  | 2024 | 2024 | 2024\nRevenues |  |  |  |  |  |  | \nTotal revenues | 19,335 | 19,335 |  |  | 21,301 | 21,301 | "
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B15",
+    "pattern": "annual-table",
+    "question": "What total revenue does TSLA report for the full fiscal year ended 2024-12-31? State currency and scale; distinguish quarterly from YTD values.",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2024-12-31"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "TSLA",
+        "reportDate": "2024-12-31",
+        "accession": "0001628280-25-003063",
+        "sourceSha256": "3823e2e3fbcfbd40f2d67b1036a23209efd842ce05b328211bc41ad547736560",
+        "contains": [
+          "Total revenues",
+          "97,690"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025003063/tsla-20241231.htm",
+        "sourceQuote": "| Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2023 vs. 2022 Change | 2023 vs. 2022 Change | 2023 vs. 2022 Change | 2023 vs. 2022 Change | 2023 vs. 2022 Change | 2023 vs. 2022 Change\n(Dollars in millions) | 2024 | 2024 | 2024 |  | 2023 | 2023 | 2023 |  | 2022 | 2022 | 2022 | $ | $ | $ |  | % | % | $ | $ | $ |  | % | %\nAutomotive sales | $ | 72,480 |  |  | $ | 78,509 |  |  | $ | 67,210 |  | $ | (6,029) |  |  | (8) | % | $ | 11,299 |  |  | 17 | %\nTotal revenues | $ | 97,690 |  |  | $ | 96,773 |  |  | $ | 81,462 |  | $ | 917 |  |  | 1 | % | $ | 15,311 |  |  | 19 | %"
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B16",
+    "pattern": "quarterly-table",
+    "question": "What total revenue does TSLA report for the three-month quarter ended 2024-09-30? State currency and scale; distinguish quarterly from YTD values.",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2024-09-30"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "TSLA",
+        "reportDate": "2024-09-30",
+        "accession": "0001628280-24-043486",
+        "sourceSha256": "8d55cec2f5e67a7406040982af7de8d842be2337098134a0c583653c845270bd",
+        "contains": [
+          "Total revenues",
+          "25,182"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828024043486/tsla-20240930.htm",
+        "sourceQuote": "| Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30,\n | 2024 | 2024 | 2024 |  | 2023 | 2023 | 2023 | 2024 | 2024 | 2024 |  | 2023 | 2023 | 2023\nRevenues |  |  |  |  |  |  |  |  |  |  |  |  |  | \nTotal revenues | 25,182 | 25,182 |  |  | 23,350 | 23,350 |  | 71,983 | 71,983 |  |  | 71,606 | 71,606 | "
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B17",
+    "pattern": "segment",
+    "question": "What Data Center revenue does NVIDIA report for its latest three-month quarter?",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2026-07-26"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "NVDA",
+        "reportDate": "2026-07-26",
+        "accession": "0001045810-26-000075",
+        "sourceSha256": "2c314690781f67d2b9139a60e5bb485fe2eb153ae8385b2b0e6cbd74505b6b56",
+        "contains": [
+          "Data Center",
+          "89,023"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+        "sourceQuote": "| Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended |  | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended\n | Jul 26, 2026 | Jul 26, 2026 | Jul 26, 2026 |  | Jul 27, 2025 | Jul 27, 2025 | Jul 27, 2025 |  | Jul 26, 2026 | Jul 26, 2026 | Jul 26, 2026 |  | Jul 27, 2025 | Jul 27, 2025 | Jul 27, 2025\n | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions)\nData Center | $ | 89,023 |  |  | $ | 41,096 |  |  | $ | 164,269 |  |  | $ | 80,208 | "
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B18",
+    "pattern": "exact-term",
+    "question": "What automotive regulatory credits does Tesla report in its latest three-month quarter?",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2026-06-30"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "TSLA",
+        "reportDate": "2026-06-30",
+        "accession": "0001628280-26-049270",
+        "sourceSha256": "f0b7bb0866f29ed758dec0b8d5ddf168baaa02efde6bd8097514e6546f555c1c",
+        "contains": [
+          "Automotive regulatory credits",
+          "146"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026049270/tsla-20260630.htm",
+        "sourceQuote": "| Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30,\n | 2026 | 2026 | 2026 |  | 2025 | 2025 | 2025 | 2026 | 2026 | 2026 |  | 2025 | 2025 | 2025\nRevenues |  |  |  |  |  |  |  |  |  |  |  |  |  | \nAutomotive regulatory credits | 146 | 146 |  |  | 439 | 439 |  | 526 | 526 |  |  | 1,034 | 1,034 | "
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B19",
+    "pattern": "narrative-risk",
+    "question": "What export-control risks does NVIDIA disclose in its latest annual filing?",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2026-01-25"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "NVDA",
+        "reportDate": "2026-01-25",
+        "accession": "0001045810-26-000021",
+        "sourceSha256": "cd8363c5f64dfb7398df38a902b2e68fc6765b78443c7d5cc698c6a586318485",
+        "contains": [
+          "export control"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "sourceQuote": "side the United States. The market in China, where our offerings are limited by export controls, is highly competitive and we expect it to remain competitive going forward. The global nature of our business subjects us to a number of risks and uncertainties, which have had in the past and could in the future have a material adverse effect on our business, financial condition and results of operations. These include domestic and international econ"
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B20",
+    "pattern": "narrative-risk",
+    "question": "What competition risks does Tesla disclose in its latest annual filing?",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2025-12-31"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "TSLA",
+        "reportDate": "2025-12-31",
+        "accession": "0001628280-26-003952",
+        "sourceSha256": "919e3acf7c3b73f5e54d16b3f8e9f906a5e9c7854a64ffd833e4e3d0eda159c3",
+        "contains": [
+          "competition"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+        "sourceQuote": "autonomous driving solutions, and Robotaxi as a preferable option, amid growing competition. If the uptake rate for autonomous driving solutions does not develop as we expect, our business, prospects, financial condition and operating results may be harmed."
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B21",
+    "pattern": "derived-q4",
+    "question": "Derive NVDA fourth-quarter revenue for the fiscal year ended 2026-01-25 from annual and matching nine-month amounts. Cite both inputs; show the subtraction.",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2025-10-26",
+      "2026-01-25"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "NVDA",
+        "reportDate": "2026-01-25",
+        "accession": "0001045810-26-000021",
+        "sourceSha256": "cd8363c5f64dfb7398df38a902b2e68fc6765b78443c7d5cc698c6a586318485",
+        "contains": [
+          "Total revenue",
+          "215,938"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "sourceQuote": "| Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended\n | Jan 25, 2026 | Jan 25, 2026 | Jan 25, 2026 |  | Jan 26, 2025 | Jan 26, 2025 | Jan 26, 2025 |  | Jan 28, 2024 | Jan 28, 2024 | Jan 28, 2024\nGeographic Revenue based upon Customer Headquarters Location (1): | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions)\nTotal revenue | $ | 215,938 |  |  | $ | 130,497 |  |  | $ | 60,922 |"
+      },
+      {
+        "ticker": "NVDA",
+        "reportDate": "2025-10-26",
+        "accession": "0001045810-25-000230",
+        "sourceSha256": "c18238f7190f676e288e9c96b4e9b43cf1a1b1a9e162cf4cef3114ef3d3923b5",
+        "contains": [
+          "Total revenue",
+          "147,811"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm",
+        "sourceQuote": "| Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended |  | Nine Months Ended | Nine Months Ended | Nine Months Ended | Nine Months Ended | Nine Months Ended | Nine Months Ended | Nine Months Ended\n | Oct 26, 2025 | Oct 26, 2025 | Oct 26, 2025 |  | Oct 27, 2024 | Oct 27, 2024 | Oct 27, 2024 |  | Oct 26, 2025 | Oct 26, 2025 | Oct 26, 2025 |  | Oct 27, 2024 | Oct 27, 2024 | Oct 27, 2024\n | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions)\nTotal revenue | $ | 57,006 |  |  | $ | 35,082 |  |  | $ | 147,811 |  |  | $ | 91,166 |"
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B22",
+    "pattern": "derived-q4",
+    "question": "Derive TSLA fourth-quarter revenue for the fiscal year ended 2025-12-31 from annual and matching nine-month amounts. Cite both inputs; show the subtraction.",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2025-09-30",
+      "2025-12-31"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "TSLA",
+        "reportDate": "2025-12-31",
+        "accession": "0001628280-26-003952",
+        "sourceSha256": "919e3acf7c3b73f5e54d16b3f8e9f906a5e9c7854a64ffd833e4e3d0eda159c3",
+        "contains": [
+          "Total revenues",
+          "94,827"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+        "sourceQuote": "| Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change\n(Dollars in millions) | 2025 | 2025 | 2025 |  | 2024 | 2024 | 2024 |  | 2023 | 2023 | 2023 | $ | $ | $ |  | % | % | $ | $ | $ |  | % | %\nAutomotive sales | $ | 65,821 |  |  | $ | 72,480 |  |  | $ | 78,509 |  | $ | (6,659) |  |  | (9) | % | $ | (6,029) |  |  | (8) | %\nTotal revenues | $ | 94,827 |  |  | $ | 97,690 |  |  | $ | 96,773 |  | $ | (2,863) |  |  | (3) | % | $ | 917 |  |  | 1 | %"
+      },
+      {
+        "ticker": "TSLA",
+        "reportDate": "2025-09-30",
+        "accession": "0001628280-25-045968",
+        "sourceSha256": "4feafff8f6db6abbd45ca04d5fe118b080ef79f997def08ec1dc99d4a79cb136",
+        "contains": [
+          "Total revenues",
+          "69,926"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025045968/tsla-20250930.htm",
+        "sourceQuote": "| Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30,\n | 2025 | 2025 | 2025 |  | 2024 | 2024 | 2024 | 2025 | 2025 | 2025 |  | 2024 | 2024 | 2024\nRevenues |  |  |  |  |  |  |  |  |  |  |  |  |  | \nTotal revenues | 28,095 | 28,095 |  |  | 25,182 | 25,182 |  | 69,926 | 69,926 |  |  | 71,983 | 71,983 | "
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B23",
+    "pattern": "eight-period-trend",
+    "question": "Show NVDA revenue over all eight selected fiscal period ends. Annual reports are annual totals; derive standalone Q4 only when nine-month inputs support it. Do not mix annual and quarterly values in a single trend.",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2024-10-27",
+      "2025-01-26",
+      "2025-04-27",
+      "2025-07-27",
+      "2025-10-26",
+      "2026-01-25",
+      "2026-04-26",
+      "2026-07-26"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "NVDA",
+        "reportDate": "2026-07-26",
+        "accession": "0001045810-26-000075",
+        "sourceSha256": "2c314690781f67d2b9139a60e5bb485fe2eb153ae8385b2b0e6cbd74505b6b56",
+        "contains": [
+          "Total revenue",
+          "96,221"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+        "sourceQuote": "| Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended |  | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended\n | Jul 26, 2026 | Jul 26, 2026 | Jul 26, 2026 |  | Jul 27, 2025 | Jul 27, 2025 | Jul 27, 2025 |  | Jul 26, 2026 | Jul 26, 2026 | Jul 26, 2026 |  | Jul 27, 2025 | Jul 27, 2025 | Jul 27, 2025\n | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions)\nTotal revenue | $ | 96,221 |  |  | $ | 46,743 |  |  | $ | 177,837 |  |  | $ | 90,805 |"
+      },
+      {
+        "ticker": "NVDA",
+        "reportDate": "2026-04-26",
+        "accession": "0001045810-26-000052",
+        "sourceSha256": "71ed8308519466e2bf2d4b0757b05426c16efccbfe12d6eba25fd96b8efc638e",
+        "contains": [
+          "Total revenue",
+          "81,615"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426.htm",
+        "sourceQuote": "| Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended\n | Apr 26, 2026 | Apr 26, 2026 | Apr 26, 2026 |  | Apr 27, 2025 | Apr 27, 2025 | Apr 27, 2025\n | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions)\nTotal revenue | $ | 81,615 |  |  | $ | 44,062 |"
+      },
+      {
+        "ticker": "NVDA",
+        "reportDate": "2026-01-25",
+        "accession": "0001045810-26-000021",
+        "sourceSha256": "cd8363c5f64dfb7398df38a902b2e68fc6765b78443c7d5cc698c6a586318485",
+        "contains": [
+          "Total revenue",
+          "215,938"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "sourceQuote": "| Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended\n | Jan 25, 2026 | Jan 25, 2026 | Jan 25, 2026 |  | Jan 26, 2025 | Jan 26, 2025 | Jan 26, 2025 |  | Jan 28, 2024 | Jan 28, 2024 | Jan 28, 2024\nGeographic Revenue based upon Customer Headquarters Location (1): | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions)\nTotal revenue | $ | 215,938 |  |  | $ | 130,497 |  |  | $ | 60,922 |"
+      },
+      {
+        "ticker": "NVDA",
+        "reportDate": "2025-10-26",
+        "accession": "0001045810-25-000230",
+        "sourceSha256": "c18238f7190f676e288e9c96b4e9b43cf1a1b1a9e162cf4cef3114ef3d3923b5",
+        "contains": [
+          "Total revenue",
+          "57,006"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm",
+        "sourceQuote": "| Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended |  | Nine Months Ended | Nine Months Ended | Nine Months Ended | Nine Months Ended | Nine Months Ended | Nine Months Ended | Nine Months Ended\n | Oct 26, 2025 | Oct 26, 2025 | Oct 26, 2025 |  | Oct 27, 2024 | Oct 27, 2024 | Oct 27, 2024 |  | Oct 26, 2025 | Oct 26, 2025 | Oct 26, 2025 |  | Oct 27, 2024 | Oct 27, 2024 | Oct 27, 2024\n | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions)\nTotal revenue | $ | 57,006 |  |  | $ | 35,082 |  |  | $ | 147,811 |  |  | $ | 91,166 |"
+      },
+      {
+        "ticker": "NVDA",
+        "reportDate": "2025-07-27",
+        "accession": "0001045810-25-000209",
+        "sourceSha256": "7701bf9f6ffa9d95ca82d7ce583a50b7ef7e306e386c08600a2f91ce66fc5715",
+        "contains": [
+          "Total revenue",
+          "46,743"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm",
+        "sourceQuote": "| Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended |  | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended\n | Jul 27, 2025 | Jul 27, 2025 | Jul 27, 2025 |  | Jul 28, 2024 | Jul 28, 2024 | Jul 28, 2024 |  | Jul 27, 2025 | Jul 27, 2025 | Jul 27, 2025 |  | Jul 28, 2024 | Jul 28, 2024 | Jul 28, 2024\n | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions)\nTotal revenue | $ | 46,743 |  |  | $ | 30,040 |  |  | $ | 90,805 |  |  | $ | 56,084 |"
+      },
+      {
+        "ticker": "NVDA",
+        "reportDate": "2025-04-27",
+        "accession": "0001045810-25-000116",
+        "sourceSha256": "711f7de9bd27adbc4e82bc975d5ee47c1fc37ec3a15eb0d7c3af05a00f28bb5c",
+        "contains": [
+          "Total revenue",
+          "44,062"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/nvda-20250427.htm",
+        "sourceQuote": "| Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended\n | Apr 27, 2025 | Apr 27, 2025 | Apr 27, 2025 |  | Apr 28, 2024 | Apr 28, 2024 | Apr 28, 2024\n | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions)\nTotal revenue | $ | 44,062 |  |  | $ | 26,044 |"
+      },
+      {
+        "ticker": "NVDA",
+        "reportDate": "2025-01-26",
+        "accession": "0001045810-25-000023",
+        "sourceSha256": "4e3a3dab1ae0009442ff1066a68637e66854f7e9f6a502f503024ae706840043",
+        "contains": [
+          "Total revenue",
+          "130,497"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
+        "sourceQuote": "| Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended\n | Jan 26, 2025 | Jan 26, 2025 | Jan 26, 2025 |  | Jan 28, 2024 | Jan 28, 2024 | Jan 28, 2024 |  | Jan 29, 2023 | Jan 29, 2023 | Jan 29, 2023\nGeographic Revenue based upon Customer Billing Location: | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions)\nTotal revenue | $ | 130,497 |  |  | $ | 60,922 |  |  | $ | 26,974 |"
+      },
+      {
+        "ticker": "NVDA",
+        "reportDate": "2024-10-27",
+        "accession": "0001045810-24-000316",
+        "sourceSha256": "b269c48624aa69c2e092845bfa669f43e34f7b03e0b254f5a9005ad29dccac4a",
+        "contains": [
+          "Total revenue",
+          "35,082"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000316/nvda-20241027.htm",
+        "sourceQuote": "| Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended |  | Nine Months Ended | Nine Months Ended | Nine Months Ended | Nine Months Ended | Nine Months Ended | Nine Months Ended | Nine Months Ended\n | Oct 27, 2024 | Oct 27, 2024 | Oct 27, 2024 |  | Oct 29, 2023 | Oct 29, 2023 | Oct 29, 2023 |  | Oct 27, 2024 | Oct 27, 2024 | Oct 27, 2024 |  | Oct 29, 2023 | Oct 29, 2023 | Oct 29, 2023\n | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions)\nTotal revenue | $ | 35,082 |  |  | $ | 18,120 |  |  | $ | 91,166 |  |  | $ | 38,819 |"
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B24",
+    "pattern": "eight-period-trend",
+    "question": "Show TSLA revenue over all eight selected fiscal period ends. Annual reports are annual totals; derive standalone Q4 only when nine-month inputs support it. Do not mix annual and quarterly values in a single trend.",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2024-09-30",
+      "2024-12-31",
+      "2025-03-31",
+      "2025-06-30",
+      "2025-09-30",
+      "2025-12-31",
+      "2026-03-31",
+      "2026-06-30"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "TSLA",
+        "reportDate": "2026-06-30",
+        "accession": "0001628280-26-049270",
+        "sourceSha256": "f0b7bb0866f29ed758dec0b8d5ddf168baaa02efde6bd8097514e6546f555c1c",
+        "contains": [
+          "Total revenues",
+          "28,236"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026049270/tsla-20260630.htm",
+        "sourceQuote": "| Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30,\n | 2026 | 2026 | 2026 |  | 2025 | 2025 | 2025 | 2026 | 2026 | 2026 |  | 2025 | 2025 | 2025\nRevenues |  |  |  |  |  |  |  |  |  |  |  |  |  | \nTotal revenues | 28,236 | 28,236 |  |  | 22,496 | 22,496 |  | 50,623 | 50,623 |  |  | 41,831 | 41,831 | "
+      },
+      {
+        "ticker": "TSLA",
+        "reportDate": "2026-03-31",
+        "accession": "0001628280-26-026673",
+        "sourceSha256": "22dad42a6a9d638eecdae2bea13093e698264a9decdc4ef361d347fb616fa8bd",
+        "contains": [
+          "Total revenues",
+          "22,387"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026026673/tsla-20260331.htm",
+        "sourceQuote": "| Three Months Ended March 31, | Three Months Ended March 31, | Three Months Ended March 31, | Three Months Ended March 31, | Three Months Ended March 31, | Three Months Ended March 31, | Three Months Ended March 31,\n | 2026 | 2026 | 2026 |  | 2025 | 2025 | 2025\nRevenues |  |  |  |  |  |  | \nTotal revenues | 22,387 | 22,387 |  |  | 19,335 | 19,335 | "
+      },
+      {
+        "ticker": "TSLA",
+        "reportDate": "2025-12-31",
+        "accession": "0001628280-26-003952",
+        "sourceSha256": "919e3acf7c3b73f5e54d16b3f8e9f906a5e9c7854a64ffd833e4e3d0eda159c3",
+        "contains": [
+          "Total revenues",
+          "94,827"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+        "sourceQuote": "| Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change\n(Dollars in millions) | 2025 | 2025 | 2025 |  | 2024 | 2024 | 2024 |  | 2023 | 2023 | 2023 | $ | $ | $ |  | % | % | $ | $ | $ |  | % | %\nAutomotive sales | $ | 65,821 |  |  | $ | 72,480 |  |  | $ | 78,509 |  | $ | (6,659) |  |  | (9) | % | $ | (6,029) |  |  | (8) | %\nTotal revenues | $ | 94,827 |  |  | $ | 97,690 |  |  | $ | 96,773 |  | $ | (2,863) |  |  | (3) | % | $ | 917 |  |  | 1 | %"
+      },
+      {
+        "ticker": "TSLA",
+        "reportDate": "2025-09-30",
+        "accession": "0001628280-25-045968",
+        "sourceSha256": "4feafff8f6db6abbd45ca04d5fe118b080ef79f997def08ec1dc99d4a79cb136",
+        "contains": [
+          "Total revenues",
+          "28,095"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025045968/tsla-20250930.htm",
+        "sourceQuote": "| Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30,\n | 2025 | 2025 | 2025 |  | 2024 | 2024 | 2024 | 2025 | 2025 | 2025 |  | 2024 | 2024 | 2024\nRevenues |  |  |  |  |  |  |  |  |  |  |  |  |  | \nTotal revenues | 28,095 | 28,095 |  |  | 25,182 | 25,182 |  | 69,926 | 69,926 |  |  | 71,983 | 71,983 | "
+      },
+      {
+        "ticker": "TSLA",
+        "reportDate": "2025-06-30",
+        "accession": "0001628280-25-035806",
+        "sourceSha256": "d6c0ed742e6cac9b111a3cfcc9bef5bd618de748cc85c053b9e07c4143195b15",
+        "contains": [
+          "Total revenues",
+          "22,496"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025035806/tsla-20250630.htm",
+        "sourceQuote": "| Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30,\n | 2025 | 2025 | 2025 |  | 2024 | 2024 | 2024 | 2025 | 2025 | 2025 |  | 2024 | 2024 | 2024\nRevenues |  |  |  |  |  |  |  |  |  |  |  |  |  | \nTotal revenues | 22,496 | 22,496 |  |  | 25,500 | 25,500 |  | 41,831 | 41,831 |  |  | 46,801 | 46,801 | "
+      },
+      {
+        "ticker": "TSLA",
+        "reportDate": "2025-03-31",
+        "accession": "0001628280-25-018911",
+        "sourceSha256": "f453360c982ff9cc63e836ad8084def9742e03070c07e18daf7a5fc0d3155c45",
+        "contains": [
+          "Total revenues",
+          "19,335"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025018911/tsla-20250331.htm",
+        "sourceQuote": "| Three Months Ended March 31, | Three Months Ended March 31, | Three Months Ended March 31, | Three Months Ended March 31, | Three Months Ended March 31, | Three Months Ended March 31, | Three Months Ended March 31,\n | 2025 | 2025 | 2025 |  | 2024 | 2024 | 2024\nRevenues |  |  |  |  |  |  | \nTotal revenues | 19,335 | 19,335 |  |  | 21,301 | 21,301 | "
+      },
+      {
+        "ticker": "TSLA",
+        "reportDate": "2024-12-31",
+        "accession": "0001628280-25-003063",
+        "sourceSha256": "3823e2e3fbcfbd40f2d67b1036a23209efd842ce05b328211bc41ad547736560",
+        "contains": [
+          "Total revenues",
+          "97,690"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025003063/tsla-20241231.htm",
+        "sourceQuote": "| Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2023 vs. 2022 Change | 2023 vs. 2022 Change | 2023 vs. 2022 Change | 2023 vs. 2022 Change | 2023 vs. 2022 Change | 2023 vs. 2022 Change\n(Dollars in millions) | 2024 | 2024 | 2024 |  | 2023 | 2023 | 2023 |  | 2022 | 2022 | 2022 | $ | $ | $ |  | % | % | $ | $ | $ |  | % | %\nAutomotive sales | $ | 72,480 |  |  | $ | 78,509 |  |  | $ | 67,210 |  | $ | (6,029) |  |  | (8) | % | $ | 11,299 |  |  | 17 | %\nTotal revenues | $ | 97,690 |  |  | $ | 96,773 |  |  | $ | 81,462 |  | $ | 917 |  |  | 1 | % | $ | 15,311 |  |  | 19 | %"
+      },
+      {
+        "ticker": "TSLA",
+        "reportDate": "2024-09-30",
+        "accession": "0001628280-24-043486",
+        "sourceSha256": "8d55cec2f5e67a7406040982af7de8d842be2337098134a0c583653c845270bd",
+        "contains": [
+          "Total revenues",
+          "25,182"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828024043486/tsla-20240930.htm",
+        "sourceQuote": "| Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Three Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30, | Nine Months Ended September 30,\n | 2024 | 2024 | 2024 |  | 2023 | 2023 | 2023 | 2024 | 2024 | 2024 |  | 2023 | 2023 | 2023\nRevenues |  |  |  |  |  |  |  |  |  |  |  |  |  | \nTotal revenues | 25,182 | 25,182 |  |  | 23,350 | 23,350 |  | 71,983 | 71,983 |  |  | 71,606 | 71,606 | "
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B25",
+    "pattern": "cross-company",
+    "question": "Compare the latest reported quarterly revenue for NVIDIA and Tesla. State both fiscal period ends and units.",
+    "tickers": [
+      "NVDA",
+      "TSLA"
+    ],
+    "periods": [
+      "2026-06-30",
+      "2026-07-26"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "NVDA",
+        "reportDate": "2026-07-26",
+        "accession": "0001045810-26-000075",
+        "sourceSha256": "2c314690781f67d2b9139a60e5bb485fe2eb153ae8385b2b0e6cbd74505b6b56",
+        "contains": [
+          "Total revenue",
+          "96,221"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+        "sourceQuote": "| Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended | Three Months Ended |  | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended | Six Months Ended\n | Jul 26, 2026 | Jul 26, 2026 | Jul 26, 2026 |  | Jul 27, 2025 | Jul 27, 2025 | Jul 27, 2025 |  | Jul 26, 2026 | Jul 26, 2026 | Jul 26, 2026 |  | Jul 27, 2025 | Jul 27, 2025 | Jul 27, 2025\n | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions)\nTotal revenue | $ | 96,221 |  |  | $ | 46,743 |  |  | $ | 177,837 |  |  | $ | 90,805 |"
+      },
+      {
+        "ticker": "TSLA",
+        "reportDate": "2026-06-30",
+        "accession": "0001628280-26-049270",
+        "sourceSha256": "f0b7bb0866f29ed758dec0b8d5ddf168baaa02efde6bd8097514e6546f555c1c",
+        "contains": [
+          "Total revenues",
+          "28,236"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026049270/tsla-20260630.htm",
+        "sourceQuote": "| Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Three Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30, | Six Months Ended June 30,\n | 2026 | 2026 | 2026 |  | 2025 | 2025 | 2025 | 2026 | 2026 | 2026 |  | 2025 | 2025 | 2025\nRevenues |  |  |  |  |  |  |  |  |  |  |  |  |  | \nTotal revenues | 28,236 | 28,236 |  |  | 22,496 | 22,496 |  | 50,623 | 50,623 |  |  | 41,831 | 41,831 | "
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B26",
+    "pattern": "cross-company-annual",
+    "question": "Compare total revenue in the latest annual filings of NVIDIA and Tesla; explain the different fiscal year ends.",
+    "tickers": [
+      "NVDA",
+      "TSLA"
+    ],
+    "periods": [
+      "2025-12-31",
+      "2026-01-25"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "NVDA",
+        "reportDate": "2026-01-25",
+        "accession": "0001045810-26-000021",
+        "sourceSha256": "cd8363c5f64dfb7398df38a902b2e68fc6765b78443c7d5cc698c6a586318485",
+        "contains": [
+          "Total revenue",
+          "215,938"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "sourceQuote": "| Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended\n | Jan 25, 2026 | Jan 25, 2026 | Jan 25, 2026 |  | Jan 26, 2025 | Jan 26, 2025 | Jan 26, 2025 |  | Jan 28, 2024 | Jan 28, 2024 | Jan 28, 2024\nGeographic Revenue based upon Customer Headquarters Location (1): | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions)\nTotal revenue | $ | 215,938 |  |  | $ | 130,497 |  |  | $ | 60,922 |"
+      },
+      {
+        "ticker": "TSLA",
+        "reportDate": "2025-12-31",
+        "accession": "0001628280-26-003952",
+        "sourceSha256": "919e3acf7c3b73f5e54d16b3f8e9f906a5e9c7854a64ffd833e4e3d0eda159c3",
+        "contains": [
+          "Total revenues",
+          "94,827"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+        "sourceQuote": "| Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change\n(Dollars in millions) | 2025 | 2025 | 2025 |  | 2024 | 2024 | 2024 |  | 2023 | 2023 | 2023 | $ | $ | $ |  | % | % | $ | $ | $ |  | % | %\nAutomotive sales | $ | 65,821 |  |  | $ | 72,480 |  |  | $ | 78,509 |  | $ | (6,659) |  |  | (9) | % | $ | (6,029) |  |  | (8) | %\nTotal revenues | $ | 94,827 |  |  | $ | 97,690 |  |  | $ | 96,773 |  | $ | (2,863) |  |  | (3) | % | $ | 917 |  |  | 1 | %"
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B27",
+    "pattern": "growth-calculation",
+    "question": "Calculate NVDA annual revenue growth between the two selected annual reports. Cite consistently scaled inputs.",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2025-01-26",
+      "2026-01-25"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "NVDA",
+        "reportDate": "2026-01-25",
+        "accession": "0001045810-26-000021",
+        "sourceSha256": "cd8363c5f64dfb7398df38a902b2e68fc6765b78443c7d5cc698c6a586318485",
+        "contains": [
+          "Total revenue",
+          "215,938"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "sourceQuote": "| Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended\n | Jan 25, 2026 | Jan 25, 2026 | Jan 25, 2026 |  | Jan 26, 2025 | Jan 26, 2025 | Jan 26, 2025 |  | Jan 28, 2024 | Jan 28, 2024 | Jan 28, 2024\nGeographic Revenue based upon Customer Headquarters Location (1): | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions)\nTotal revenue | $ | 215,938 |  |  | $ | 130,497 |  |  | $ | 60,922 |"
+      },
+      {
+        "ticker": "NVDA",
+        "reportDate": "2025-01-26",
+        "accession": "0001045810-25-000023",
+        "sourceSha256": "4e3a3dab1ae0009442ff1066a68637e66854f7e9f6a502f503024ae706840043",
+        "contains": [
+          "Total revenue",
+          "130,497"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
+        "sourceQuote": "| Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended | Year Ended\n | Jan 26, 2025 | Jan 26, 2025 | Jan 26, 2025 |  | Jan 28, 2024 | Jan 28, 2024 | Jan 28, 2024 |  | Jan 29, 2023 | Jan 29, 2023 | Jan 29, 2023\nGeographic Revenue based upon Customer Billing Location: | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions) | (In millions)\nTotal revenue | $ | 130,497 |  |  | $ | 60,922 |  |  | $ | 26,974 |"
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B28",
+    "pattern": "growth-calculation",
+    "question": "Calculate TSLA annual revenue growth between the two selected annual reports. Cite consistently scaled inputs.",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2024-12-31",
+      "2025-12-31"
+    ],
+    "expected": "answered",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [
+      {
+        "ticker": "TSLA",
+        "reportDate": "2025-12-31",
+        "accession": "0001628280-26-003952",
+        "sourceSha256": "919e3acf7c3b73f5e54d16b3f8e9f906a5e9c7854a64ffd833e4e3d0eda159c3",
+        "contains": [
+          "Total revenues",
+          "94,827"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+        "sourceQuote": "| Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2025 vs. 2024 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change\n(Dollars in millions) | 2025 | 2025 | 2025 |  | 2024 | 2024 | 2024 |  | 2023 | 2023 | 2023 | $ | $ | $ |  | % | % | $ | $ | $ |  | % | %\nAutomotive sales | $ | 65,821 |  |  | $ | 72,480 |  |  | $ | 78,509 |  | $ | (6,659) |  |  | (9) | % | $ | (6,029) |  |  | (8) | %\nTotal revenues | $ | 94,827 |  |  | $ | 97,690 |  |  | $ | 96,773 |  | $ | (2,863) |  |  | (3) | % | $ | 917 |  |  | 1 | %"
+      },
+      {
+        "ticker": "TSLA",
+        "reportDate": "2024-12-31",
+        "accession": "0001628280-25-003063",
+        "sourceSha256": "3823e2e3fbcfbd40f2d67b1036a23209efd842ce05b328211bc41ad547736560",
+        "contains": [
+          "Total revenues",
+          "97,690"
+        ],
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025003063/tsla-20241231.htm",
+        "sourceQuote": "| Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | Year Ended December 31, | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2024 vs. 2023 Change | 2023 vs. 2022 Change | 2023 vs. 2022 Change | 2023 vs. 2022 Change | 2023 vs. 2022 Change | 2023 vs. 2022 Change | 2023 vs. 2022 Change\n(Dollars in millions) | 2024 | 2024 | 2024 |  | 2023 | 2023 | 2023 |  | 2022 | 2022 | 2022 | $ | $ | $ |  | % | % | $ | $ | $ |  | % | %\nAutomotive sales | $ | 72,480 |  |  | $ | 78,509 |  |  | $ | 67,210 |  | $ | (6,029) |  |  | (8) | % | $ | 11,299 |  |  | 17 | %\nTotal revenues | $ | 97,690 |  |  | $ | 96,773 |  |  | $ | 81,462 |  | $ | 917 |  |  | 1 | % | $ | 15,311 |  |  | 19 | %"
+      }
+    ],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B29",
+    "pattern": "ambiguous",
+    "question": "What is profit?",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2026-07-26"
+    ],
+    "expected": "needs_clarification",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B30",
+    "pattern": "unanswerable",
+    "question": "What will the NVIDIA stock price be next Friday?",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2026-07-26"
+    ],
+    "expected": "insufficient_evidence",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B31",
+    "pattern": "missing-corpus",
+    "question": "What did Tesla executives say on the latest earnings call? Use the transcript.",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2026-06-30"
+    ],
+    "expected": "insufficient_evidence",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  },
+  {
+    "id": "B32",
+    "pattern": "missing-period",
+    "question": "What was NVIDIA revenue for fiscal 2010? Use only the selected filings.",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2024-10-27",
+      "2025-01-26",
+      "2025-04-27",
+      "2025-07-27",
+      "2025-10-26",
+      "2026-01-25",
+      "2026-04-26",
+      "2026-07-26"
+    ],
+    "expected": "insufficient_evidence",
+    "reviewed": true,
+    "reviewer": "Codex source review (not independent human review)",
+    "labels": [],
+    "humanReviewed": false,
+    "reviewNotes": "Source hashes, metric rows, quarterly/annual headers and policy expectations inspected. Narrative labels checked in Risk Factors. Gold labels are partial required-evidence judgments, not exhaustive relevance judgments."
+  }
+]

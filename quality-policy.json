@@ -1,0 +1,8 @@
+{
+  "persona": "Investment analyst",
+  "corpus": "User-uploaded English SEC 10-K and 10-Q filings",
+  "freshness": {"reviewEveryDays": 7, "mode": "weekly operator review; explicit opt-in SEC check", "maxPeriodAgeDays": 150},
+  "service": {"maxQueueMinutes": 30, "maxProcessingMinutes": 30, "answerP95Ms": 15000},
+  "targets": {"faithfulness": 0.95, "citationAccuracy": 0.95, "recallAt5": 0.80, "answerRelevance": 0.90, "statusAccuracy": 0.90, "numericAccuracy": 0.95},
+  "targetStatus": "Acceptance targets, not measured guarantees"
+}

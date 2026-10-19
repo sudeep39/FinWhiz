@@ -1,0 +1,25 @@
+{
+  "use_case": "Financial Document Intelligence",
+  "persona": "Investment analyst",
+  "tickers": [
+    "NVDA",
+    "TSLA"
+  ],
+  "periods_per_company": 8,
+  "as_of": "2026-10-18",
+  "retrieval_pattern": "table-aware hybrid",
+  "run_id": "nvda-tsla-8q-v1",
+  "planned_retrieval": {
+    "dense_candidates_per_company_period": 5,
+    "keyword_candidates": 20,
+    "fusion": "reciprocal rank fusion",
+    "fusion_candidates": 80,
+    "rerank_candidates_minimum": 20,
+    "final_evidence_maximum": 16
+  },
+  "proposed_targets_not_measured": {
+    "faithfulness_percent": 95,
+    "p95_answer_latency_seconds": 15,
+    "evaluation_questions": 32
+  }
+}

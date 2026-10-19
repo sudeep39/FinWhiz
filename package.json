@@ -1,0 +1,32 @@
+{
+  "name": "finwhiz",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server.mjs",
+    "refresh": "node scripts/collect-filings.mjs",
+    "download": "node scripts/download-filings.mjs",
+    "pinecone:plan": "node --env-file-if-exists=.env scripts/create-pinecone-index.mjs --dry-run",
+    "pinecone:create": "node --env-file-if-exists=.env scripts/create-pinecone-index.mjs --apply",
+    "test": "node --test filings.test.mjs pinecone.test.mjs web.test.mjs review.test.mjs rubric.test.mjs provider.test.mjs",
+    "evaluate": "node --env-file-if-exists=.env scripts/evaluate.mjs",
+    "ingest:evaluation": "node --env-file-if-exists=.env scripts/ingest-evaluation.mjs",
+    "freshness": "node --env-file-if-exists=.env scripts/check-freshness.mjs",
+    "score:reviews": "node scripts/score-reviews.mjs",
+    "export:project": "node scripts/export-project.mjs",
+    "test:browser": "node scripts/browser-check.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "busboy": "^1.6.0",
+    "cheerio": "^1.2.0",
+    "js-tiktoken": "^1.0.21",
+    "pdf-parse": "^2.4.5"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.64.1"
+  }
+}

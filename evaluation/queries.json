@@ -1,0 +1,542 @@
+[
+  {
+    "id": "Q01",
+    "pattern": "single-table",
+    "question": "What revenue does NVIDIA report for the most recent quarter?",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2024-10-27",
+      "2025-01-26",
+      "2025-04-27",
+      "2025-07-27",
+      "2025-10-26",
+      "2026-01-25",
+      "2026-04-26",
+      "2026-07-26"
+    ],
+    "expected": "answered",
+    "reviewed": false,
+    "labels": []
+  },
+  {
+    "id": "Q02",
+    "pattern": "single-table",
+    "question": "What automotive revenue does Tesla report for its most recent quarter?",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2024-09-30",
+      "2024-12-31",
+      "2025-03-31",
+      "2025-06-30",
+      "2025-09-30",
+      "2025-12-31",
+      "2026-03-31",
+      "2026-06-30"
+    ],
+    "expected": "answered",
+    "reviewed": false,
+    "labels": []
+  },
+  {
+    "id": "Q03",
+    "pattern": "annual-vs-quarter",
+    "question": "What is NVIDIA annual revenue in its latest 10-K? Do not describe this as fourth-quarter revenue.",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2024-10-27",
+      "2025-01-26",
+      "2025-04-27",
+      "2025-07-27",
+      "2025-10-26",
+      "2026-01-25",
+      "2026-04-26",
+      "2026-07-26"
+    ],
+    "expected": "answered",
+    "reviewed": false,
+    "labels": []
+  },
+  {
+    "id": "Q04",
+    "pattern": "annual-vs-quarter",
+    "question": "What is Tesla annual revenue in its latest 10-K?",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2024-09-30",
+      "2024-12-31",
+      "2025-03-31",
+      "2025-06-30",
+      "2025-09-30",
+      "2025-12-31",
+      "2026-03-31",
+      "2026-06-30"
+    ],
+    "expected": "answered",
+    "reviewed": false,
+    "labels": []
+  },
+  {
+    "id": "Q05",
+    "pattern": "quarter-vs-ytd",
+    "question": "Separate quarterly and year-to-date operating cash flow in the most recent NVIDIA 10-Q.",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2024-10-27",
+      "2025-01-26",
+      "2025-04-27",
+      "2025-07-27",
+      "2025-10-26",
+      "2026-01-25",
+      "2026-04-26",
+      "2026-07-26"
+    ],
+    "expected": "answered",
+    "reviewed": false,
+    "labels": []
+  },
+  {
+    "id": "Q06",
+    "pattern": "quarter-vs-ytd",
+    "question": "Separate quarterly and year-to-date net income in the most recent Tesla 10-Q.",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2024-09-30",
+      "2024-12-31",
+      "2025-03-31",
+      "2025-06-30",
+      "2025-09-30",
+      "2025-12-31",
+      "2026-03-31",
+      "2026-06-30"
+    ],
+    "expected": "answered",
+    "reviewed": false,
+    "labels": []
+  },
+  {
+    "id": "Q07",
+    "pattern": "calculation",
+    "question": "Calculate NVIDIA gross margin for its most recent quarter from revenue and cost of revenue.",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2024-10-27",
+      "2025-01-26",
+      "2025-04-27",
+      "2025-07-27",
+      "2025-10-26",
+      "2026-01-25",
+      "2026-04-26",
+      "2026-07-26"
+    ],
+    "expected": "answered",
+    "reviewed": false,
+    "labels": []
+  },
+  {
+    "id": "Q08",
+    "pattern": "calculation",
+    "question": "Calculate Tesla gross margin for its most recent quarter from revenue and cost of revenue.",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2024-09-30",
+      "2024-12-31",
+      "2025-03-31",
+      "2025-06-30",
+      "2025-09-30",
+      "2025-12-31",
+      "2026-03-31",
+      "2026-06-30"
+    ],
+    "expected": "answered",
+    "reviewed": false,
+    "labels": []
+  },
+  {
+    "id": "Q09",
+    "pattern": "derived-q4",
+    "question": "Derive NVIDIA fourth-quarter revenue from its latest annual revenue and the matching nine-month total. Show source periods and calculation.",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2024-10-27",
+      "2025-01-26",
+      "2025-04-27",
+      "2025-07-27",
+      "2025-10-26",
+      "2026-01-25",
+      "2026-04-26",
+      "2026-07-26"
+    ],
+    "expected": "answered",
+    "reviewed": false,
+    "labels": []
+  },
+  {
+    "id": "Q10",
+    "pattern": "derived-q4",
+    "question": "Derive Tesla fourth-quarter revenue from its latest annual revenue and the matching nine-month total.",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2024-09-30",
+      "2024-12-31",
+      "2025-03-31",
+      "2025-06-30",
+      "2025-09-30",
+      "2025-12-31",
+      "2026-03-31",
+      "2026-06-30"
+    ],
+    "expected": "answered",
+    "reviewed": false,
+    "labels": []
+  },
+  {
+    "id": "Q11",
+    "pattern": "eight-period-trend",
+    "question": "Chart NVIDIA revenue across all eight fiscal periods. Derive annual-report quarters only when matching nine-month evidence is available.",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2024-10-27",
+      "2025-01-26",
+      "2025-04-27",
+      "2025-07-27",
+      "2025-10-26",
+      "2026-01-25",
+      "2026-04-26",
+      "2026-07-26"
+    ],
+    "expected": "answered",
+    "reviewed": false,
+    "labels": []
+  },
+  {
+    "id": "Q12",
+    "pattern": "eight-period-trend",
+    "question": "Chart Tesla revenue across all eight fiscal periods. Separate quarterly from annual totals.",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2024-09-30",
+      "2024-12-31",
+      "2025-03-31",
+      "2025-06-30",
+      "2025-09-30",
+      "2025-12-31",
+      "2026-03-31",
+      "2026-06-30"
+    ],
+    "expected": "answered",
+    "reviewed": false,
+    "labels": []
+  },
+  {
+    "id": "Q13",
+    "pattern": "cross-company",
+    "question": "Compare NVIDIA and Tesla gross margins for their latest reported quarters. Explain fiscal-period differences.",
+    "tickers": [
+      "NVDA",
+      "TSLA"
+    ],
+    "periods": [
+      "2024-09-30",
+      "2024-10-27",
+      "2024-12-31",
+      "2025-01-26",
+      "2025-03-31",
+      "2025-04-27",
+      "2025-06-30",
+      "2025-07-27",
+      "2025-09-30",
+      "2025-10-26",
+      "2025-12-31",
+      "2026-01-25",
+      "2026-03-31",
+      "2026-04-26",
+      "2026-06-30",
+      "2026-07-26"
+    ],
+    "expected": "answered",
+    "reviewed": false,
+    "labels": []
+  },
+  {
+    "id": "Q14",
+    "pattern": "cross-company",
+    "question": "Compare operating cash flow in the latest annual filings, keeping units consistent.",
+    "tickers": [
+      "NVDA",
+      "TSLA"
+    ],
+    "periods": [
+      "2024-09-30",
+      "2024-10-27",
+      "2024-12-31",
+      "2025-01-26",
+      "2025-03-31",
+      "2025-04-27",
+      "2025-06-30",
+      "2025-07-27",
+      "2025-09-30",
+      "2025-10-26",
+      "2025-12-31",
+      "2026-01-25",
+      "2026-03-31",
+      "2026-04-26",
+      "2026-06-30",
+      "2026-07-26"
+    ],
+    "expected": "answered",
+    "reviewed": false,
+    "labels": []
+  },
+  {
+    "id": "Q15",
+    "pattern": "risk-comparison",
+    "question": "Compare the material supply-chain risks disclosed in the latest annual filings.",
+    "tickers": [
+      "NVDA",
+      "TSLA"
+    ],
+    "periods": [
+      "2024-09-30",
+      "2024-10-27",
+      "2024-12-31",
+      "2025-01-26",
+      "2025-03-31",
+      "2025-04-27",
+      "2025-06-30",
+      "2025-07-27",
+      "2025-09-30",
+      "2025-10-26",
+      "2025-12-31",
+      "2026-01-25",
+      "2026-03-31",
+      "2026-04-26",
+      "2026-06-30",
+      "2026-07-26"
+    ],
+    "expected": "answered",
+    "reviewed": false,
+    "labels": []
+  },
+  {
+    "id": "Q16",
+    "pattern": "exact-term",
+    "question": "What does NVIDIA disclose about export controls? Cite the relevant disclosure.",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2024-10-27",
+      "2025-01-26",
+      "2025-04-27",
+      "2025-07-27",
+      "2025-10-26",
+      "2026-01-25",
+      "2026-04-26",
+      "2026-07-26"
+    ],
+    "expected": "answered",
+    "reviewed": false,
+    "labels": []
+  },
+  {
+    "id": "Q17",
+    "pattern": "exact-term",
+    "question": "What does Tesla disclose about regulatory credits?",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2024-09-30",
+      "2024-12-31",
+      "2025-03-31",
+      "2025-06-30",
+      "2025-09-30",
+      "2025-12-31",
+      "2026-03-31",
+      "2026-06-30"
+    ],
+    "expected": "answered",
+    "reviewed": false,
+    "labels": []
+  },
+  {
+    "id": "Q18",
+    "pattern": "segment",
+    "question": "What revenue is reported for Data Center in the latest quarterly filing?",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2024-10-27",
+      "2025-01-26",
+      "2025-04-27",
+      "2025-07-27",
+      "2025-10-26",
+      "2026-01-25",
+      "2026-04-26",
+      "2026-07-26"
+    ],
+    "expected": "answered",
+    "reviewed": false,
+    "labels": []
+  },
+  {
+    "id": "Q19",
+    "pattern": "footnote",
+    "question": "What stock-based compensation is disclosed in the most recent quarterly filing? Distinguish three-month and year-to-date amounts.",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2024-09-30",
+      "2024-12-31",
+      "2025-03-31",
+      "2025-06-30",
+      "2025-09-30",
+      "2025-12-31",
+      "2026-03-31",
+      "2026-06-30"
+    ],
+    "expected": "answered",
+    "reviewed": false,
+    "labels": []
+  },
+  {
+    "id": "Q20",
+    "pattern": "units",
+    "question": "Compare cash and cash equivalents in the latest balance sheets, stating currency and scale.",
+    "tickers": [
+      "NVDA",
+      "TSLA"
+    ],
+    "periods": [
+      "2024-09-30",
+      "2024-10-27",
+      "2024-12-31",
+      "2025-01-26",
+      "2025-03-31",
+      "2025-04-27",
+      "2025-06-30",
+      "2025-07-27",
+      "2025-09-30",
+      "2025-10-26",
+      "2025-12-31",
+      "2026-01-25",
+      "2026-03-31",
+      "2026-04-26",
+      "2026-06-30",
+      "2026-07-26"
+    ],
+    "expected": "answered",
+    "reviewed": false,
+    "labels": []
+  },
+  {
+    "id": "Q21",
+    "pattern": "ambiguous",
+    "question": "What is profit? Ask me to specify the metric and period if needed.",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2024-09-30",
+      "2024-12-31",
+      "2025-03-31",
+      "2025-06-30",
+      "2025-09-30",
+      "2025-12-31",
+      "2026-03-31",
+      "2026-06-30"
+    ],
+    "expected": "clarify",
+    "reviewed": false,
+    "labels": []
+  },
+  {
+    "id": "Q22",
+    "pattern": "unanswerable",
+    "question": "What will the NVIDIA stock price be next Friday?",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2024-10-27",
+      "2025-01-26",
+      "2025-04-27",
+      "2025-07-27",
+      "2025-10-26",
+      "2026-01-25",
+      "2026-04-26",
+      "2026-07-26"
+    ],
+    "expected": "insufficient_evidence",
+    "reviewed": false,
+    "labels": []
+  },
+  {
+    "id": "Q23",
+    "pattern": "missing-corpus",
+    "question": "What did Tesla executives say during the latest earnings call? Use a transcript, not SEC filings.",
+    "tickers": [
+      "TSLA"
+    ],
+    "periods": [
+      "2024-09-30",
+      "2024-12-31",
+      "2025-03-31",
+      "2025-06-30",
+      "2025-09-30",
+      "2025-12-31",
+      "2026-03-31",
+      "2026-06-30"
+    ],
+    "expected": "insufficient_evidence",
+    "reviewed": false,
+    "labels": []
+  },
+  {
+    "id": "Q24",
+    "pattern": "missing-period",
+    "question": "What was NVIDIA revenue for fiscal 2010?",
+    "tickers": [
+      "NVDA"
+    ],
+    "periods": [
+      "2024-10-27",
+      "2025-01-26",
+      "2025-04-27",
+      "2025-07-27",
+      "2025-10-26",
+      "2026-01-25",
+      "2026-04-26",
+      "2026-07-26"
+    ],
+    "expected": "insufficient_evidence",
+    "reviewed": false,
+    "labels": []
+  }
+]
