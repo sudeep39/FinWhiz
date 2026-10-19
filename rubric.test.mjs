@@ -128,6 +128,21 @@ test('financial generation rejects invented citations, chart numbers and percent
     const margins=await research({store,jobs,question:'Calculate automotive gross margin with and without regulatory credits.',tickers:['ACME'],rerank:false});
     assert.equal(answerCalls,2);
     assert.deepEqual(margins.calculations.map(c=>c.result.toFixed(1)),['16.9','16.3','17.2','15.0']);
+    row.metadata.text+=' Energy revenue: 2026 3,139; 2025 2,789. Energy cost of revenue: 2026 2,499; 2025 1,943.';
+    answerCalls=0;
+    globalThis.fetch=async(url,options)=>{
+      if(!String(url).endsWith('/chat/completions'))return fixture.fetch(url,options);
+      answerCalls++;
+      if(answerCalls===2)assert.match(JSON.parse(JSON.parse(options.body).messages[1].content).validationErrors.join(' '),/4 inputs/);
+      const reply=answerCalls===1?{...valid,calculations:[{label:'Energy gross profit',operation:'difference',unit:'USD millions',values:[3139,2499,2789,1943],source_ids:['S1']}]}:
+        {sentences:[{text:'Energy gross profit declined despite higher revenue; see the calculations.',source_ids:['S1']}],calculations:[
+          {label:'Q2 2026 gross profit',operation:'difference',unit:'USD millions',values:[3139,2499],source_ids:['S1']},
+          {label:'Q2 2025 gross profit',operation:'difference',unit:'USD millions',values:[2789,1943],source_ids:['S1']}
+        ]};
+      return new Response(JSON.stringify({choices:[{finish_reason:'stop',message:{content:JSON.stringify(reply)}}]}),{status:200});
+    };
+    const profits=await research({store,jobs,question:'Energy revenue increased in Q2 2026. Did its gross profit improve?',tickers:['ACME'],rerank:false});
+    assert.equal(answerCalls,2);assert.deepEqual(profits.calculations.map(c=>c.result),[640,846]);
     for(const [reply,pattern] of [
       [{...valid,answer:'Invented claim [S999].'},/citation|schema validation/],
       [{...valid,chart:{...valid.chart,type:'bar',points:[{label:'Invented',value:999,source_ids:['S1']}]}},/Chart values/],
