@@ -1,6 +1,6 @@
 run = "npm start"
 entrypoint = "server.mjs"
-modules = ["nodejs-22"]
+modules = ["nodejs-20", "python-3.12", "web"]
 
 [deployment]
 deploymentTarget = "vm"
@@ -10,3 +10,6 @@ run = ["sh", "-c", "npm start"]
 [[ports]]
 localPort = 3100
 externalPort = 80
+
+[nix]
+channel = "stable-25_05"
