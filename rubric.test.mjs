@@ -79,18 +79,61 @@ test('quota exhaustion stops immediately instead of repeating paid-provider requ
 
 test('financial generation rejects invented citations, chart numbers and percent scaling',async()=>{
   const original=globalThis.fetch,keys=['OPENAI_API_KEY','PINECONE_API_KEY'],saved=Object.fromEntries(keys.map(k=>[k,process.env[k]]));
-  const fixture=createProviderFixture(),row={id:'evidence',metadata:{text:'Revenue 125 million. Cost of revenue 50 million.',ticker:'ACME',report_date:'2025-12-31',chunk_type:'narrative'}};
+  const fixture=createProviderFixture(),row={id:'evidence',metadata:{text:'Revenue 125 million. Cost of revenue 50 million. Six months operating cash flow: 2026 8,634; 2025 4,696. Purchases of property and equipment: 2026 (8,282); 2025 (3,886). All amounts in millions.',ticker:'ACME',report_date:'2025-12-31',chunk_type:'narrative'}};
   fixture.namespaces.set('fixed-fixture',new Map([[row.id,row]]));
   const store={json:async()=>[row]};
   const valid={status:'answered',answer:'Revenue was 125 million [S1].',citation_ids:['S1'],chart:{type:'none',title:'',unit:'',points:[]},calculations:[]};
   try{
     for(const key of keys)process.env[key]='offline-test';
+    let answerCalls=0;
+    globalThis.fetch=async(url,options)=>{
+      if(!String(url).endsWith('/chat/completions'))return fixture.fetch(url,options);
+      answerCalls++;
+      if(answerCalls===2){
+        const request=JSON.parse(options.body),schema=request.response_format.json_schema.schema;
+        assert.ok(schema.properties.calculations.items.properties.values.items.enum.includes(-8282));
+        assert.ok(!schema.properties.calculations.items.properties.values.items.enum.includes(8282));
+        assert.ok(!schema.properties.calculations.items.properties.values.items.enum.includes(352));
+        assert.equal(JSON.parse(request.messages[1].content).previousAnswer,undefined);
+      }
+      const reply=answerCalls===1?{...valid,answer:'Revenue was 125 million.',citation_ids:[]}:{sentences:[{text:'Revenue was 125 million',source_ids:['S1']}],calculations:[{label:'FCF 2026',operation:'sum',unit:'USD millions',values:[8634,-8282],source_ids:['S1']},{label:'FCF 2025',operation:'sum',unit:'USD millions',values:[4696,-3886],source_ids:['S1']}]};
+      return new Response(JSON.stringify({choices:[{finish_reason:'stop',message:{content:JSON.stringify(reply)}}]}),{status:200});
+    };
+    const repaired=await research({store,jobs,question:'What revenue is disclosed?',tickers:['ACME'],rerank:false});
+    assert.equal(answerCalls,2);assert.equal(repaired.answer,'Revenue was 125 million [S1]');
+    assert.deepEqual(repaired.calculations.map(c=>c.result),[352,810]);
+    answerCalls=0;
+    globalThis.fetch=async(url,options)=>{
+      if(!String(url).endsWith('/chat/completions'))return fixture.fetch(url,options);
+      answerCalls++;
+      return new Response(JSON.stringify({choices:[{finish_reason:'stop',message:{content:JSON.stringify({...valid,answer:'Revenue was 125 million [S1, S1].'})}}]}),{status:200});
+    };
+    const grouped=await research({store,jobs,question:'What revenue is disclosed?',tickers:['ACME'],rerank:false});
+    assert.equal(answerCalls,1);assert.match(grouped.answer,/\[S1\] \[S1\]/);
+    // A derived numerator is not a filing literal: repair it into raw-input margin operations.
+    row.metadata.text+=' Automotive revenue 20,516 and 16,661; costs 17,053 and 13,795; credits 146 and 439.';
+    answerCalls=0;
+    globalThis.fetch=async(url,options)=>{
+      if(!String(url).endsWith('/chat/completions'))return fixture.fetch(url,options);
+      answerCalls++;
+      const reply=answerCalls===1?{...valid,calculations:[{label:'Adjusted margin',operation:'percentage',unit:'%',values:[3317,20370],source_ids:['S1']}]}:
+        {sentences:[{text:'See the automotive margins calculated from reported revenue, costs and credits.',source_ids:['S1']}],calculations:[
+          {label:'2026 including credits',operation:'gross_margin',unit:'%',values:[20516,17053],source_ids:['S1']},
+          {label:'2026 excluding credits',operation:'gross_margin_excluding_revenue',unit:'%',values:[20516,17053,146],source_ids:['S1']},
+          {label:'2025 including credits',operation:'gross_margin',unit:'%',values:[16661,13795],source_ids:['S1']},
+          {label:'2025 excluding credits',operation:'gross_margin_excluding_revenue',unit:'%',values:[16661,13795,439],source_ids:['S1']}
+        ]};
+      return new Response(JSON.stringify({choices:[{finish_reason:'stop',message:{content:JSON.stringify(reply)}}]}),{status:200});
+    };
+    const margins=await research({store,jobs,question:'Calculate automotive gross margin with and without regulatory credits.',tickers:['ACME'],rerank:false});
+    assert.equal(answerCalls,2);
+    assert.deepEqual(margins.calculations.map(c=>c.result.toFixed(1)),['16.9','16.3','17.2','15.0']);
     for(const [reply,pattern] of [
-      [{...valid,answer:'Invented claim [S999].'},/citation/],
+      [{...valid,answer:'Invented claim [S999].'},/citation|schema validation/],
       [{...valid,chart:{...valid.chart,type:'bar',points:[{label:'Invented',value:999,source_ids:['S1']}]}},/Chart values/],
       [{...valid,calculations:[{label:'Margin',operation:'ratio',unit:'%',values:[50,125],source_ids:['S1']}]},/percentage operation/]
     ]){
-      globalThis.fetch=async(url,options)=>String(url).endsWith('/chat/completions')?new Response(JSON.stringify({choices:[{finish_reason:'stop',message:{content:JSON.stringify(reply)}}]}),{status:200}):fixture.fetch(url,options);
+      globalThis.fetch=async(url,options)=>String(url).endsWith('/chat/completions')?new Response(JSON.stringify({choices:[{finish_reason:'stop',message:{content:JSON.stringify(JSON.parse(options.body).response_format.json_schema.name==='repair_financial_answer'?{sentences:[{text:'Invented claim',source_ids:['S999']}],calculations:[]}:reply)}}]}),{status:200}):fixture.fetch(url,options);
       await assert.rejects(research({store,jobs,question:'What revenue is disclosed?',tickers:['ACME'],rerank:false}),pattern);
     }
   }finally{globalThis.fetch=original;for(const key of keys)saved[key]===undefined?delete process.env[key]:process.env[key]=saved[key];}
