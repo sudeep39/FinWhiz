@@ -1,0 +1,17 @@
+query_id,strategy,rerank,success,status,status_correct,strict_recall_at_5,strict_mrr_at_5,latency_seconds
+B01,fixed,false,true,answered,true,0,0,19.633
+B01,fixed,true,true,answered,true,0,0,29.902
+B01,semantic,false,true,answered,true,0,0,9.972
+B01,semantic,true,true,answered,true,0,0,56.297
+B02,fixed,true,true,answered,true,0,0,11.393
+B02,semantic,false,true,answered,true,0,0,10.903
+B02,semantic,true,true,answered,true,0,0,9.694
+B02,fixed,false,true,answered,true,0,0,12.458
+B03,semantic,false,true,insufficient_evidence,false,0,0,6.023
+B03,semantic,true,true,answered,true,0,0,10.803
+B03,fixed,false,true,insufficient_evidence,false,0,0,6.123
+B03,fixed,true,true,answered,true,0,0,10.259
+B04,semantic,true,true,answered,true,0,0,17.355
+B04,fixed,false,true,answered,true,0,0,13.374
+B04,fixed,true,true,answered,true,0,0,42.814
+B04,semantic,false,true,answered,true,0,0,11.425

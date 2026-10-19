@@ -77,6 +77,20 @@ test('local storage preserves byte buffers and structured state',async()=>{
   const directory=await mkdtemp(join(tmpdir(),'finwhiz-web-'));const store=await new Storage({directory}).init();
   try{await store.put('upload',Buffer.from([0,255,10]));assert.deepEqual(await store.get('upload'),Buffer.from([0,255,10]));await store.putJson('state',{phase:'embedding'});assert.deepEqual(await store.json('state'),{phase:'embedding'});}finally{await store.close();if(resolve(directory).startsWith(resolve(tmpdir(),'finwhiz-web-')))await rm(directory,{recursive:true,force:true});}
 });
+test('embedding caches compress losslessly and legacy JSON remains readable',async()=>{
+  const directory=await mkdtemp(join(tmpdir(),'finwhiz-web-'));const store=await new Storage({directory}).init();
+  try{
+    const values=Array.from({length:4096},(_,i)=>Math.sin(i)*0.001);
+    await store.putJson('embedding/compressed',values);
+    const data=await store.get('embedding/compressed');
+    assert.equal(data[0],0x1f);assert.equal(data[1],0x8b);
+    assert.ok(data.length<Buffer.byteLength(JSON.stringify(values)));
+    assert.deepEqual(await store.json('embedding/compressed'),values);
+    await store.put('embedding/legacy',JSON.stringify(values));
+    assert.deepEqual(await store.json('embedding/legacy'),values);
+  }finally{await store.close();if(resolve(directory).startsWith(resolve(tmpdir(),'finwhiz-web-')))await rm(directory,{recursive:true,force:true});}
+});
+
 test('real background worker completes both strategies and retrieval uses mocked providers only',async()=>{
   const directory=await mkdtemp(join(tmpdir(),'finwhiz-web-'));const store=await new Storage({directory}).init();
   const originalFetch=globalThis.fetch,oldKey=process.env.OPENAI_API_KEY,oldPinecone=process.env.PINECONE_API_KEY;
