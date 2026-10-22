@@ -1,10 +1,10 @@
-run = "PORT=5000 python run.py serve"
+run = "FINWHIZ_BACKEND_URL= FINWHIZ_BOOTSTRAP_LIBRARY=data/recovery/replit-library-v1.json.gz FINWHIZ_BOOTSTRAP_SHA256=84e0f0b08f6bbe46d3b0891ed6003aeabe568e98e85dcb0923f7ac1c3b07b7d9 AI_PROVIDER=nebius PORT=5000 python run.py serve"
 entrypoint = "run.py"
 modules = ["python-3.12", "web", "nodejs-22"]
 
 [deployment]
 deploymentTarget = "vm"
-run = ["sh", "-c", "PORT=5000 python run.py serve"]
+run = ["sh", "-c", "FINWHIZ_BACKEND_URL= FINWHIZ_BOOTSTRAP_LIBRARY=data/recovery/replit-library-v1.json.gz FINWHIZ_BOOTSTRAP_SHA256=84e0f0b08f6bbe46d3b0891ed6003aeabe568e98e85dcb0923f7ac1c3b07b7d9 AI_PROVIDER=nebius PORT=5000 python run.py serve"]
 
 [[ports]]
 localPort = 5000
@@ -31,7 +31,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "PORT=5000 python run.py serve"
+args = "FINWHIZ_BACKEND_URL= FINWHIZ_BOOTSTRAP_LIBRARY=data/recovery/replit-library-v1.json.gz FINWHIZ_BOOTSTRAP_SHA256=84e0f0b08f6bbe46d3b0891ed6003aeabe568e98e85dcb0923f7ac1c3b07b7d9 AI_PROVIDER=nebius PORT=5000 python run.py serve"
 waitForPort = 5000
 
 [workflows.workflow.metadata]

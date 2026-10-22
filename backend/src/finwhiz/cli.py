@@ -38,6 +38,7 @@ def parser():
         "command",
         choices=[
             "serve",
+            "recover-library",
             "library-inventory",
             "fiscal-metadata-plan",
             "index",
@@ -236,6 +237,8 @@ def export_project(destination):
             continue
         if len(relative.parts) > 1 and relative.parts[0] not in allowed_dirs:
             continue
+        if relative.parts[:2] in {('data', 'embeddings'), ('data', 'chunks'), ('data', 'parents'), ('data', 'parsed'), ('data', 'raw')}:
+            continue  # Generated caches are restored from the verified bundle, not deployed separately.
         if (
             (path.name.startswith(".env") and path.name != ".env.example")
             or path.suffix in (".pyc", ".sqlite3", ".db")
@@ -260,6 +263,16 @@ def export_project(destination):
 
 
 def execute(args, settings):
+    if args.command == 'recover-library':
+        from .bootstrap import recover_empty_library
+        path = args.source or settings.finwhiz_bootstrap_library
+        if not path:
+            raise AppError('Specify --source=RECOVERY_BUNDLE or FINWHIZ_BOOTSTRAP_LIBRARY.')
+        path = path if path.is_absolute() else ROOT / path
+        store = Storage(settings.finwhiz_data_dir)
+        with runtime_lock(store.directory):
+            return recover_empty_library(store, Jobs(store), settings, path,
+                                         settings.finwhiz_bootstrap_sha256, Providers, args.apply)
     if args.command in ('library-inventory', 'fiscal-metadata-plan'):
         from .library import inventory, compare_inventories
         import sqlite3

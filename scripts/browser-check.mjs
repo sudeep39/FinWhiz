@@ -17,6 +17,22 @@ try{
   const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
   const base=process.env.FINWHIZ_BROWSER_BASE||`http://127.0.0.1:${server.address().port}`;
   const emptyState=await (await fetch(base+'/api/state')).json();
+  const recoveryPage=await browser.newPage();
+  await recoveryPage.addInitScript(()=>sessionStorage.setItem('finwhiz-provider','openai'));
+  const recoveredDoc={id:'fixture',ticker:'TSLA',company:'Tesla',form:'10-Q',reportDate:'2026-06-30',strategies:['fixed','semantic']};
+  await recoveryPage.route('**/api/state',route=>{
+    const provider=route.request().headers()['x-ai-provider']||'openai';
+    const visible=provider==='nebius';
+    return route.fulfill({json:{...emptyState,config:{...emptyState.config,aiProvider:provider},
+      documents:visible?[recoveredDoc]:[],companies:visible?[{ticker:'TSLA',name:'Tesla',periods:[{reportDate:'2026-06-30',form:'10-Q',ready:true}]}]:[],
+      jobs:[{id:'recovered',status:'ready',createdAt:'2026-10-22',aiConfig:{provider:'nebius'},files:[],summaries:[],documents:[recoveredDoc]}]}});
+  });
+  await recoveryPage.goto(base);
+  await recoveryPage.waitForFunction(()=>document.querySelector('#ai-provider').value==='nebius'&&document.querySelector('#nav-doc-count').textContent==='1');
+  await recoveryPage.selectOption('#ai-provider','openai');
+  await recoveryPage.waitForFunction(()=>document.querySelector('#nav-doc-count').textContent==='0');
+  assert.equal(await recoveryPage.locator('#ai-provider').inputValue(),'openai');
+  await recoveryPage.close();
   // An old backend may still return catalog companies without uploaded data.
   // The frontend must hide those as well, not just trust that stale list.
   await page.route('**/api/state',route=>route.fulfill({json:{...emptyState,companies:[{ticker:'NVDA',name:'NVIDIA',periods:[{reportDate:'2026-07-26',form:'10-Q',ready:false}]}]}}));

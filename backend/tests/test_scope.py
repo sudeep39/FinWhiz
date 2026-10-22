@@ -62,6 +62,14 @@ def test_q4_and_second_half_require_ytd_inputs():
     assert resolve_scope('Tesla second half 2026', [annual, document()], ['TSLA'])['status'] == 'resolved'
 
 
+def test_q2_source_selection_can_derive_q1_even_when_q1_filing_exists():
+    docs = [document(), document(day='2026-03-31', quarter=1)]
+    question = 'Using Tesla Q2 2026 filing, what were Q1 2026 revenue and common stockholder income, and how did Q2 compare?'
+    for periods in ([], ['2026-06-30']):
+        result = resolve_scope(question, docs, ['TSLA'], periods)
+        assert result['status'] == 'resolved' and result['filingDates'] == ['2026-06-30']
+
+
 def test_followup_uses_previous_resolved_company_period_and_detects_conflicts():
     docs = [document(), document(day='2025-06-30', year=2025)]
     prior = resolve_scope('Tesla Q2', docs, ['TSLA'], ['2026-06-30'])

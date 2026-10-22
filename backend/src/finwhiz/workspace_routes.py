@@ -41,6 +41,7 @@ async def workspace(request, path, *, settings, store, jobs):
             dict(
                 companies=companies,
                 documents=documents,
+                **({'recovery': store.json('library-bootstrap')} if settings.finwhiz_bootstrap_library else {}),
                 jobs=[public_job(j) for j in all_jobs],
                 config=dict(
                     providersConfigured=settings.configured(config),

@@ -119,9 +119,15 @@ def resolve_scope(question, documents, tickers, periods=None, history=None):
         if half:
             pairs += [(year, 2 if half == 1 else 4) for year in years]
         requested = [f'{year}-Q{q}' for year, q in pairs] + ([f'{year}-H{half}' for year in years] if half else [])
+        source_filing = re.search(r'\b(?:using|from|based on|according to)\b[^?.]{0,100}?\bQ([1-4])\s+((?:19|20|21)\d{2})\s+filing\b', question, re.I)
         for ticker in selected:
             for year, q in pairs:
                 candidates = [doc for doc in known if doc['ticker'] == ticker and doc['fiscal_year'] == year and doc['fiscal_quarter'] == q]
+                if q == 1 and ((source_filing and source_filing[1] == '2' and int(source_filing[2]) == year) or
+                               (periods and not any(doc['reportDate'] in periods for doc in candidates))):
+                    q2 = [doc for doc in known if doc['ticker'] == ticker and doc['fiscal_year'] == year and doc['fiscal_quarter'] == 2 and doc.get('form') == '10-Q' and (not periods or doc['reportDate'] in periods)]
+                    if q2:
+                        candidates = q2
                 if not candidates and q == 1:
                     # Q2 YTD minus Q2 can support Q1 without a separate Q1 filing.
                     candidates = [doc for doc in known if doc['ticker'] == ticker and doc['fiscal_year'] == year and doc['fiscal_quarter'] == 2 and doc.get('form') == '10-Q']

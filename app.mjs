@@ -2,6 +2,7 @@ const $=id=>document.getElementById(id);
 const make=(tag,className,text)=>{const node=document.createElement(tag);if(className)node.className=className;if(text!==undefined)node.textContent=text;return node;};
 let state=null,view='research',selectedFiles=[],fileDetails=[],busy=false,uploading=false,periodSelection=new Set(),conversation=[],password=sessionStorage.getItem('finwhiz-password')||'';
 let toastTimer,pollTimer;
+let initialLibraryProviderResolved=false;
 let selectedProvider=sessionStorage.getItem('finwhiz-provider')||'';
 $('ai-provider').value=selectedProvider||'openai';
 $('ai-provider').onchange=()=>{if(busy||uploading){$('ai-provider').value=selectedProvider||'openai';return;}selectedProvider=$('ai-provider').value;sessionStorage.setItem('finwhiz-provider',selectedProvider);periodSelection.clear();clearChat();refresh().catch(error=>toast(error.message,true));};
@@ -89,7 +90,17 @@ function renderJobs(){
 }
 async function refresh(){
   const requestedProvider=selectedProvider;
-  const updated=await api('/api/state');if(selectedProvider!==requestedProvider)return;state=updated;
+  const updated=await api('/api/state');if(selectedProvider!==requestedProvider)return;
+  if(!initialLibraryProviderResolved){
+    initialLibraryProviderResolved=true;
+    if(!updated.documents?.length){
+      const available=(updated.jobs||[]).find(job=>job.status==='ready'&&job.documents?.length&&['openai','nebius'].includes(job.aiConfig?.provider));
+      if(available&&available.aiConfig.provider!==(updated.config.aiProvider||selectedProvider)){
+        selectedProvider=available.aiConfig.provider;sessionStorage.setItem('finwhiz-provider',selectedProvider);await refresh();return;
+      }
+    }
+  }
+  state=updated;
   selectedProvider=state.config.aiProvider||selectedProvider||'openai';$('ai-provider').value=selectedProvider;
   // Do not display legacy catalog-only company entries from an older server.
   // A company and period must have a corresponding completed-upload document.

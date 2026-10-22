@@ -48,6 +48,12 @@ def create_app(
     processing_timeout_seconds=1800,
 ):
     settings = settings or Settings(_env_file=ROOT / ".env")
+    if settings.replit_deployment and not settings.finwhiz_bootstrap_library:
+        from .bootstrap import DEFAULT_BUNDLE_SHA256
+        bundled = ROOT / 'data/recovery/replit-library-v1.json.gz'
+        if bundled.is_file():
+            settings = settings.model_copy(update={'finwhiz_bootstrap_library': bundled,
+                                                   'finwhiz_bootstrap_sha256': DEFAULT_BUNDLE_SHA256})
     if settings.finwhiz_backend_url:
         raise AppError('A shared backend is configured. Use restart.cmd to start its local frontend instead of creating another library owner.')
     store = Storage(settings.finwhiz_data_dir)
@@ -64,6 +70,16 @@ def create_app(
     @asynccontextmanager
     async def lifespan(app):
         with runtime_lock(store.directory):
+            if settings.finwhiz_bootstrap_library:
+                from .bootstrap import recover_empty_library
+                path = settings.finwhiz_bootstrap_library
+                path = path if path.is_absolute() else ROOT / path
+                app.state.recovery = await asyncio.to_thread(
+                    recover_empty_library, store, jobs, settings, path,
+                    settings.finwhiz_bootstrap_sha256, provider_factory, True)
+                logger.info('library bootstrap status=%s documents=%s reused_vectors=%s',
+                            app.state.recovery['status'], app.state.recovery.get('documents'),
+                            app.state.recovery.get('reusedVectors'))
             await asyncio.to_thread(jobs.recover)
             task = (
                 None

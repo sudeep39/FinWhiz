@@ -85,6 +85,13 @@ class Settings(BaseSettings):
     app_password: str = ""
     finwhiz_shared_backend_password: str = ""
     finwhiz_backend_url: str = ""
+    finwhiz_bootstrap_library: Path | None = None
+    finwhiz_bootstrap_sha256: str = ""
+
+    @field_validator('finwhiz_bootstrap_library', mode='before')
+    @classmethod
+    def optional_bootstrap_path(cls, value):
+        return None if value == '' else value
     node_env: str = ""
     replit_deployment: str = ""
     finwhiz_data_dir: Path = ROOT / ".runtime-python"
