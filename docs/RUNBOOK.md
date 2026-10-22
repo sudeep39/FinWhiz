@@ -1,12 +1,12 @@
 # Run, evaluate and recover
 
-Run commands from the FinWhiz root using Node 22 or later. Local verification used Node 24. Keep keys in `.env` or server environment secrets; never paste them into code or commit them. Pinecone uses its API key; there is no extra connection password.
+Run commands from the FinWhiz root with Python >=3.12 and an activated virtual environment. See [Python migration and rollback](PYTHON_MIGRATION.md) before adopting existing data. Optional npm aliases use the local .venv and require Node >=22. Keep keys in `.env` or server environment secrets; never paste them into code or commit them. Pinecone uses its API key; there is no extra connection password.
 
 ## Application
 
 ```sh
-npm ci
-npm start
+python -m pip install -r backend/requirements.lock
+python run.py serve
 ```
 
 Open http://localhost:3100. Research starts blank and becomes available only after a completed ingestion job. Browser uploads continue processing after acknowledgement even if the user leaves. APP_PASSWORD is required in production/Replit deployment. Use a Reserved VM and a verified persistent `FINWHIZ_DATA_DIR`. Do not run the web server and the standalone ingestion CLI against the same queue simultaneously.
@@ -54,8 +54,8 @@ The first command is a local status check. The second requires `SEC_USER_AGENT` 
 Stop the server and let the queue drain. Snapshots contain uploaded documents and derived evidence; protect them as carefully as the corpus.
 
 ```sh
-node --env-file-if-exists=.env scripts/recovery.mjs --snapshot --to=.backups/runtime-snapshot
-node scripts/recovery.mjs --restore=.backups/runtime-snapshot --to=.runtime-restored
+python run.py snapshot --to=.backups/runtime-snapshot
+python run.py restore --source=.backups/runtime-snapshot --to=.runtime-restored
 ```
 
 Both destinations must be empty. Checksums and filenames are verified before restore; existing data is never overwritten. Set FINWHIZ_DATA_DIR to the restored directory and restart. This restores source/state/cache, not deleted Pinecone vectors or namespaces. Retain the original sources and provider index; reingest if remote vectors were lost. Store a protected copy of backups off the deployment disk. Verify actual hosted durability with a restart/redeploy-and-restore drill before relying on it.

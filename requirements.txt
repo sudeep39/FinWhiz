@@ -1,4 +1,4 @@
-beautifulsoup4>=4.12,<5
-lxml>=5,<7
-tiktoken>=0.8,<1
+# Application dependencies are pinned in the backend lockfile.
+-r backend/requirements.lock
+# Retained optional preparation/loading scripts use NumPy.
 numpy>=1.26,<3

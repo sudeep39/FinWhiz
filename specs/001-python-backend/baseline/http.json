@@ -1,0 +1,348 @@
+[
+  {
+    "name": "health",
+    "request": {
+      "path": "/api/health",
+      "method": "GET",
+      "body": null,
+      "headers": {}
+    },
+    "status": 200,
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "cache-control": "no-store",
+      "x-content-type-options": "nosniff",
+      "referrer-policy": "same-origin",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+    },
+    "body": {
+      "ok": true
+    }
+  },
+  {
+    "name": "unauthorized",
+    "request": {
+      "path": "/api/state",
+      "method": "GET",
+      "body": null,
+      "headers": {
+        "Authorization": ""
+      }
+    },
+    "status": 401,
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "cache-control": "no-store",
+      "x-content-type-options": "nosniff",
+      "referrer-policy": "same-origin",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+    },
+    "body": {
+      "error": "Enter your workspace password."
+    }
+  },
+  {
+    "name": "empty-state",
+    "request": {
+      "path": "/api/state",
+      "method": "GET",
+      "body": null,
+      "headers": {}
+    },
+    "status": 200,
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "cache-control": "no-store",
+      "x-content-type-options": "nosniff",
+      "referrer-policy": "same-origin",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+    },
+    "body": {
+      "companies": [],
+      "documents": [],
+      "jobs": [],
+      "config": {
+        "providersConfigured": false,
+        "aiProvider": "openai",
+        "aiProviders": [
+          {
+            "provider": "openai",
+            "label": "OpenAI",
+            "embeddingModel": "text-embedding-3-large",
+            "dimension": 1536,
+            "indexName": "finwhiz-filings-v1",
+            "chatModel": "gpt-4.1-mini",
+            "judgeModel": "gpt-4.1-mini",
+            "configured": false
+          },
+          {
+            "provider": "nebius",
+            "label": "Nebius Token Factory",
+            "embeddingModel": "Qwen/Qwen3-Embedding-8B",
+            "dimension": 4096,
+            "indexName": "finwhiz-nebius-v1",
+            "chatModel": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+            "judgeModel": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+            "configured": false
+          }
+        ],
+        "storageBackend": "filesystem",
+        "authenticated": true,
+        "asOf": "2026-10-18"
+      },
+      "capabilities": {
+        "hybrid": true,
+        "rerank": true,
+        "strategies": [
+          "fixed",
+          "semantic"
+        ]
+      }
+    }
+  },
+  {
+    "name": "nebius-state",
+    "request": {
+      "path": "/api/state",
+      "method": "GET",
+      "body": null,
+      "headers": {
+        "X-AI-Provider": "nebius"
+      }
+    },
+    "status": 200,
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "cache-control": "no-store",
+      "x-content-type-options": "nosniff",
+      "referrer-policy": "same-origin",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+    },
+    "body": {
+      "companies": [],
+      "documents": [],
+      "jobs": [],
+      "config": {
+        "providersConfigured": false,
+        "aiProvider": "nebius",
+        "aiProviders": [
+          {
+            "provider": "openai",
+            "label": "OpenAI",
+            "embeddingModel": "text-embedding-3-large",
+            "dimension": 1536,
+            "indexName": "finwhiz-filings-v1",
+            "chatModel": "gpt-4.1-mini",
+            "judgeModel": "gpt-4.1-mini",
+            "configured": false
+          },
+          {
+            "provider": "nebius",
+            "label": "Nebius Token Factory",
+            "embeddingModel": "Qwen/Qwen3-Embedding-8B",
+            "dimension": 4096,
+            "indexName": "finwhiz-nebius-v1",
+            "chatModel": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+            "judgeModel": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+            "configured": false
+          }
+        ],
+        "storageBackend": "filesystem",
+        "authenticated": true,
+        "asOf": "2026-10-18"
+      },
+      "capabilities": {
+        "hybrid": true,
+        "rerank": true,
+        "strategies": [
+          "fixed",
+          "semantic"
+        ]
+      }
+    }
+  },
+  {
+    "name": "invalid-provider",
+    "request": {
+      "path": "/api/state",
+      "method": "GET",
+      "body": null,
+      "headers": {
+        "X-AI-Provider": "invalid"
+      }
+    },
+    "status": 400,
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "cache-control": "no-store",
+      "x-content-type-options": null,
+      "referrer-policy": null,
+      "content-security-policy": null
+    },
+    "body": {
+      "error": "Choose OpenAI or Nebius Token Factory."
+    }
+  },
+  {
+    "name": "unknown-endpoint",
+    "request": {
+      "path": "/api/missing",
+      "method": "GET",
+      "body": null,
+      "headers": {}
+    },
+    "status": 404,
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "cache-control": "no-store",
+      "x-content-type-options": "nosniff",
+      "referrer-policy": "same-origin",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+    },
+    "body": {
+      "error": "Endpoint not found."
+    }
+  },
+  {
+    "name": "missing-source",
+    "request": {
+      "path": "/api/sources/00000000-0000-0000-0000-000000000000",
+      "method": "GET",
+      "body": null,
+      "headers": {}
+    },
+    "status": 404,
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "cache-control": "no-store",
+      "x-content-type-options": "nosniff",
+      "referrer-policy": "same-origin",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+    },
+    "body": {
+      "error": "Source not found."
+    }
+  },
+  {
+    "name": "invalid-question",
+    "request": {
+      "path": "/api/chat",
+      "method": "POST",
+      "body": "{}",
+      "headers": {}
+    },
+    "status": 400,
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "cache-control": "no-store",
+      "x-content-type-options": "nosniff",
+      "referrer-policy": "same-origin",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+    },
+    "body": {
+      "error": "Enter a question of up to 3,000 characters."
+    }
+  },
+  {
+    "name": "malformed-json",
+    "request": {
+      "path": "/api/chat",
+      "method": "POST",
+      "body": "{",
+      "headers": {}
+    },
+    "status": 400,
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "cache-control": "no-store",
+      "x-content-type-options": "nosniff",
+      "referrer-policy": "same-origin",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+    },
+    "body": {
+      "error": "Invalid JSON request."
+    }
+  },
+  {
+    "name": "unready-company",
+    "request": {
+      "path": "/api/chat",
+      "method": "POST",
+      "body": "{\"question\":\"What is revenue?\",\"tickers\":[\"ACME\"]}",
+      "headers": {}
+    },
+    "status": 409,
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "cache-control": "no-store",
+      "x-content-type-options": "nosniff",
+      "referrer-policy": "same-origin",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+    },
+    "body": {
+      "error": "The selected company is not ready yet. Finish loading its filings first."
+    }
+  },
+  {
+    "name": "origin-rejected",
+    "request": {
+      "path": "/api/uploads",
+      "method": "POST",
+      "body": null,
+      "headers": {
+        "Origin": "https://untrusted.example"
+      }
+    },
+    "status": 403,
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "cache-control": "no-store",
+      "x-content-type-options": "nosniff",
+      "referrer-policy": "same-origin",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+    },
+    "body": {
+      "error": "Origin not allowed."
+    }
+  },
+  {
+    "name": "upload-unconfigured",
+    "request": {
+      "path": "/api/uploads",
+      "method": "POST",
+      "body": null,
+      "headers": {}
+    },
+    "status": 503,
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "cache-control": "no-store",
+      "x-content-type-options": "nosniff",
+      "referrer-policy": "same-origin",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+    },
+    "body": {
+      "error": "Configure OPENAI_API_KEY and PINECONE_API_KEY in server secrets before submitting files."
+    }
+  },
+  {
+    "name": "retry-ineligible",
+    "request": {
+      "path": "/api/jobs/00000000-0000-0000-0000-000000000000/retry",
+      "method": "POST",
+      "body": null,
+      "headers": {}
+    },
+    "status": 400,
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "cache-control": "no-store",
+      "x-content-type-options": "nosniff",
+      "referrer-policy": "same-origin",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+    },
+    "body": {
+      "error": "This job cannot be retried."
+    }
+  }
+]

@@ -1,0 +1,5 @@
+.test-tmp/
+.pytest_cache/
+*.egg-info/
+build/
+dist/

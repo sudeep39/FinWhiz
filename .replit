@@ -1,11 +1,11 @@
-run = "PORT=5000 npm start"
-entrypoint = "server.mjs"
+run = "PORT=5000 python run.py serve"
+entrypoint = "run.py"
 modules = ["python-3.12", "web", "nodejs-22"]
 
 [deployment]
 deploymentTarget = "vm"
-build = ["sh", "-c", "npm ci"]
-run = ["sh", "-c", "npm start"]
+build = ["sh", "-c", "python -m pip install -r backend/requirements.lock"]
+run = ["sh", "-c", "python run.py serve"]
 
 [[ports]]
 localPort = 5000
@@ -32,7 +32,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "PORT=5000 npm start"
+args = "PORT=5000 python run.py serve"
 waitForPort = 5000
 
 [workflows.workflow.metadata]

@@ -1,0 +1,26 @@
+[
+  {
+    "config": {
+      "provider": "openai",
+      "label": "OpenAI",
+      "embeddingModel": "text-embedding-3-large",
+      "dimension": 1536,
+      "indexName": "finwhiz-filings-v1",
+      "chatModel": "gpt-4.1-mini",
+      "judgeModel": "gpt-4.1-mini"
+    },
+    "fingerprint": "9c9c47ac9ba5a8de3fe0a5bbbedab0f1d1e05d113c7881f1a8fa7cfc08740753"
+  },
+  {
+    "config": {
+      "provider": "nebius",
+      "label": "Nebius Token Factory",
+      "embeddingModel": "Qwen/Qwen3-Embedding-8B",
+      "dimension": 4096,
+      "indexName": "finwhiz-nebius-v1",
+      "chatModel": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "judgeModel": "Qwen/Qwen3-30B-A3B-Instruct-2507"
+    },
+    "fingerprint": "595ecd95e754ee2279bc1848225b9500a46e611409065916885ce785db73845b"
+  }
+]

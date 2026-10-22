@@ -1,0 +1,110 @@
+{
+  "html": "<html><body><h2>Item 7. Results</h2><p>Revenue and operating cash flow reflect the fiscal year ended December 31, 2025.</p><table><tr><th>Metric</th><th>2025</th><th>2024</th></tr><tr><td>Revenue</td><td>125</td><td>100</td></tr><tr><td>Capital expenditure</td><td>(20)</td><td>(15)</td></tr></table></body></html>",
+  "blocks": [
+    {
+      "kind": "narrative",
+      "text": "Item 7. Results",
+      "section": "Item 7. Results",
+      "anchor": "",
+      "id": "b0"
+    },
+    {
+      "kind": "narrative",
+      "text": "Revenue and operating cash flow reflect the fiscal year ended December 31, 2025.",
+      "section": "Item 7. Results",
+      "anchor": "",
+      "id": "b1"
+    },
+    {
+      "kind": "table",
+      "text": "Metric | 2025 | 2024\nRevenue | 125 | 100\nCapital expenditure | (20) | (15)",
+      "section": "Item 7. Results",
+      "anchor": "",
+      "id": "b2"
+    }
+  ],
+  "parents": [
+    {
+      "kind": "narrative",
+      "text": "Item 7. Results\n\nRevenue and operating cash flow reflect the fiscal year ended December 31, 2025.",
+      "section": "Item 7. Results",
+      "anchor": "",
+      "id": "b0",
+      "index": 0,
+      "context": ""
+    },
+    {
+      "kind": "table",
+      "text": "Metric | 2025 | 2024\nRevenue | 125 | 100\nCapital expenditure | (20) | (15)",
+      "section": "Item 7. Results",
+      "anchor": "",
+      "id": "b2",
+      "index": 1,
+      "context": "Item 7. Results\n\nRevenue and operating cash flow reflect the fiscal year ended December 31, 2025."
+    }
+  ],
+  "chunks": [
+    {
+      "parent": 0,
+      "fixed": [
+        "Item 7. Results\n\nRevenue and operating cash flow reflect the fiscal year ended December 31, 2025."
+      ],
+      "semantic": [
+        "Item 7. Results\n\nRevenue and operating cash flow reflect the fiscal year ended December 31, 2025."
+      ]
+    },
+    {
+      "parent": 1,
+      "fixed": [
+        "Item 7. Results\n\nRevenue and operating cash flow reflect the fiscal year ended December 31, 2025.\nMetric | 2025 | 2024\nRevenue | 125 | 100\nCapital expenditure | (20) | (15)"
+      ],
+      "semantic": [
+        "Item 7. Results\n\nRevenue and operating cash flow reflect the fiscal year ended December 31, 2025.\nMetric | 2025 | 2024\nRevenue | 125 | 100\nCapital expenditure | (20) | (15)"
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "id": "a",
+      "metadata": {
+        "text": "revenue growth gross margin"
+      }
+    },
+    {
+      "id": "b",
+      "metadata": {
+        "text": "operating cash flow capital expenditure"
+      }
+    }
+  ],
+  "bm25": [
+    {
+      "id": "b",
+      "metadata": {
+        "text": "operating cash flow capital expenditure"
+      },
+      "score": 1.3260206932451128
+    }
+  ],
+  "fused": [
+    {
+      "id": "b",
+      "metadata": {
+        "text": "operating cash flow capital expenditure"
+      },
+      "fusionScore": 0.03252247488101534
+    },
+    {
+      "id": "a",
+      "metadata": {
+        "text": "revenue growth gross margin"
+      },
+      "fusionScore": 0.01639344262295082
+    }
+  ],
+  "calculations": {
+    "percentChange": 25,
+    "cashFlow": 80,
+    "negativeEvidence": true
+  }
+}

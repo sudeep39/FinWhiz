@@ -1,0 +1,214 @@
+[
+  {
+    "path": "app.mjs",
+    "sha256": "a9395a7a5b3ac25886470b156c18046283491658d6a68624c11bea8dce7af65d"
+  },
+  {
+    "path": "evaluation/benchmark.json",
+    "sha256": "80c8eb86425b16e14643e53b6d88902b062a008426ba3b45566f68ffd804987f"
+  },
+  {
+    "path": "experiment.json",
+    "sha256": "ba29a6ca2bbf501f09e81d6a2b2b7e0738077dc7cff7ecce2e3297b19c068567"
+  },
+  {
+    "path": "filings.test.mjs",
+    "sha256": "d57005b12dfdff6777d8a1b43fa3ba9a35f2aae7f05e870b281d931e99538868"
+  },
+  {
+    "path": "index.html",
+    "sha256": "5349442b8efc5ee0a2e29909acf4da4935457afa3170e7c90dd42df015121714"
+  },
+  {
+    "path": "lib/ai-config.mjs",
+    "sha256": "15f8b008f97573875d9586751910961b2d3fc4b7f40b8481aae3ca5332e526a1"
+  },
+  {
+    "path": "lib/answer-review.mjs",
+    "sha256": "8951dd8bafb5660d6a67a03513cb6f958aba6aca06861a4f7035d776a0c52396"
+  },
+  {
+    "path": "lib/benchmark.mjs",
+    "sha256": "4473bdbd713eb514732b5774f2089e82bca81dc4d5b7ed27b3f4a2dba09db4f8"
+  },
+  {
+    "path": "lib/cash-flow.mjs",
+    "sha256": "05010a69f6008b6ea54851f7c45af9a8b38ac69febe1c0bd80e821fc5fb236a7"
+  },
+  {
+    "path": "lib/chunking.mjs",
+    "sha256": "d7ca16c9f503b63197a52aec3ce9f7dbf24507fb99e811acd1c347f66b8e8bd1"
+  },
+  {
+    "path": "lib/evaluation.mjs",
+    "sha256": "8b586d5d319d5765bb665b6a3408fa2246b9f30fa0ec5ad7d4af05c5082ff511"
+  },
+  {
+    "path": "lib/filing-metadata.mjs",
+    "sha256": "7055f9f2d3d37f34c3bc5b9aeff5fe3b4b8dd6d8447d0bcc0593701ce63be2b0"
+  },
+  {
+    "path": "lib/ingest.worker.mjs",
+    "sha256": "bbe8f2a542c872b1516764f5e597bfa30da2e4027020cf93850ca105975a03dd"
+  },
+  {
+    "path": "lib/manual-scoring.mjs",
+    "sha256": "d09e1fed75de3df39b01d0a63197e5727d9e2882456442e0bdc5d67a1d430667"
+  },
+  {
+    "path": "lib/operations.mjs",
+    "sha256": "71dac471c1efcae6dae05fd541a14768dbcd7584d5f07085c517bfb0b27c5367"
+  },
+  {
+    "path": "lib/providers.mjs",
+    "sha256": "658eef237eb8eecadbbb63f56e25732dc5af1ae757be808e18a23b12efad3c63"
+  },
+  {
+    "path": "lib/query-policy.mjs",
+    "sha256": "19bb251350460e5b1cbcec2c54acb61a185eb7daabccf5167f6cddb08784d407"
+  },
+  {
+    "path": "lib/recovery.mjs",
+    "sha256": "8f5d67ee1de40025876a945c4b0e3594d759b4b1b6c5b7c255c6e15802a37190"
+  },
+  {
+    "path": "lib/retrieval.mjs",
+    "sha256": "9dcbc90a2560bc0aee08ebe302a3355610cf4a203a55a1b641c9ebc55a964801"
+  },
+  {
+    "path": "lib/storage.mjs",
+    "sha256": "fd92e4aaf9d564237fd100a759c824ce30e36f692b881f9e78dea438b83a470d"
+  },
+  {
+    "path": "lib/validation.mjs",
+    "sha256": "c83790c06f5265514b09ab395c8e8905c80aa525fcc5c1415d019e5d5d059755"
+  },
+  {
+    "path": "lib/web-server.mjs",
+    "sha256": "22ae4ea9d403c1b9fbe9b4b2d7b28a9bdcebe97a81059c4557c1f7b056c47818"
+  },
+  {
+    "path": "package-lock.json",
+    "sha256": "6bd834397400a4adb14eae5b80aaecb3521ad6687c6a7ec9d08d34d8183707ea"
+  },
+  {
+    "path": "package.json",
+    "sha256": "d7dd3fb326ff19fbdd729a692e6ade39a643aab48ea66bc973f9b14a94df11b1"
+  },
+  {
+    "path": "pinecone.test.mjs",
+    "sha256": "a7b2ac5445562c6770c64213622a5a8083a9c9325875160cfdf3ea4db0a5c6ed"
+  },
+  {
+    "path": "pinecone/index.json",
+    "sha256": "a9aac7db265ff3ec7120d39a78310c3fb4e3bff5844c67a8b367b65660861b30"
+  },
+  {
+    "path": "provider.test.mjs",
+    "sha256": "9f7abfdb9bc7b5c1e5f0a194a34d048810d73e71904af21c54e28de99088f17d"
+  },
+  {
+    "path": "quality-policy.json",
+    "sha256": "64753dd4860605a4b53384ca18c1937991996233b3a2f0c2c0b8581e208f3e1b"
+  },
+  {
+    "path": "requirements.txt",
+    "sha256": "280faeb92454eddfe2016efcf40ce335be2cb1fa283040362282e7bc71a0ede4"
+  },
+  {
+    "path": "review.test.mjs",
+    "sha256": "780c635360bbcebe75fd105cb09676ed3ad6285c018e711b850489f30a467893"
+  },
+  {
+    "path": "rubric.test.mjs",
+    "sha256": "8477976bb0ac8a9a8138c00419bbaab7d158606adbe1637e894f8f84b6e35292"
+  },
+  {
+    "path": "scripts/browser-check.mjs",
+    "sha256": "2231ebf503a3fbc8dc2b226afb5918d3c3fdac87da937f396c4453ec3975ccfa"
+  },
+  {
+    "path": "scripts/build-benchmark.mjs",
+    "sha256": "3e48a0a30a721751b740586b26ccf5ecbc5cce38f806560ec16f3587dffafe92"
+  },
+  {
+    "path": "scripts/check-freshness.mjs",
+    "sha256": "2c009ec42c6f93332c1eee156d2465a6e217ff0c5f8e32a4bf25539da82b4940"
+  },
+  {
+    "path": "scripts/collect-filings.mjs",
+    "sha256": "4efd4c5abd059e818ea2307429b9f602210365f3bf344fe4f4eccf5816179720"
+  },
+  {
+    "path": "scripts/create-pinecone-index.mjs",
+    "sha256": "1e58dc51f11305a6a71051b0dbfd8cf0781f7a28f5f6c946e192dfae3f36b63e"
+  },
+  {
+    "path": "scripts/download-filings.mjs",
+    "sha256": "9ce42f604b0e7d784ff213a9f54f0aadb362908ce1ec43a156a058a0d7a6e128"
+  },
+  {
+    "path": "scripts/evaluate.mjs",
+    "sha256": "a7e0e6b3564c28f175a17b721509bf50c570518c316bf84015e9f266daec4149"
+  },
+  {
+    "path": "scripts/export-experiment.mjs",
+    "sha256": "92e8bddf51a6a2179c16f260c9eb09f930756811a77dcc3b4c2fc17865f0dbbc"
+  },
+  {
+    "path": "scripts/export-project.mjs",
+    "sha256": "d0607b7bef4b5a7ab6cd0252ccbaf0107c6fc44d2a56e6f99a64fd1829b78284"
+  },
+  {
+    "path": "scripts/ingest-evaluation.mjs",
+    "sha256": "5ad0f7659b7db763df5f1cf7e42c00c6a047a2dfc141c8fd060793d5c443c5c8"
+  },
+  {
+    "path": "scripts/load-evaluation-corpus.mjs",
+    "sha256": "59fa65bc3c3f6d6fecdfe810e463b7a33ce033af78e7e318e3a215016989166a"
+  },
+  {
+    "path": "scripts/load_pinecone.py",
+    "sha256": "4e047465725b46a6b5d0f8b746e0e371ba9ccbfbe72945c719a322cb38cacb46"
+  },
+  {
+    "path": "scripts/prepare_filings.py",
+    "sha256": "5e55ae3c6174bec504dcf8c6bdbc189b8b1b63810f2e35de63c4d6ae2edf7846"
+  },
+  {
+    "path": "scripts/provider-fixture.mjs",
+    "sha256": "73ab2ae6a939f1792f2d2b236d8a1696c1c2ca411f37308163fdd2136801895e"
+  },
+  {
+    "path": "scripts/recovery.mjs",
+    "sha256": "c0c409e628ad57c1ce15f831b98ee58a17b43175b1acfcff57bfd53ef53d4f2d"
+  },
+  {
+    "path": "scripts/run-benchmark.mjs",
+    "sha256": "55b6d93fe8ed64d8c847c1a76a8c18b4ec6c823f7634ad8b24d3cff1831d997e"
+  },
+  {
+    "path": "scripts/score-reviews.mjs",
+    "sha256": "9e2545d393c30d98b145d27380815462a0dc5e7a9bdeafa4364b448e77f82ecb"
+  },
+  {
+    "path": "scripts/test_load_pinecone.py",
+    "sha256": "3a3e228d34091aa6b3ecacbdf76f84766c3b1ebaffa8875889678331f9446a6b"
+  },
+  {
+    "path": "scripts/test_prepare_filings.py",
+    "sha256": "216516944aaf08edb56333ff20dc4e93570183ff99011056b8848b27dfc3c559"
+  },
+  {
+    "path": "server.mjs",
+    "sha256": "8abdb61c7d0ac858c28c34bd5ab87d5e769a4cc599cfe494c7b47685501eea11"
+  },
+  {
+    "path": "style.css",
+    "sha256": "141ec879bfc48f989765efc072c97f41675d98fc3926d0aabffaabf16cbffdd7"
+  },
+  {
+    "path": "web.test.mjs",
+    "sha256": "87e40671280c814249940351a5c144f9f3f724db889268095d4bf51601188920"
+  }
+]

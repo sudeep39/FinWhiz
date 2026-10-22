@@ -157,7 +157,7 @@ $('upload-submit').onclick=async()=>{
   if(fileDetails.some((d,i)=>!/\.html?$/i.test(selectedFiles[i].name)&&(!d.ticker||!d.reportDate))){toast('Confirm the ticker and fiscal period end for PDF and text files.',true);return;}
   const data=new FormData();data.append('details',JSON.stringify(fileDetails));selectedFiles.forEach((file,i)=>data.append(`file_${i}`,file));
   uploading=true;$('ai-provider').disabled=true;$('upload-submit').textContent='Uploading files…';renderFiles();
-  try{const result=await api('/api/uploads',{method:'POST',body:data});selectedFiles=[];fileDetails=[];const banner=make('div','success-banner');banner.append(make('strong','','Your files are uploaded.'),make('span','',result.message));$('documents-view').prepend(banner);setTimeout(()=>banner.remove(),30000);toast('Upload complete. You can leave this screen and return when processing is done.');await refresh();}
+  try{const result=await api('/api/uploads',{method:'POST',body:data});selectedFiles=[];fileDetails=[];const banner=make('div','success-banner');banner.append(make('strong','',result.created===false?'Existing files found.':'Upload accepted.'),make('span','',result.message));$('documents-view').prepend(banner);setTimeout(()=>banner.remove(),30000);toast(result.created===false?'Existing files reused; no duplicate indexing.':'Upload accepted. New files will process in the background.');await refresh();}
   catch(error){toast(error.message,true);}finally{uploading=false;$('ai-provider').disabled=busy;$('upload-submit').textContent='Upload & process ↗';renderFiles();}
 };
 
@@ -202,7 +202,8 @@ function renderAnswer(result){
   if(result.chart?.type!=='none'&&result.chart?.points?.length)message.append(chartCard(result.chart,result.sources));
   if(result.calculations?.length){const grid=make('div','calculations');for(const c of result.calculations){const card=make('div','calculation');card.append(make('h4','',c.label),make('strong','',`${number(c.result)} ${c.unit}`),make('small','',`${c.operation.replaceAll('_',' ')} · Inputs: ${c.values.map(number).join(', ')}`));c.source_ids.forEach(id=>card.append(sourceButton(id,result.sources)));grid.append(card);}message.append(grid);}
   const links=make('div','evidence-links');for(const source of result.sources){const chip=make('button','evidence-chip',`${source.id} · ${source.ticker} · ${source.form} · ${source.report_date}`);chip.onclick=()=>showSource(source);links.append(chip);}message.append(links);
-  if(result.metrics)message.append(make('div','message-metrics',`${result.metrics.strategy||$('strategy-select').value} · Hybrid${result.metrics.rerank?' + rerank':''} · ${result.metrics.evidence||0} sources · ${(result.metrics.latencyMs/1000).toFixed(1)}s`));
+  if(result.scope)message.append(make('div','message-metrics',result.scope.label+(result.scope.requestedPeriods?.length?' | Requested: '+result.scope.requestedPeriods.join(', '):'')));
+  if(result.metrics)message.append(make('div','message-metrics',`${result.metrics.strategy||$('strategy-select').value} · Hybrid${result.metrics.rerank?(result.metrics.rerankFallback?' ? Reranking limited':' + rerank'):''} · ${result.metrics.evidence||0} sources · ${(result.metrics.latencyMs/1000).toFixed(1)}s`));
   const toolbar=make('div','message-toolbar'),copy=make('button','','Copy answer');copy.onclick=()=>navigator.clipboard.writeText(result.answer).then(()=>toast('Answer copied.'),()=>toast('Copy is unavailable in this browser.',true));toolbar.append(copy);message.append(toolbar);scrollBottom();
 }
 document.querySelectorAll('[data-question]').forEach(button=>button.onclick=()=>{$('question').value=button.dataset.question;$('question').focus();});
@@ -213,7 +214,19 @@ $('chat-form').onsubmit=async event=>{
   const scope=selectedTickers(),strategy=$('strategy-select').value,periods=selectedPeriods();
   addMessage('user',question);$('question').value='';busy=true;$('ai-provider').disabled=true;renderScope();
   const thinking=make('div','thinking');thinking.append(make('span','thinking-dot'),make('span','','Searching filings and checking the evidence…'));$('messages').append(thinking);scrollBottom();
-  try{const result=await api('/api/chat',{method:'POST',body:JSON.stringify({question,tickers:scope,periods,strategy,rerank:$('rerank-toggle').checked,history:conversation.slice(-4)})});thinking.remove();renderAnswer(result);conversation.push({role:'user',content:question},{role:'assistant',content:result.answer});}
+  try{
+    const payload={question,tickers:scope,periods,strategy,rerank:$('rerank-toggle').checked,history:conversation.slice(-4)};
+    const resolved=await api('/api/scope',{method:'POST',body:JSON.stringify(payload)});
+    let result;
+    if(resolved.status!=='resolved'){
+      result={status:resolved.status,answer:resolved.message,scope:resolved,sources:[],calculations:[],chart:{type:'none',points:[]}};
+    }else{
+      thinking.lastChild.textContent=resolved.label+' | Checking the evidence\u2026';
+      result=await api('/api/chat',{method:'POST',body:JSON.stringify(payload)});
+    }
+    thinking.remove();renderAnswer(result);
+    conversation.push({role:'user',content:question,scope:result.scope||resolved},{role:'assistant',content:result.answer});
+  }
   catch(error){thinking.remove();addMessage('assistant',error.message);toast(error.message,true);}
   finally{busy=false;$('ai-provider').disabled=uploading;renderScope();scrollBottom();}
 };

@@ -4,18 +4,22 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node --env-file-if-exists=.env server.mjs",
-    "refresh": "node scripts/collect-filings.mjs",
-    "download": "node scripts/download-filings.mjs",
-    "pinecone:plan": "node --env-file-if-exists=.env scripts/create-pinecone-index.mjs --dry-run",
-    "pinecone:create": "node --env-file-if-exists=.env scripts/create-pinecone-index.mjs --apply",
+    "start": "node scripts/python-command.mjs serve",
+    "dev:frontend": "node scripts/frontend-server.mjs",
+    "start:legacy": "node --env-file-if-exists=.env server.mjs",
+    "refresh": "node scripts/python-command.mjs collect --apply",
+    "download": "node scripts/python-command.mjs download --apply",
+    "pinecone:plan": "node scripts/python-command.mjs index",
+    "pinecone:create": "node scripts/python-command.mjs index --apply",
     "test": "node --test filings.test.mjs pinecone.test.mjs web.test.mjs review.test.mjs rubric.test.mjs provider.test.mjs",
-    "evaluate": "node --env-file-if-exists=.env scripts/evaluate.mjs",
-    "ingest:evaluation": "node --env-file-if-exists=.env scripts/ingest-evaluation.mjs",
-    "freshness": "node --env-file-if-exists=.env scripts/check-freshness.mjs",
-    "score:reviews": "node scripts/score-reviews.mjs",
-    "export:project": "node scripts/export-project.mjs",
-    "test:browser": "node scripts/browser-check.mjs"
+    "evaluate": "node scripts/python-command.mjs evaluate",
+    "ingest:evaluation": "node scripts/python-command.mjs ingest",
+    "freshness": "node scripts/python-command.mjs freshness",
+    "score:reviews": "node scripts/python-command.mjs score-reviews",
+    "export:project": "node scripts/python-command.mjs export-project --apply",
+    "test:python": "node scripts/python-command.mjs --test",
+    "test:browser": "node scripts/browser-check-python.mjs",
+    "test:browser:legacy": "node scripts/browser-check.mjs"
   },
   "engines": {
     "node": ">=22"
