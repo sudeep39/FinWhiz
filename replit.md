@@ -6,7 +6,9 @@
 - Python >=3.12 is required and configured; Node is optional browser/legacy tooling.
 - Use the **Start application** workflow (`PORT=5000 python run.py serve`) or Replit's Run button.
 - The preview serves on `0.0.0.0:5000`. Outside Replit, `python run.py serve` defaults to port 3100.
-- Install the backend with `python -m pip install -r backend/requirements.lock`.
+- Backend dependencies are pinned in `backend/requirements.lock` and included by root `requirements.txt`. Replit installs them automatically during publishing.
+- Leave the custom publishing build command empty. Do not add a second `python -m pip install` step: publishing's build shell uses Nix-managed Python and rejects writes to its immutable environment (PEP 668).
+- The publishing run command explicitly sets `PORT=5000` before `python run.py serve`, matching the configured port.
 
 ## Credentials and data
 

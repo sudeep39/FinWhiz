@@ -4,8 +4,7 @@ modules = ["python-3.12", "web", "nodejs-22"]
 
 [deployment]
 deploymentTarget = "vm"
-build = ["sh", "-c", "python -m pip install -r backend/requirements.lock"]
-run = ["sh", "-c", "python run.py serve"]
+run = ["sh", "-c", "PORT=5000 python run.py serve"]
 
 [[ports]]
 localPort = 5000
