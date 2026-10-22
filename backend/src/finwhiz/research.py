@@ -17,6 +17,7 @@ from .telemetry import ResearchTrace, current_trace, span
 from .documents import token_count
 from .fiscal import catalog_documents
 from .scope import resolve_scope
+from .automotive_margins import answer as automotive_margin_answer
 
 PROMPTS = Path(__file__).parent / "prompts"
 
@@ -96,6 +97,7 @@ class ResearchState(TypedDict, total=False):
     repaired: bool
     deterministic: bool
     scope: dict
+    deterministic_method: str
 
 
 def build_graph(store, jobs, provider):
@@ -160,8 +162,12 @@ def build_graph(store, jobs, provider):
                 )
             }
         deterministic = cash_flow_answer(state["question"], sources)
+        method = 'cash-flow-table'
+        if not deterministic:
+            deterministic = automotive_margin_answer(state['question'], sources, state.get('scope'))
+            method = 'automotive-credit-table'
         if deterministic:
-            return {"answer": deterministic, "deterministic": True}
+            return {"answer": deterministic, "deterministic": True, 'deterministic_method': method}
         settings = getattr(provider, "settings", None)
         budget = settings.answer_max_tokens if settings else 20000
         system = (PROMPTS / "answer.txt").read_text(encoding="utf-8")
@@ -331,7 +337,7 @@ def research(
         return dict(ranking=evidence.get("ranking", []), metrics=metrics)
     answer = state["answer"]
     if state.get("deterministic"):
-        metrics["calculationMethod"] = "cash-flow-table"
+        metrics["calculationMethod"] = state.get('deterministic_method', 'cash-flow-table')
     result = {
         **answer,
         **({'scope': state['scope']} if state.get('scope') else {}),

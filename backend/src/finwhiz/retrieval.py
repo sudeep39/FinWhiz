@@ -9,6 +9,7 @@ from .telemetry import span, current_trace
 from contextvars import copy_context
 from .schemas import Ranking
 from .domain_types import ResearchProvider, RetrievalResult
+from .automotive_margins import table_anchors
 
 
 def bm25(records, query, limit=20):
@@ -117,6 +118,9 @@ def retrieve(
     with span("bm25"):
         lexical = LexicalIndex(unique, statistics).score(question)
     merged = fuse([sorted(all_rows, key=lambda r: -r["score"]), lexical], 80)
+    anchors = table_anchors(store, unique, question)
+    anchor_ids = {row['id'] for row in anchors}
+    merged = anchors + [row for row in merged if row['id'] not in anchor_ids]
     candidates, group_count = diverse(merged)
     candidates = candidates[: max(20, group_count)]
     fallback = False
@@ -151,11 +155,12 @@ def retrieve(
             fallback, fallback_reason = True, "timeout"
     ranking = [{"chunkId": r["id"], **r["metadata"]} for r in candidates]
     selected, _ = diverse(candidates)
+    selected = anchors + [row for row in selected if row['id'] not in anchor_ids]
     sources = []
     parent_cache = {}
     for row in copy.deepcopy(selected[: min(16, max(5, group_count))]):
         metadata = row["metadata"]
-        if metadata["chunk_type"] == "table":
+        if metadata["chunk_type"] == "table" and not metadata.get('complete_table_attached'):
             parent_key = f"parents/{metadata['corpus_id']}/{metadata['doc_id']}"
             if parent_key not in parent_cache:
                 parent_cache[parent_key] = store.json(parent_key, [])
