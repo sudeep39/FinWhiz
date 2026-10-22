@@ -1,11 +1,13 @@
 """LangChain generation, validated embeddings and Pinecone transport."""
 
 import math
+import ssl
 import time
 import threading
 from collections import OrderedDict
 
 import httpx
+import truststore
 from langchain_core.embeddings import Embeddings
 
 from .config import AppError, compact, digest
@@ -20,7 +22,9 @@ class Providers(Embeddings):
     def __init__(self, settings, config, client=None):
         self.settings, self.config = settings, config
         self.client = client or httpx.Client(
-            timeout=settings.generation_timeout_seconds, follow_redirects=False
+            timeout=settings.generation_timeout_seconds,
+            follow_redirects=False,
+            verify=truststore.SSLContext(ssl.PROTOCOL_TLS_CLIENT),
         )
         self.transport = JsonTransport(self.client, settings)
         self.generation = GenerationClient(settings, config, self.client, self.base)
