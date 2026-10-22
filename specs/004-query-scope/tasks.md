@@ -9,6 +9,7 @@
 - [x] Review-only fiscal metadata backfill plan; no re-embedding or remote writes.
 - [x] Offline resolver, retrieval, API, ingestion and browser regression checks.
 - [x] Regulatory-credit comparison regression: reserve complete automotive revenue/cost/credit tables for both requested quarters, preserve them through reranking, and calculate cited margins from quarterly columns with costs unchanged. Fall back to grounded generation for missing, conflicting or unsupported table inputs.
+- [x] Return only evidence referenced by final answer text, calculations or visible chart points; preserve source IDs and the full retrieval trace, and report retrieved versus cited evidence counts separately.
 - [ ] Review/apply metadata updates to the selected authoritative deployed runtime.
 - [ ] Deploy updated backend and frontend; verify the chosen shared-backend target.
 

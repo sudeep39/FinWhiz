@@ -65,6 +65,10 @@ def test_comparison_keeps_both_quarter_tables_despite_commentary_ranking(library
     tables = [s for s in result['sources'] if has_inputs(s['excerpt'])]
     assert {s['report_date'] for s in tables} == set(queries)
     assert result['metrics']['calculationMethod'] == 'automotive-credit-table'
+    assert len(result['sources']) == 2
+    assert result['metrics']['evidence'] == 2
+    assert result['metrics']['retrievedEvidence'] > 2
+    assert set(result['citation_ids']) == {s['id'] for s in result['sources']}
     calculations = result['calculations']
     assert [c['values'] for c in calculations] == [
         [16661, 13795], [16661, 13795, 439],

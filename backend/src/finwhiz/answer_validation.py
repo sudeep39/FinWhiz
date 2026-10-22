@@ -5,6 +5,17 @@ from .config import AppError
 from .finance import calculate, supports_number, finalize_margins, empty_chart
 
 
+def referenced_sources(answer, sources):
+    """Expose evidence actually referenced by the final rendered response."""
+    ids = set(re.findall(r'\[(S\d+)\]', answer['answer']))
+    for calculation in answer.get('calculations', []):
+        ids.update(calculation.get('source_ids', []))
+    if answer.get('chart', {}).get('type') != 'none':
+        for point in answer.get('chart', {}).get('points', []):
+            ids.update(point.get('source_ids', []))
+    return [source for source in sources if source['id'] in ids]
+
+
 def supports_narrative_number(sources, ids, value, unit=None):
     """Allow exact unit conversions, never rounding or new arithmetic claims."""
     scales = {'thousand': 1e3, 'million': 1e6, 'billion': 1e9, 'trillion': 1e12}

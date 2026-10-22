@@ -12,7 +12,7 @@ from .config import AppError, job_matches, compact
 from .finance import cash_flow_answer, empty_chart
 from .retrieval import retrieve
 from .schemas import Answer, Repair
-from .answer_validation import validation_issues, finalize
+from .answer_validation import validation_issues, finalize, referenced_sources
 from .telemetry import ResearchTrace, current_trace, span
 from .documents import token_count
 from .fiscal import catalog_documents
@@ -336,6 +336,10 @@ def research(
     if retrieval_only:
         return dict(ranking=evidence.get("ranking", []), metrics=metrics)
     answer = state["answer"]
+    sources = referenced_sources(answer, sources)
+    answer = {**answer, 'citation_ids': [source['id'] for source in sources]}
+    metrics['retrievedEvidence'] = metrics['evidence']
+    metrics['evidence'] = len(sources)
     if state.get("deterministic"):
         metrics["calculationMethod"] = state.get('deterministic_method', 'cash-flow-table')
     result = {
