@@ -1,0 +1,1 @@
+- [Provider certificate trust](provider-certificate-trust.md) — system trust is required for provider HTTPS; test empty-library startup without changing live data.
