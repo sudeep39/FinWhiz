@@ -8,13 +8,26 @@ from .telemetry import span
 
 
 class PineconeClient:
+    """Validated vector-index adapter owned by Providers.index.
+
+    Providers delegates host discovery, queries and upserts here. Ingestion
+    writes vectors; retrieval queries them; maintenance uses explicit vector
+    operations through the same facade."""
     def __init__(self, config, api_key, request):
+        """Bind the index snapshot, credential and injected JSON request function.
+
+        Called by Providers.__init__; sets up synchronized lazy host discovery
+        without contacting Pinecone."""
         self.config, self.api_key, self.request = config, api_key, request
         self.host = None
         self.host_checked = 0
         self.lock = threading.Lock()
 
     def pinecone_host(self):
+        """Return the validated data-plane host, refreshing after five minutes.
+
+        Called by pinecone. A lock prevents simultaneous discovery calls; stale
+        entries are cleared before _resolve_host rechecks the index."""
         with self.lock:
             if self.host and time.monotonic() - self.host_checked < 300:
                 return self.host
@@ -24,6 +37,11 @@ class PineconeClient:
             return host
 
     def _resolve_host(self):
+        """Discover and validate the configured index before storing its host.
+
+        Internal helper called under pinecone_host's lock. Checks dimensions,
+        cosine/dense type, embedding provenance, readiness and hostname; raises
+        AppError rather than using an incompatible or unexpected endpoint."""
         if self.host:
             return self.host
         if not self.api_key:
@@ -60,6 +78,10 @@ class PineconeClient:
         return self.host
 
     def pinecone(self, path, body):
+        """POST an operation body to the validated index host and return JSON.
+
+        Called through Providers.pinecone. path selects query/fetch/stats or a
+        write operation; credentials and API version headers are added here."""
         return self.request(
             f"https://{self.pinecone_host()}/{path}",
             body,
@@ -67,6 +89,11 @@ class PineconeClient:
         )
 
     def upsert(self, namespace, records):
+        """Write namespace records in bounded-size batches and verify counts.
+
+        Called through Providers.upsert by ingestion. Rejects an oversized record
+        or incomplete acknowledgement with AppError; partial earlier batches may
+        already exist, so ingestion checkpoints/retries use stable vector IDs."""
         batch, size = [], 0
 
         def flush():

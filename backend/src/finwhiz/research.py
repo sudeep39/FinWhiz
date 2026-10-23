@@ -5,19 +5,24 @@ import time
 import uuid
 from pathlib import Path
 from typing import TypedDict
+from dataclasses import dataclass
 
 from langgraph.graph import END, START, StateGraph
 
 from .config import AppError, job_matches, compact
-from .finance import cash_flow_answer, empty_chart
+from .finance import empty_chart
 from .retrieval import retrieve
 from .schemas import Answer, Repair
-from .answer_validation import validation_issues, finalize, referenced_sources
-from .telemetry import ResearchTrace, current_trace, span
+from .answer_validation import validation_issues, finalize, referenced_sources, coverage_issues
+from .telemetry import ResearchTrace, current_trace, span, operation_budget
 from .documents import token_count
 from .fiscal import catalog_documents
 from .scope import resolve_scope
-from .automotive_margins import answer as automotive_margin_answer
+from .calculation_handlers import try_calculation
+from .financial_facts import facts_payload
+from .domain_types import ResearchProvider
+from .storage import Storage
+from . import agentic
 
 PROMPTS = Path(__file__).parent / "prompts"
 
@@ -82,6 +87,11 @@ def empty_answer(status, answer):
 
 
 class ResearchState(TypedDict, total=False):
+    """Per-invocation LangGraph state for research and agent tool rounds.
+
+    research() initializes it; build_graph node functions return partial
+    updates. RESEARCH_GRAPH is shared, but this state and runtime are not."""
+    runtime: 'ResearchRuntime'
     question: str
     tickers: list[str]
     periods: list[str]
@@ -98,16 +108,46 @@ class ResearchState(TypedDict, total=False):
     deterministic: bool
     scope: dict
     deterministic_method: str
+    agent_rounds: int
+    agent_decision: dict
+    agent_observations: list[dict]
+    agent_attempts: list[str]
+    agent_stop_reason: str
+    agent_assessments: int
+    evidence_budget: int
+    source_catalog: dict[str, str]
 
 
-def build_graph(store, jobs, provider):
+@dataclass(frozen=True)
+class ResearchRuntime:
+    """Request dependencies supplied to the shared RESEARCH_GRAPH.
+
+    research() constructs it from the blob store, a job snapshot and the
+    selected provider. Nodes read these dependencies from state.runtime."""
+    store: Storage
+    jobs: list[dict]
+    provider: ResearchProvider
+
+
+def build_graph():
+    """Compile research/agent nodes and bounded repair routing once at import.
+
+    RESEARCH_GRAPH is reused by research(); each invocation supplies its own
+    ResearchState and ResearchRuntime. Nested functions below are LangGraph
+    callbacks, not independent HTTP endpoints.
+    """
     def policy(state):
+        """Graph entry: enforce question policy, resolve scope and check ready jobs."""
+        runtime = state['runtime']
+        store, jobs, provider = runtime.store, runtime.jobs, runtime.provider
         plan = plan_question(state["question"], state["history"])
         scope = state.get('scope')
         if not state['retrieval_only'] and not plan.get('status'):
-            documents = catalog_documents([job for job in jobs if job_matches(job, provider.config) and job.get('namespaces', {}).get(state['strategy'])], store)
-            if documents:
-                scope = scope or resolve_scope(state['question'], documents, state['tickers'], state['periods'], state['history'])
+            if scope is None:
+                documents = catalog_documents([job for job in jobs if job_matches(job, provider.config) and job.get('namespaces', {}).get(state['strategy'])], store)
+                if documents:
+                    scope = resolve_scope(state['question'], documents, state['tickers'], state['periods'], state['history'])
+            if scope:
                 if scope['status'] != 'resolved':
                     return {'plan': plan, 'scope': scope, 'answer': empty_answer(scope['status'], scope['message'])}
         if (
@@ -138,6 +178,14 @@ def build_graph(store, jobs, provider):
         }
 
     def retrieval(state):
+        """Graph/tool callback: run scoped hybrid retrieval under the answer budget."""
+        runtime = state['runtime']
+        store, jobs, provider = runtime.store, runtime.jobs, runtime.provider
+        settings = getattr(provider, 'settings', None)
+        budget = settings.answer_max_tokens if settings else 20000
+        overhead = token_count((PROMPTS / 'answer.txt').read_text(encoding='utf-8')) + token_count(compact({
+            'question': state['question'], 'tickers': state['tickers'], 'requestedPeriods': state['periods'],
+            'resolvedScope': state.get('scope'), 'history': state['history'][-4:]})) + 1000
         result = retrieve(
             store,
             jobs,
@@ -146,13 +194,87 @@ def build_graph(store, jobs, provider):
             state["tickers"],
             state["periods"],
             state["strategy"],
-            state["rerank"],
+            state["rerank"] if not state.get('agent_rounds') else False,
             filing_scope={(f['ticker'], f['reportDate']) for f in state['scope']['filings']} if state.get('scope') else None,
             resolved_scope=state.get('scope'),
+            evidence_budget=max(0, budget - overhead),
+            local_first=not state['retrieval_only'] and not state.get('agent_rounds'),
         )
-        return {"evidence": result}
+        return {'evidence': result, 'evidence_budget': max(0, budget - overhead),
+                'source_catalog': {s['chunkId']: s['id'] for s in result.get('sources', []) if s.get('chunkId')}}
+
+    def assess_evidence(state):
+        """Graph callback: ask the bounded agent for its next action, or skip it."""
+        provider = state['runtime'].provider
+        evidence = state['evidence']
+        if not agentic.enabled(provider) or evidence.get('localAnswer') or state.get('agent_stop_reason'):
+            return {'agent_decision': {'action': 'answer'}}
+        if evidence.get('coverageReason') == 'evidence_budget':
+            return {'agent_stop_reason': 'evidence_budget', 'agent_decision': {'action': 'answer'}}
+        decision, reason = agentic.assess(provider, state['plan'].get('retrievalQuestion', state['question']), state.get('scope'),
+                                          evidence, state.get('agent_observations', []))
+        assessments = state.get('agent_assessments', 0) + 1
+        if reason:
+            return {'agent_stop_reason': reason, 'agent_decision': {'action': 'answer'},
+                    'agent_assessments': assessments}
+        if decision['action'] in ('search', 'read_table'):
+            if state.get('agent_rounds', 0) >= provider.settings.agent_max_rounds:
+                reason = 'round_limit'
+            elif agentic.action_key(decision) in state.get('agent_attempts', []):
+                reason = 'repeated_action'
+        else:
+            reason = 'evidence_sufficient' if decision['action'] == 'answer' else 'insufficient_evidence'
+        return {'agent_decision': decision, 'agent_assessments': assessments,
+                **({'agent_stop_reason': reason} if reason else {})}
+
+    def agent_tool(state):
+        """Graph callback: execute an authorized search/table read and merge evidence."""
+        runtime, decision = state['runtime'], state['agent_decision']
+        trace = current_trace.get()
+        rounds = state.get('agent_rounds', 0) + 1
+        attempts = state.get('agent_attempts', []) + [agentic.action_key(decision)]
+        seconds = trace.remaining() - runtime.provider.settings.agent_answer_reserve_seconds if trace else 15
+        if seconds <= 1:
+            return {'agent_stop_reason': 'answer_time_reserved', 'agent_decision': {'action': 'answer'}}
+        previous = state['evidence']
+        try:
+            with operation_budget(seconds):
+                if decision['action'] == 'search':
+                    incoming = retrieval({**state, 'agent_rounds': rounds,
+                                          'plan': {**state['plan'], 'retrievalQuestion': decision['query']}})['evidence']
+                else:
+                    incoming = agentic.read_tables(runtime.store, previous.get('sources', []), decision['source_ids'])
+            merged, catalog = agentic.merge_evidence(runtime.store, previous, incoming,
+                                                     state.get('scope'), state['evidence_budget'], state['source_catalog'])
+        except AppError:
+            if trace:
+                trace.remaining()
+            return {'agent_rounds': rounds, 'agent_attempts': attempts, 'agent_stop_reason': 'tool_unavailable'}
+        old = {s['chunkId']: s['text'] for s in previous.get('sources', [])}
+        gained = sum(old.get(s['chunkId']) != s['text'] for s in merged.get('sources', []))
+        observation = dict(tool=decision['action'], newEvidence=gained,
+                           evidenceCount=len(merged.get('sources', [])), missingCoverage=merged.get('missingCoverage', []))
+        if trace:
+            trace.record('agent_tool_result', 0, round=rounds, **observation)
+        return {'evidence': merged, 'source_catalog': catalog, 'agent_rounds': rounds, 'agent_attempts': attempts,
+                'agent_observations': state.get('agent_observations', []) + [observation],
+                **({'agent_stop_reason': 'no_new_evidence'} if not gained else {})}
 
     def generate(state):
+        """Graph callback: use a verified local calculation or request an Answer."""
+        provider = state['runtime'].provider
+        if state.get('agent_stop_reason') == 'insufficient_evidence':
+            return {'answer': empty_answer('insufficient_evidence',
+                'The selected filings do not provide sufficient evidence for every part of this question. Try a narrower question or add the missing filings.')}
+        if state['evidence'].get('missingCoverage'):
+            if state['evidence'].get('coverageReason') == 'no_supporting_evidence':
+                return {'answer': empty_answer('insufficient_evidence',
+                    'I could not find supporting evidence for every requested company and period in the selected filings.')}
+            return {'answer': empty_answer('needs_clarification',
+                'I cannot fit supporting evidence for every requested company and period. Select fewer periods or ask a narrower question.')}
+        if state['evidence'].get('localAnswer'):
+            return {'answer': state['evidence']['localAnswer'], 'deterministic': True,
+                    'deterministic_method': state['evidence']['localMethod']}
         sources = state["evidence"]["sources"]
         if not sources:
             return {
@@ -161,11 +283,7 @@ def build_graph(store, jobs, provider):
                     "I could not find supporting evidence in the selected filings. Try a different period or a more specific financial metric.",
                 )
             }
-        deterministic = cash_flow_answer(state["question"], sources)
-        method = 'cash-flow-table'
-        if not deterministic:
-            deterministic = automotive_margin_answer(state['question'], sources, state.get('scope'))
-            method = 'automotive-credit-table'
+        deterministic, method = try_calculation(state['question'], sources, state.get('scope'))
         if deterministic:
             return {"answer": deterministic, "deterministic": True, 'deterministic_method': method}
         settings = getattr(provider, "settings", None)
@@ -181,6 +299,10 @@ def build_graph(store, jobs, provider):
                 dict.fromkeys(f"{s['ticker']}:{s['report_date']}" for s in sources)
             ),
             evidence=sources,
+            financialFacts=facts_payload(sources),
+            evidenceAssessment=dict(action=state.get('agent_decision', {}).get('action'),
+                                    missingEvidence=state.get('agent_decision', {}).get('missing_evidence', []),
+                                    stopReason=state.get('agent_stop_reason')),
         )
         input_tokens = token_count(system) + token_count(compact(payload))
         measurement = current_trace.get()
@@ -189,18 +311,18 @@ def build_graph(store, jobs, provider):
                 "answer_input", 0, inputTokens=input_tokens, evidenceCount=len(sources)
             )
         if input_tokens > budget:
-            raise AppError(
-                "Selected evidence exceeds the answer context budget. Select fewer periods or a narrower question.",
-                413,
-            )
+            return {'answer': empty_answer('needs_clarification',
+                'The complete evidence exceeds the answer budget. Select fewer periods or ask a narrower question.')}
         answer = provider.structured(system, payload, Answer)
         return {"answer": answer}
 
     def validate(state):
+        """Graph callback: check facts/citations/coverage, finalize, or route to repair."""
         answer = state["answer"]
         issues = validation_issues(
             answer, state["evidence"]["sources"], not state.get("deterministic", False)
         )
+        issues += coverage_issues(answer, state['evidence']['sources'], state.get('scope'))
         if issues and state.get("repaired"):
             measurement = current_trace.get()
             if measurement:
@@ -218,30 +340,37 @@ def build_graph(store, jobs, provider):
         }
 
     def repair(state):
-        result = provider.structured(
-            (PROMPTS / "repair.txt").read_text(encoding="utf-8"),
-            dict(
+        """Graph callback: request one Repair; the next validation is still mandatory."""
+        provider = state['runtime'].provider
+        system = (PROMPTS / 'repair.txt').read_text(encoding='utf-8')
+        payload = dict(
                 question=state["question"],
                 tickers=state["tickers"],
                 requestedPeriods=state["periods"],
                 resolvedScope=state.get('scope'),
                 evidence=state["evidence"]["sources"],
+                financialFacts=facts_payload(state['evidence']['sources']),
                 validationErrors=state["issues"],
                 previousAnswer=state['answer'],
-            ),
-            Repair,
-        )
+            )
+        settings = getattr(provider, 'settings', None)
+        budget = settings.answer_max_tokens if settings else 20000
+        if token_count(system) + token_count(compact(payload)) > budget:
+            return {'repaired': True, 'deterministic': False, 'answer': empty_answer('needs_clarification',
+                'The evidence and validation details exceed the answer budget. Select fewer periods or ask a narrower question.')}
+        result = provider.structured(system, payload, Repair)
         allowed = {s["id"] for s in state["evidence"]["sources"]}
         if any(
             not s["source_ids"] or any(i not in allowed for i in s["source_ids"])
             for s in result["sentences"]
         ):
-            return {'repaired': True, 'answer': empty_answer(
+            return {'repaired': True, 'deterministic': False, 'answer': empty_answer(
                 'insufficient_evidence',
                 'The retrieved passages did not support a verifiable answer. Ask for a specific metric and comparison period.'
             )}
         return {
             "repaired": True,
+            "deterministic": False,
             "answer": {
                 **state["answer"],
                 "answer": " ".join(
@@ -261,6 +390,8 @@ def build_graph(store, jobs, provider):
     for name, fn in [
         ("policy", policy),
         ("retrieve", retrieval),
+        ('assess_evidence', assess_evidence),
+        ('agent_tool', agent_tool),
         ("generate", generate),
         ("validate", validate),
         ("repair", repair),
@@ -276,11 +407,17 @@ def build_graph(store, jobs, provider):
         graph.add_node(name, timed_node(fn, name))
     graph.add_edge(START, "policy")
     graph.add_conditional_edges("policy", lambda s: END if s.get("answer") else "retrieve")
-    graph.add_conditional_edges("retrieve", lambda s: END if s["retrieval_only"] else "generate")
+    graph.add_conditional_edges("retrieve", lambda s: END if s["retrieval_only"] else 'assess_evidence')
+    graph.add_conditional_edges('assess_evidence', lambda s: 'agent_tool' if (
+        not s.get('agent_stop_reason') and s.get('agent_decision', {}).get('action') in ('search', 'read_table')) else 'generate')
+    graph.add_edge('agent_tool', 'assess_evidence')
     graph.add_edge("generate", "validate")
     graph.add_conditional_edges("validate", lambda s: "repair" if s["issues"] else END)
     graph.add_edge("repair", "validate")
     return graph.compile()
+
+
+RESEARCH_GRAPH = build_graph()
 
 
 def research(
@@ -298,14 +435,23 @@ def research(
     context=None,
     scope_result=None,
 ):
+    """Execute one isolated research request on the shared compiled graph.
+
+    Called by ResearchEndpoints, CLI evaluation and offline tests. jobs is a
+    registry snapshot; tickers/periods bound retrieval; scope_result may supply
+    an already-resolved scope. Returns the validated answer, cited excerpts
+    and metrics, or ranking/metrics only when retrieval_only is true. context
+    carries deadline/cancellation; otherwise a ResearchTrace is created here.
+    """
     started = time.monotonic()
     context = context or ResearchTrace(
         str(uuid.uuid4()), getattr(getattr(provider, "settings", None), "chat_timeout_seconds", 60)
     )
     token = current_trace.set(context)
     try:
-        state = build_graph(store, jobs, provider).invoke(
+        state = RESEARCH_GRAPH.invoke(
             dict(
+                runtime=ResearchRuntime(store, jobs, provider),
                 question=question,
                 tickers=tickers,
                 periods=periods or [],
@@ -329,6 +475,14 @@ def research(
         rerank=rerank,
         rerankFallback=evidence.get("rerankFallback", False),
         rerankFallbackReason=evidence.get("rerankFallbackReason"),
+        retrievalDegraded=evidence.get('retrievalDegraded', False),
+        degradationReasons=evidence.get('degradationReasons', []),
+        missingCoverage=evidence.get('missingCoverage', []),
+        agentic=agentic.enabled(provider) and not retrieval_only,
+        agentRounds=state.get('agent_rounds', 0),
+        agentAssessments=state.get('agent_assessments', 0),
+        agentStopReason=state.get('agent_stop_reason', 'local_calculation' if evidence.get('localAnswer') else 'disabled'),
+        agentTools=state.get('agent_observations', []),
         candidates=evidence.get("candidate_count", 0),
         evidence=len(sources),
         coverage=list(dict.fromkeys(f"{s['ticker']}:{s['report_date']}" for s in sources)),
@@ -340,6 +494,8 @@ def research(
     answer = {**answer, 'citation_ids': [source['id'] for source in sources]}
     metrics['retrievedEvidence'] = metrics['evidence']
     metrics['evidence'] = len(sources)
+    metrics['retrievedCoverage'] = metrics['coverage']
+    metrics['coverage'] = list(dict.fromkeys(f"{s['ticker']}:{s['report_date']}" for s in sources))
     if state.get("deterministic"):
         metrics["calculationMethod"] = state.get('deterministic_method', 'cash-flow-table')
     result = {

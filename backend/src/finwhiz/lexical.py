@@ -14,7 +14,15 @@ def terms(text):
 
 
 class LexicalIndex:
+    """BM25 scorer over a caller-selected set of chunk records.
+
+    CorpusCache prepares reusable token counts; retrieval constructs a scoped
+    index so keyword scores use only the authorized company/period corpus."""
     def __init__(self, records, prepared=None):
+        """Bind chunk records and optional precomputed per-chunk term counts.
+
+        Called by CorpusCache and retrieval. Missing prepared counts are computed
+        locally; construction does not contact an embedding or model provider."""
         self.records = records
         self.counts = (
             prepared
@@ -23,6 +31,10 @@ class LexicalIndex:
         )
 
     def score(self, query, limit=20):
+        """Return at most limit positively scoring chunks, highest BM25 score first.
+
+        Called by retrieval for a question. Uses this instance's scoped records
+        for document frequency/average length; returned records include score."""
         words = terms(query)
         docs = [self.counts[r["id"]] for r in self.records]
         lengths = [sum(d.values()) for d in docs]
@@ -43,10 +55,23 @@ class LexicalIndex:
 
 
 class CorpusCache:
+    """Thread-safe LRU cache of chunk records and token counts.
+
+    The module-level CORPORA instance is used by retrieval.retrieve. Entries
+    are invalidated by file path, modification time and size."""
     def __init__(self, capacity=8):
+        """Create an LRU with capacity measured in corpus entries, not bytes.
+
+        Used for the module-level CORPORA instance; initializes an empty cache
+        and lock without reading any artifacts."""
         self.capacity, self.entries, self.lock = capacity, OrderedDict(), threading.Lock()
 
     def load(self, store, key):
+        """Return (chunk records, term counts) for a logical corpus key.
+
+        Called by retrieval.retrieve. Cache misses read/tokenize outside the
+        global lock; changed signatures replace older entries for the same path.
+        An absent artifact returns ([], {}); other read/parse errors propagate."""
         path = store.path(key)
         try:
             stat = path.stat()
@@ -58,9 +83,16 @@ class CorpusCache:
                 self.entries.move_to_end(signature)
                 with span("corpus_cache_hit"):
                     return self.entries[signature]
-            with span("corpus_load"):
-                rows = store.json(key, [])
-                value = rows, LexicalIndex(rows).counts
+        # Disk I/O and tokenization must not serialize unrelated cold requests.
+        with span("corpus_load"):
+            rows = store.json(key, [])
+            value = rows, LexicalIndex(rows).counts
+        with self.lock:
+            if signature in self.entries:
+                self.entries.move_to_end(signature)
+                return self.entries[signature]
+            for old in [old for old in self.entries if old[0] == signature[0]]:
+                del self.entries[old]
             self.entries[signature] = value
             while len(self.entries) > self.capacity:
                 self.entries.popitem(last=False)

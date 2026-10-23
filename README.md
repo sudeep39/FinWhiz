@@ -8,6 +8,9 @@ Financial Document Intelligence for investment analysts. A vanilla JavaScript fr
 
 ## Start
 
+For class responsibilities, method callers and end-to-end request traces, see
+the [Python backend code guide](docs/BACKEND_CODE_GUIDE.md).
+
 This workspace is configured to use Replit's shared library. Run `.\restart.cmd` and open http://127.0.0.1:5173. The launcher serves Replit's matching UI and API; it does not create a local library. `npm.cmd start` also honors `FINWHIZ_BACKEND_URL`. The standalone Python instructions below apply only when shared mode is explicitly disabled for an isolated development environment.
 
 ```sh
@@ -28,6 +31,14 @@ To run the frontend on port 5173 and the Python backend on port 8000 in separate
 For a single library across local and hosted frontends, upload deduplication, and offline inventory before Pinecone cleanup, see [shared library setup](docs/SHARED_LIBRARY.md).
 
 Company and fiscal-period mentions now narrow retrieval before vector/keyword search. See [query scope behavior and fiscal metadata review](docs/QUERY_SCOPE.md).
+
+Research now uses bounded agentic hybrid RAG: after the initial retrieval, the
+model can request up to two focused searches or complete-table reads before
+answering. Scope, arithmetic, evidence budgets and citation validation remain
+enforced by the backend. Complete local calculations bypass model planning.
+See the [agentic RAG specification and rollback settings](specs/008-agentic-rag/spec.md).
+Set `AGENTIC_RAG_ENABLED=false` to restore one-pass retrieval. Deploy the updated
+Python source to apply this behavior to the shared Replit instance.
 
 The Python backend provides an authenticated preview/apply API for merging fully duplicate ingestion jobs while preserving source links. See [duplicate-merge API and deployment instructions](docs/DEDUPLICATION_API.md).
 

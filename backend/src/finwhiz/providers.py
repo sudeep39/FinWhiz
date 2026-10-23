@@ -19,7 +19,17 @@ from .telemetry import span
 
 
 class Providers(Embeddings):
+    """Provider facade used by ingestion, retrieval, research and evaluation.
+
+    ProviderPool owns API instances; CLI/worker entry points may construct them
+    directly. Delegates generation to GenerationClient, JSON HTTP calls to
+    JsonTransport, and vector operations to PineconeClient. Also implements
+    the LangChain Embeddings interface."""
     def __init__(self, settings, config, client=None):
+        """Bind settings/config and create transport, generation and index adapters.
+
+        Called by ProviderPool or CLI/worker setup. An injected HTTP client enables
+        offline tests; initialization itself does not call a remote provider."""
         self.settings, self.config = settings, config
         self.client = client or httpx.Client(
             timeout=settings.generation_timeout_seconds,
@@ -33,19 +43,38 @@ class Providers(Embeddings):
         self.cache_lock = threading.Lock()
 
     def close(self):
+        """Close the shared HTTP client owned by this facade.
+
+        Called by ProviderPool.close or direct CLI/worker cleanup; also closes an
+        injected client, so callers must account for that ownership."""
         self.client.close()
 
     def embed_documents(self, texts):
-        """LangChain Embeddings interface retains the validated document transport."""
+        """Implement LangChain's document embedding interface.
+
+        Called by LangChain-compatible consumers; delegates to embed with
+        purpose="document" and returns one validated vector per input text."""
         return self.embed(texts, purpose="document")
 
     def embed_query(self, text):
+        """Implement LangChain's single-query embedding interface.
+
+        Called by LangChain-compatible consumers; delegates to embed with query
+        instructions/cache behavior and returns one vector."""
         return self.embed([text], purpose="query")[0]
 
     def request(self, url, body=None, headers=None, method="POST", attempts=None):
+        """Delegate a JSON HTTP operation to JsonTransport.request.
+
+        Called by embed and PineconeClient. Returns decoded JSON or raises
+        AppError under transport, credential, quota or deadline failures."""
         return self.transport.request(url, body, headers, method, attempts)
 
     def vector(self, vector):
+        """Validate and return one vector for the configured embedding dimension.
+
+        Used by embedding responses and cached_embeddings. Rejects nonnumeric,
+        nonfinite, all-zero or incorrectly sized vectors with AppError."""
         if (
             not isinstance(vector, list)
             or len(vector) != self.config.dimension
@@ -56,6 +85,12 @@ class Providers(Embeddings):
         return vector
 
     def embed(self, texts, purpose="document"):
+        """Create validated embeddings in input order, or return [] for no texts.
+
+        Called by ingestion/cached_embeddings and retrieval. Query mode adds the
+        Nebius retrieval instruction and caches single queries for five minutes.
+        Document mode has no query instruction. May make a paid HTTP call; model,
+        response ordering, vector dimensions and values are checked."""
         if not texts:
             return []
         cache_key = texts[0] if purpose == "query" and len(texts) == 1 else None
@@ -107,6 +142,10 @@ class Providers(Embeddings):
 
     @property
     def base(self):
+        """Return the selected model provider's API base URL.
+
+        Used when constructing GenerationClient and sending embedding requests;
+        this property performs no I/O."""
         return (
             "https://api.tokenfactory.nebius.com/v1"
             if self.config.provider == "nebius"
@@ -114,27 +153,53 @@ class Providers(Embeddings):
         )
 
     def structured(self, system, user, schema, model=None):
+        """Delegate a schema-constrained model call to GenerationClient.
+
+        Used by retrieval ranking, agent assessment, research/repair and evaluation.
+        Returns a validated dictionary; schema/model determine the requested task."""
         return self.generation.structured(system, user, schema, model)
 
     def pinecone_host(self):
+        """Delegate validated, cached index host discovery to PineconeClient.
+
+        Used by index operations and diagnostics; may make a control-plane call."""
         return self.index.pinecone_host()
 
     def pinecone(self, path, body):
+        """Send a Pinecone operation such as query, fetch or delete.
+
+        Used by retrieval, ingestion verification and explicit maintenance.
+        path/body determine whether it is read-only; this facade is not itself
+        a permission boundary."""
         return self.index.pinecone(path, body)
 
     def upsert(self, namespace, records):
+        """Delegate vector writes and acknowledgement checks to PineconeClient.
+
+        Called by ingestion index stages; records contain IDs, values and
+        metadata, and namespace identifies the target corpus."""
         return self.index.upsert(namespace, records)
 
 
 class ProviderPool:
-    """Application-owned clients, isolated by the complete nonsecret configuration."""
+    """Application-owned provider clients keyed by complete nonsecret config.
+
+    api.create_app creates one pool; ResearchEndpoints reuses its clients for
+    chat requests. Application shutdown closes all pooled HTTP connections."""
 
     def __init__(self, settings, factory=Providers):
+        """Initialize an empty thread-safe cache using the supplied client factory.
+
+        Called once by api.create_app; factory injection supports offline API tests."""
         self.settings, self.factory = settings, factory
         self.providers = {}
         self.lock = threading.Lock()
 
     def get(self, config):
+        """Return or construct the client for an exact nonsecret config snapshot.
+
+        Called by ResearchEndpoints for chat. Reuses HTTP connections and query
+        embedding caches; initialization is protected against concurrent misses."""
         key = compact(config.model_dump())
         with self.lock:
             if key not in self.providers:
@@ -142,6 +207,10 @@ class ProviderPool:
             return self.providers[key]
 
     def close(self):
+        """Remove and close all cached provider clients.
+
+        Called during API lifespan shutdown after pending research/maintenance
+        tasks finish; returns None."""
         with self.lock:
             providers = list(self.providers.values())
             self.providers.clear()

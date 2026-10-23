@@ -32,7 +32,7 @@ def library():
     return bundle['jobs'][:1], Store()
 
 
-def test_comparison_keeps_both_quarter_tables_despite_commentary_ranking(library, monkeypatch):
+def test_comparison_uses_local_tables_without_provider_calls(library, monkeypatch):
     jobs, store = library
     config = AIConfig.model_validate(jobs[0]['aiConfig'])
     queries = []
@@ -45,15 +45,14 @@ def test_comparison_keeps_both_quarter_tables_despite_commentary_ranking(library
 
     class Provider:
         def embed(self, texts, purpose):
-            return [[1.0]]
+            pytest.fail('Complete local calculations must not call embeddings')
 
         def pinecone(self, path, body):
             queries.append(body['filter']['report_date']['$eq'])
             return {'matches': []}  # Required tables must survive even a dense miss.
 
         def structured(self, system, payload, schema, model=None):
-            assert schema.__name__ == 'Ranking', 'No generation or repair call should be needed'
-            return {'ids': [r['id'] for r in reversed(payload['candidates'])]}
+            pytest.fail('Complete local calculations must not call any LLM')
 
     provider = Provider()
     provider.config = config
@@ -61,13 +60,13 @@ def test_comparison_keeps_both_quarter_tables_despite_commentary_ranking(library
     assert scope['filingDates'] == ['2025-06-30', '2026-06-30']
     result = research(store, jobs, provider, QUESTION, ['TSLA'], scope_result=scope)
     assert result['status'] == 'answered'
-    assert set(queries) == {'2025-06-30', '2026-06-30'}
+    assert not queries
     tables = [s for s in result['sources'] if has_inputs(s['excerpt'])]
-    assert {s['report_date'] for s in tables} == set(queries)
+    assert {s['report_date'] for s in tables} == {'2026-06-30'}
     assert result['metrics']['calculationMethod'] == 'automotive-credit-table'
-    assert len(result['sources']) == 2
-    assert result['metrics']['evidence'] == 2
-    assert result['metrics']['retrievedEvidence'] > 2
+    assert len(result['sources']) == 1
+    assert result['metrics']['evidence'] == 1
+    assert result['metrics']['retrievedEvidence'] >= 2
     assert set(result['citation_ids']) == {s['id'] for s in result['sources']}
     calculations = result['calculations']
     assert [c['values'] for c in calculations] == [
@@ -95,7 +94,8 @@ def test_missing_conflicting_or_wrong_period_inputs_do_not_invent_answers(librar
     assert answer(QUESTION, sources, {'requestedPeriods': ['2026-Q2']}) is None
     assert answer(QUESTION, sources) is not None
     incomplete = [s for s in sources if s['report_date'] != '2025-06-30']
-    assert answer(QUESTION, incomplete) is None
+    assert answer(QUESTION, incomplete) is not None  # Prior year is in the comparative columns.
+    assert answer(QUESTION, [s for s in sources if s['report_date'] < '2026-01-01']) is None
     original = next(s for s in sources if s['report_date'] == '2026-06-30')
     conflicting = {**original, 'id': 'conflict', 'text': original['text'].replace('20,516', '20,517')}
     assert answer(QUESTION, sources + [conflicting]) is None

@@ -40,12 +40,22 @@ def digest(value):
 
 
 class AppError(Exception):
+    """Expected application failure with a public message and HTTP status.
+
+    Raised by services; api.create_app translates it into a JSON error response."""
     def __init__(self, message, status=502):
+        """Initialize a public error message and HTTP status (default 502).
+
+        Called by service failure paths; api.application_error reads status."""
         super().__init__(message)
         self.status = status
 
 
 class AIConfig(BaseModel):
+    """Immutable, nonsecret provider/model/index snapshot.
+
+    Built by Settings.provider; stored with jobs and used by ProviderPool and
+    job_matches to keep incompatible embedding spaces separate."""
     model_config = ConfigDict(frozen=True, extra="ignore")
     provider: Literal["openai", "nebius"]
     label: str
@@ -57,6 +67,11 @@ class AIConfig(BaseModel):
 
     @property
     def fingerprint(self):
+        """Return the compatibility hash for this embedding space.
+
+        Used by job_matches, embedding caches, ingestion and maintenance. The hash
+        includes provider, embedding model, dimensions, index and query-instruction
+        version; chat/judge model changes do not invalidate stored vectors."""
         return digest(
             [
                 self.provider,
@@ -69,6 +84,10 @@ class AIConfig(BaseModel):
 
 
 class Settings(BaseSettings):
+    """Validated server configuration, including credentials and research budgets.
+
+    Created by api.create_app and cli.main; passed into provider, storage,
+    worker and research services. Keep this object on the server."""
     model_config = SettingsConfigDict(extra="ignore", case_sensitive=False)
     ai_provider: Literal["openai", "nebius"] = "openai"
     openai_api_key: str = ""
@@ -91,6 +110,9 @@ class Settings(BaseSettings):
     @field_validator('finwhiz_bootstrap_library', mode='before')
     @classmethod
     def optional_bootstrap_path(cls, value):
+        """Normalize an empty bootstrap environment setting to None.
+
+        Pydantic calls this before validating finwhiz_bootstrap_library."""
         return None if value == '' else value
     node_env: str = ""
     replit_deployment: str = ""
@@ -106,13 +128,26 @@ class Settings(BaseSettings):
     provider_attempts: int = Field(default=2, ge=1, le=4)
     rerank_max_tokens: int = Field(default=12000, ge=1000)
     answer_max_tokens: int = Field(default=20000, ge=1000)
+    agentic_rag_enabled: bool = True
+    agent_max_rounds: int = Field(default=2, ge=0, le=2)
+    agent_timeout_seconds: float = Field(default=8, gt=0, le=20)
+    agent_max_tokens: int = Field(default=8000, ge=1000, le=20000)
+    agent_answer_reserve_seconds: float = Field(default=20, gt=0, le=60)
 
     @field_validator("finwhiz_data_dir")
     @classmethod
     def resolve_runtime(cls, value):
+        """Resolve the runtime directory relative to the project root.
+
+        Pydantic calls this for finwhiz_data_dir during Settings construction."""
         return value.resolve() if value.is_absolute() else (ROOT / value).resolve()
 
     def provider(self, selection=None):
+        """Build the selected provider's nonsecret AIConfig snapshot.
+
+        Called by request middleware and CLI/worker setup. selection may override
+        the default provider; unsupported names raise AppError. Reads index
+        defaults locally and performs no network calls."""
         selection = selection or self.ai_provider
         if selection not in ("openai", "nebius"):
             raise AppError("Choose OpenAI or Nebius Token Factory.", 400)
@@ -132,9 +167,17 @@ class Settings(BaseSettings):
         )
 
     def key(self, config):
+        """Return the selected provider's server-side API credential.
+
+        Used by Providers.embed and GenerationClient. Never serialize this value
+        into job snapshots, browser responses or diagnostic logs."""
         return self.nebius_api_key if config.provider == "nebius" else self.openai_api_key
 
     def configured(self, config):
+        """Report whether model and Pinecone credentials are both present.
+
+        Used by workspace/CLI readiness checks; it does not verify credentials
+        or contact either provider."""
         return bool(self.key(config) and self.pinecone_api_key)
 
 

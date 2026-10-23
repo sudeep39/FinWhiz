@@ -7,6 +7,7 @@ def settings(tmp_path):
     return Settings(
         _env_file=None,
         ai_provider="openai",
+        agentic_rag_enabled=False,
         app_password="baseline-password",
         openai_api_key="",
         nebius_api_key="",

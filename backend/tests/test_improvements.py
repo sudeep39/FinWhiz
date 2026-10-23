@@ -243,9 +243,9 @@ def test_answer_budget_fails_before_generation(settings):
     store, jobs, job, provider = setup_job(settings)
     ingest(job, store, jobs, provider)
     provider.settings = settings.model_copy(update={"answer_max_tokens": 1})
-    with pytest.raises(AppError) as error:
-        research(store, jobs.all(), provider, "What revenue was reported?", ["ACME"], rerank=False)
-    assert error.value.status == 413 and "Answer" not in provider.generated
+    result = research(store, jobs.all(), provider, "What revenue was reported?", ["ACME"], rerank=False)
+    assert result['status'] == 'needs_clarification' and 'Answer' not in provider.generated
+    assert result['metrics']['missingCoverage']
 
 
 def test_late_success_does_not_bypass_operation_budget(settings):

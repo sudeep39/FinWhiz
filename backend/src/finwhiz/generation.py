@@ -12,16 +12,35 @@ from .telemetry import remaining, span, current_trace
 
 
 class GenerationClient:
+    """Structured LLM generation adapter owned by Providers.generation.
+
+    Providers.structured delegates here for agent decisions, reranking,
+    answers, repairs and evaluation. Uses the shared HTTP client and request
+    deadline; it does not retrieve documents or perform financial arithmetic."""
     def __init__(self, settings, config, client, base):
+        """Keep references to the selected config and shared HTTP client.
+
+        Called by Providers.__init__; base is the model API URL and no network
+        request is made until structured is called."""
         self.settings, self.config, self.client, self.base = settings, config, client, base
 
     def structured(self, system, user, schema, model=None):
+        """Run a bounded LangChain model call and return a schema-validated dict.
+
+        Called through Providers.structured. system is the task prompt; user may
+        be text or a payload dictionary; schema is a Pydantic output model; model
+        optionally overrides the configured chat model. Chooses agent/rerank or
+        generation timeout, disables SDK retries, classifies quota/transport
+        failures and records usage. Raises AppError for refusal, truncation,
+        invalid output, unavailable credentials or exhausted budgets."""
         if not self.settings.key(self.config):
             raise AppError("Configure the selected provider API key in server secrets.")
         if self.config.provider == "nebius":
             system += "\nReturn JSON matching this schema: " + compact(schema.model_json_schema())
         stage_timeout = (
-            self.settings.rerank_timeout_seconds
+            self.settings.agent_timeout_seconds
+            if schema.__name__ == 'AgentDecision'
+            else self.settings.rerank_timeout_seconds
             if schema.__name__ == "Ranking"
             else self.settings.generation_timeout_seconds
         )
@@ -51,6 +70,7 @@ class GenerationClient:
                 )
                 operation = {
                     "Ranking": "reranking",
+                    "AgentDecision": "evidence_assessment",
                     "Answer": "answer_generation",
                     "Repair": "answer_repair",
                 }.get(schema.__name__, "model_generation")

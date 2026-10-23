@@ -12,6 +12,7 @@ from .documents import validate_details
 
 
 def response(value, status=200):
+    """Build the UTF-8, no-store JSON response used by API area handlers."""
     return JSONResponse(
         value,
         status_code=status,
@@ -20,6 +21,11 @@ def response(value, status=200):
 
 
 def public_job(job):
+    """Return a browser-facing job with internal file keys/paths removed.
+
+    Used by workspace/document routes; file entries expose only ID, name and
+    size. This does not filter arbitrary extra fields on the job itself.
+    """
     return {
         **{k: v for k, v in job.items() if k != "files"},
         "files": [{k: f[k] for k in ("id", "name", "size")} for f in job["files"]],
@@ -27,6 +33,11 @@ def public_job(job):
 
 
 async def read_json(request):
+    """Read a route's JSON object with a 32,000-byte limit.
+
+    Called by research and maintenance endpoints. Returns a dictionary or
+    raises AppError with HTTP 400 for invalid JSON/object shape or 413 for size.
+    """
     data = bytearray()
     async for chunk in request.stream():
         data.extend(chunk)
@@ -42,6 +53,13 @@ async def read_json(request):
 
 
 async def receive_files(request, store):
+    """Parse an upload batch and persist accepted files in the runtime store.
+
+    Called by document_routes.documents after authentication. Validates batch
+    metadata, filenames and size/count limits; returns a sorted list of file
+    records, each with its details for job creation. Failed batches remove the
+    blobs written so far. Unlike read_json, this function writes blobs.
+    """
     if not request.headers.get("content-type", "").startswith("multipart/form-data"):
         raise AppError("Use a multipart file upload.", 400)
     files = []
@@ -107,12 +125,23 @@ async def receive_files(request, store):
 
 
 class BodyLimit:
-    """Cap multipart transport bytes before the parser spools unbounded input."""
+    """ASGI middleware limiting incoming HTTP bodies before upload parsing.
+
+    Registered by api.create_app. FastAPI invokes __call__ for each request;
+    individual JSON and multipart parsers apply their own smaller limits."""
 
     def __init__(self, app):
+        """Keep the next ASGI application in the middleware chain.
+
+        FastAPI/Starlette constructs this after api.create_app registers BodyLimit."""
         self.app = app
 
     async def __call__(self, scope, receive, send):
+        """Wrap HTTP receive to count bytes before passing them to the application.
+
+        Invoked by the ASGI server, not directly by a route. Raises HTTP 413 via
+        AppError beyond the transport cap; non-HTTP scopes pass through unchanged.
+        The receive/send callables follow the ASGI protocol."""
         if scope["type"] != "http":
             return await self.app(scope, receive, send)
         count = 0

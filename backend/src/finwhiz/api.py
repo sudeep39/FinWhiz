@@ -12,16 +12,11 @@ from urllib.parse import urlparse
 from fastapi import FastAPI, Request
 from fastapi.responses import Response
 
-from .config import ROOT, AppError, Settings, job_matches
-from .documents import iso_date
+from .config import ROOT, AppError, Settings
 from .ingestion import worker_main
 from .providers import Providers, ProviderPool
 from .supervisor import supervise
-from .telemetry import ResearchTrace
 from .http_helpers import response, read_json, BodyLimit
-from .research import research
-from .scope import resolve_scope
-from .fiscal import catalog_documents
 from .storage import Jobs, Storage, runtime_lock
 
 logger = logging.getLogger(__name__)
@@ -47,6 +42,13 @@ def create_app(
     worker_target=worker_main,
     processing_timeout_seconds=1800,
 ):
+    """Assemble FastAPI routes, security, shared services and lifespan ownership.
+
+    Called by the serve CLI and offline API tests. Initializes Storage, Jobs,
+    ProviderPool and ResearchEndpoints; lifespan owns the runtime lock, optional
+    recovery and worker supervision. disable_workers/factories enable isolated
+    tests. Returns the application; startup work runs when its lifespan starts.
+    """
     settings = settings or Settings(_env_file=ROOT / ".env")
     if settings.replit_deployment and not settings.finwhiz_bootstrap_library:
         from .bootstrap import DEFAULT_BUNDLE_SHA256
@@ -62,10 +64,11 @@ def create_app(
             "Legacy runtime detected. Stop Node and use run.py migrate --source=LEGACY --to=NEW_DIRECTORY --apply, then set FINWHIZ_DATA_DIR to the new directory."
         )
     jobs = Jobs(store)
-    auth_limits, chat_limits = {}, {}
-    active_chats = 0
+    auth_limits = {}
     pool = ProviderPool(settings, provider_factory)
     pending_research = set()
+    from .research_routes import ResearchEndpoints
+    research_endpoints = ResearchEndpoints(settings, store, jobs, pool, pending_research)
 
     @asynccontextmanager
     async def lifespan(app):
@@ -181,123 +184,6 @@ def create_app(
     async def application_error(request, error):
         return response({"error": str(error)}, error.status)
 
-    async def chat_route(request, path):
-        nonlocal active_chats
-        config = request.state.ai
-        if path in ("/api/chat", "/api/scope") and request.method == "POST":
-            client = request.client.host if request.client else "local"
-            current = time.monotonic()
-            for key in list(chat_limits):
-                if current - chat_limits[key][0] > 60:
-                    del chat_limits[key]
-            start, count = chat_limits.get(client, (current, 0))
-            if path == '/api/chat':
-                chat_limits[client] = start, count + 1
-            if path == '/api/chat' and count + 1 > 12:
-                raise AppError("Please wait a moment before sending another question.", 429)
-            body = await read_json(request)
-            question = body.get("question")
-            if not isinstance(question, str) or not question.strip() or len(question) > 3000:
-                raise AppError("Enter a question of up to 3,000 characters.", 400)
-            tickers = body.get("tickers")
-            if (
-                not isinstance(tickers, list)
-                or not 1 <= len(tickers) <= 4
-                or any(
-                    not isinstance(t, str) or not re.fullmatch(r"[A-Z][A-Z0-9.-]{0,9}", t)
-                    for t in tickers
-                )
-            ):
-                raise AppError("Select at least one company.", 400)
-            strategy = body.get("strategy") or "fixed"
-            if strategy not in ("fixed", "semantic"):
-                raise AppError("Invalid retrieval strategy.", 400)
-            periods = body.get("periods") or []
-            if (
-                not isinstance(periods, list)
-                or len(periods) > 32
-                or any(not iso_date(p) for p in periods)
-            ):
-                raise AppError("Invalid period selection.", 400)
-            ready = [
-                j
-                for j in (await asyncio.to_thread(jobs.all))
-                if j["status"] == "ready" and job_matches(j, config)
-            ]
-            if any(
-                not any(any(d["ticker"] == ticker for d in j.get("documents", [])) for j in ready)
-                for ticker in tickers
-            ):
-                raise AppError(
-                    "The selected company is not ready yet. Finish loading its filings first.", 409
-                )
-            history = body.get("history", [])
-            history = (
-                [
-                    dict(role=m["role"], content=m["content"][:1500], scope=m.get('scope'))
-                    for m in history[-4:]
-                    if isinstance(m, dict)
-                    and m.get("role") in ("user", "assistant")
-                    and isinstance(m.get("content"), str)
-                ]
-                if isinstance(history, list)
-                else []
-            )
-            scoped_jobs = [job for job in ready if job.get('namespaces', {}).get(strategy)]
-            documents = await asyncio.to_thread(catalog_documents, scoped_jobs, store)
-            resolved = resolve_scope(question.strip(), documents, tickers, periods, history)
-            if path == '/api/scope':
-                return response(resolved)
-            if resolved['status'] != 'resolved':
-                from .research import empty_answer
-                return response({**empty_answer(resolved['status'], resolved['message']), 'scope': resolved})
-            if active_chats >= 2:
-                raise AppError("Two questions are already processing. Please retry shortly.", 429)
-            active_chats += 1
-            context = ResearchTrace(request.state.request_id, settings.chat_timeout_seconds)
-
-            async def execute_research():
-                nonlocal active_chats
-                try:
-                    provider = pool.get(config)
-                    return await asyncio.to_thread(
-                        research,
-                        store,
-                        ready,
-                        provider,
-                        question.strip(),
-                        tickers,
-                        periods,
-                        strategy,
-                        body.get("rerank") is not False,
-                        history,
-                        context=context,
-                        scope_result=resolved,
-                    )
-                finally:
-                    active_chats -= 1
-
-            task = asyncio.create_task(execute_research())
-            pending_research.add(task)
-
-            def finished(completed):
-                pending_research.discard(completed)
-                if not completed.cancelled():
-                    completed.exception()  # consume exceptions even after a client timeout
-
-            task.add_done_callback(finished)
-            try:
-                result = await asyncio.wait_for(asyncio.shield(task), settings.chat_timeout_seconds)
-                return response(result)
-            except (TimeoutError, asyncio.CancelledError) as error:
-                context.cancelled.set()
-                if isinstance(error, asyncio.CancelledError):
-                    raise
-                raise AppError(
-                    "Research exceeded its time budget. Select fewer periods or retry.", 504
-                ) from None
-        return None
-
     async def deduplicate_route(request, path):
         match = re.fullmatch(r'/api/jobs/([a-f0-9-]+)/deduplicate', path)
         if not match or request.method != 'POST':
@@ -314,7 +200,7 @@ def create_app(
             return response(public_plan(plan))
         if body.get('confirmToken') != plan['confirmToken']:
             raise AppError('Preview this merge and supply its current confirmToken before applying.', 409)
-        if app.state.active_mutations or active_chats or app.state.maintenance:
+        if app.state.active_mutations or research_endpoints.active or app.state.maintenance:
             raise AppError('Wait for active uploads, research or maintenance to finish.', 409)
         if request.state.ai.provider != plan['provider'] or request.state.ai.indexName != plan['index']:
             raise AppError('Select the duplicate job\'s AI provider before applying.', 409)
@@ -330,21 +216,8 @@ def create_app(
         task.add_done_callback(lambda completed: None if completed.cancelled() else completed.exception())
         return response(await asyncio.shield(task))
 
-    async def dispatch(request: Request, path: str):
-        path = "/" + path
-        maintenance_result = await deduplicate_route(request, path)
-        if maintenance_result is not None:
-            return maintenance_result
-        from .workspace_routes import workspace
-        from .document_routes import documents
-
-        for handler in (workspace, documents):
-            result = await handler(request, path, settings=settings, store=store, jobs=jobs)
-            if result is not None:
-                return result
-        result = await chat_route(request, path)
-        if result is not None:
-            return result
+    async def static_route(request: Request):
+        path = request.url.path
         if path.startswith("/api/"):
             return response({"error": "Endpoint not found."}, 404)
         if path in STATIC and request.method == "GET":
@@ -360,5 +233,10 @@ def create_app(
 
     from .routes import register_routes
 
-    register_routes(app, dispatch)
+    from functools import partial
+    from .workspace_routes import workspace
+    from .document_routes import documents
+    register_routes(app, workspace=partial(workspace, settings=settings, store=store, jobs=jobs),
+                    documents=partial(documents, settings=settings, store=store, jobs=jobs),
+                    research=research_endpoints, maintenance=deduplicate_route, fallback=static_route)
     return app

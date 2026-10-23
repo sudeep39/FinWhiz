@@ -17,11 +17,23 @@ logger = logging.getLogger(__name__)
 
 
 class IngestionState(TypedDict):
+    """LangGraph state carrying the job ID and checkpoint version.
+
+    ingestion.ingest initializes it; parse/chunk/index/verify/publish nodes
+    exchange references and persist resumable checkpoints. Large artifacts
+    remain in Storage rather than being copied into graph state."""
     job_id: str
     version: str
 
 
 def ingest(job, store, jobs, provider, fail_after=None):
+    """Parse, chunk, embed, index, verify and publish one claimed ingestion job.
+
+    Called by worker_main and CLI ingestion/evaluation setup. Artifacts live
+    in Storage, progress in Jobs and graph checkpoints in SQLite, allowing
+    interrupted work to resume. provider selects the embedding space; remote
+    embeddings/vector writes may occur. fail_after is an offline-test hook.
+    """
     job_id, config = job["id"], provider.config
 
     def progress(phase, percent, detail):

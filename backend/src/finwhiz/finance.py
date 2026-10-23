@@ -3,6 +3,7 @@
 import math
 import re
 from .config import AppError
+from .financial_facts import number as parse_number
 
 
 def _calculate(operation, values):
@@ -40,8 +41,10 @@ def calculate(operation, values):
 
 
 def supports_number(text, value):
-    for raw in re.findall(r"\(?-?\d[\d,]*(?:\.\d+)?%?\)?", text):
-        number = float(re.sub(r"[(),%]", "", raw)) * (-1 if raw.startswith("(") else 1)
+    for raw in re.findall(r"\(?[+\-\u2212]?\d[\d,\u066c]*(?:[.\u066b]\d+)?(?:[eE][+-]?\d+)?%?\)?", text):
+        number = parse_number(raw)
+        if number is None:
+            continue
         if abs(number - value) <= max(1e-9, abs(value) * 1e-9):
             return True
     return False

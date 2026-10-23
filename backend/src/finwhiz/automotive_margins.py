@@ -1,8 +1,10 @@
-"""Evidence selection and conservative table arithmetic for credit-adjusted margins."""
+"""A calculation handler over reusable source-located financial facts."""
 import re
 from .finance import calculate, empty_chart
+from .financial_facts import complete_tables, table_facts
 
-LABELS = (r'total automotive revenues?', r'total automotive cost of revenues?', r'automotive regulatory credits')
+LABELS = (r'total automotive revenues?', r'total automotive cost of revenues?', r'automotive regulatory credits(?: revenues?)?')
+INPUTS = ('automotive_revenue', 'automotive_cost', 'regulatory_credits')
 
 
 def requested(question):
@@ -15,94 +17,81 @@ def has_inputs(text):
 
 
 def table_anchors(store, rows, question):
-    """Reserve a complete input table per company/filing, before global truncation."""
-    if not requested(question):
-        return []
-    anchors, seen, parents_cache = [], set(), {}
-    for row in rows:
-        m = row['metadata']
-        group = m['ticker'], m['report_date']
-        if group in seen or m.get('chunk_type') != 'table':
-            continue
-        key = f'parents/{m["corpus_id"]}/{m["doc_id"]}'
-        if key not in parents_cache:
-            parents_cache[key] = store.json(key, [])
-        index = int(m['parent_id'].rsplit(':', 1)[1])
-        parents = parents_cache[key]
-        if not 0 <= index < len(parents):
-            continue
-        parent = parents[index]
-        if parent['kind'] != 'table' or len(parent['text']) > 12000 or not has_inputs(parent['text']):
-            continue
-        prefix = f"{m['company']} | {m['ticker']} | {m['form']} | Period ended {m['report_date']}\n{m['section_path']}\n"
-        anchors.append({**row, 'metadata': {**m, 'text': prefix + parent['text'], 'complete_table_attached': True}})
-        seen.add(group)
-    return anchors
+    return complete_tables(store, rows, has_inputs) if requested(question) else []
 
 
 def _quarter_values(text, year):
-    """Respect three-month versus six-month column groups and repeated HTML cells."""
-    lines = [line.split('|') for line in text.splitlines() if '|' in line]
-    lines = [[cell.strip() for cell in line] for line in lines]
-    for i, header in enumerate(lines):
-        if not any(re.search('Three Months Ended', cell, re.I) for cell in header):
-            continue
-        years = next((line for line in lines[i + 1:i + 4] if str(year) in line), None)
-        if years is None:
-            continue
-        columns = [col for col, cell in enumerate(years) if cell == str(year) and col < len(header) and re.search('Three Months Ended', header[col], re.I)]
-        result = []
-        for label in LABELS:
-            matches = [line for line in lines[i + 1:] if re.fullmatch(label, line[0], re.I)]
-            values = []
-            for line in matches:
-                numbers = [float(line[col].replace(',', '')) for col in columns if col < len(line) and re.fullmatch(r'\d[\d,]*(?:\.\d+)?', line[col])]
-                if numbers and len(set(numbers)) == 1:
-                    values.append(numbers[0])
-            if not values or len(set(values)) != 1:
-                break
-            result.append(values[0])
-        if len(result) == 3:
-            return result
-    return None
+    """Compatibility helper; calculation handlers use explicit period identities."""
+    facts = table_facts(dict(id='table', ticker='TSLA', text=text))
+    periods = {f.period for f in facts if f.period.startswith(f'{year}-Q')}
+    return _inputs(facts, next(iter(periods))) if len(periods) == 1 else None
+
+
+def _inputs(facts, period):
+    result, units = [], set()
+    for metric in INPUTS:
+        matched = [f for f in facts if f.period == period and f.metric == metric]
+        values = {f.value for f in matched}
+        if len(values) != 1:
+            return None
+        units.update(f.unit for f in matched)
+        result.append(next(iter(values)))
+    # Ratios cancel a table's shared scale; never combine differently scaled rows.
+    return result if len(units) == 1 else None
+
+
+def complete_request(question, sources, scope):
+    """An exact handler must understand every requested clause, not just keywords."""
+    names = ' '.join(str(s.get('company', '')) + ' ' + s.get('ticker', '') for s in sources)
+    allowed = set(('how did do does the a an s automotive regulatory credits credit revenue revenues '
+                   'affect impact influence contribute to of tesla q1 q2 q3 q4 in versus vs and '
+                   'calculate compute margins margin gross profit including excluding include exclude '
+                   'with without keeping keep reported total costs cost unchanged constant held '
+                   'compare comparison between for what was were is are percent percentage points '
+                   'revenue').split()) | set(re.findall(r'[a-z]+', names.lower()))
+    words = set(re.findall(r'[a-z]+\d*', question.lower()))
+    return words <= allowed and (not scope or set(scope.get('tickers', [])) == {s['ticker'] for s in sources})
 
 
 def answer(question, sources, scope=None):
-    if not requested(question):
+    if not requested(question) or not complete_request(question, sources, scope):
         return None
     quarters = set(re.findall(r'\bQ([1-4])\b', question, re.I))
     years = sorted(set(re.findall(r'\b20\d{2}\b', question)))
-    # This supported table layout is Tesla's calendar-quarter disclosure.
-    # Other issuers/ambiguous periods continue through general grounded generation.
-    if len(quarters) != 1 or not years or quarters == {'4'}:
+    if len(quarters) != 1 or not years:
         return None
     quarter = int(next(iter(quarters)))
-    if scope and set(scope.get('requestedPeriods', [])) != {f'{year}-Q{quarter}' for year in years}:
+    periods = {f'{year}-Q{quarter}' for year in years}
+    if scope and set(scope.get('requestedPeriods', [])) != periods:
         return None
-    suffix = {1: '03-31', 2: '06-30', 3: '09-30'}[quarter]
-    calculations, ids = [], []
-    effects = []
-    for year in years:
-        matched = []
-        for source in sources:
-            if source.get('ticker') != 'TSLA' or source.get('report_date') != f'{year}-{suffix}':
-                continue
-            values = _quarter_values(source['text'], year)
-            if values:
-                matched.append((source, values))
-        if not matched or len({tuple(values) for _, values in matched}) != 1:
-            return None
-        source, (revenue, cost, credits) = matched[0]
-        if revenue <= 0 or revenue - credits <= 0 or cost < 0:
-            return None
-        ids.append(source['id'])
-        for operation, values, label in (
-            ('gross_margin', [revenue, cost], 'including regulatory credits'),
-            ('gross_margin_excluding_revenue', [revenue, cost, credits], ''),
-        ):
-            calculations.append(dict(label=f'Tesla Q{quarter} {year} {label}'.strip(), operation=operation,
-                                     values=values, source_ids=[source['id']], unit='%'))
-        effect = calculate('gross_margin', [revenue, cost]) - calculate('gross_margin_excluding_revenue', [revenue, cost, credits])
-        effects.append(f"Credit revenue increased the calculated margin by {effect:.2f} percentage points in Q{quarter} {year} [{source['id']}].")
+    tickers = scope.get('tickers', []) if scope else sorted({s['ticker'] for s in sources})
+    if not tickers:
+        return None
+    parsed = [(s, table_facts(s)) for s in sources]
+    # Prefer one recent comparative table when it covers several periods. Any
+    # conflicting original/comparative values require general grounded handling.
+    parsed.sort(key=lambda item: (-sum(_inputs(item[1], p) is not None for p in periods),
+                                  -int(item[0].get('report_date', '0000-00-00').replace('-', ''))))
+    calculations, ids, effects = [], [], []
+    for ticker in tickers:
+        for year in years:
+            period = f'{year}-Q{quarter}'
+            matched = [(s, _inputs(facts, period)) for s, facts in parsed if s['ticker'] == ticker]
+            matched = [(s, values) for s, values in matched if values is not None]
+            if not matched or len({tuple(values) for _, values in matched}) != 1:
+                return None
+            source, (revenue, cost, credits) = matched[0]
+            if revenue <= 0 or revenue - credits <= 0 or cost < 0 or credits < 0:
+                return None
+            ids.append(source['id'])
+            company = source.get('company', ticker)
+            for operation, values, label in (
+                ('gross_margin', [revenue, cost], 'including regulatory credits'),
+                ('gross_margin_excluding_revenue', [revenue, cost, credits], ''),
+            ):
+                calculations.append(dict(label=f'{company} {ticker} automotive Q{quarter} {year} {label}'.strip(),
+                                         operation=operation, values=values, source_ids=[source['id']], unit='%'))
+            effect = calculate('gross_margin', [revenue, cost]) - calculate('gross_margin_excluding_revenue', [revenue, cost, credits])
+            effects.append(f"Credit revenue increased {ticker}'s calculated margin by {effect:.2f} percentage points in Q{quarter} {year} [{source['id']}].")
     return dict(status='answered', answer='With reported total automotive costs unchanged, ' + ' '.join(effects),
                 citation_ids=list(dict.fromkeys(ids)), chart=empty_chart(), calculations=calculations)

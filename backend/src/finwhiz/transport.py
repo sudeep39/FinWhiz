@@ -7,10 +7,24 @@ from .telemetry import remaining, span, current_trace
 
 
 class JsonTransport:
+    """Bounded JSON HTTP adapter owned by Providers.transport.
+
+    Providers.request delegates embedding and Pinecone HTTP calls here.
+    GenerationClient uses LangChain separately with the same HTTP client."""
     def __init__(self, client, settings):
+        """Bind a shared HTTP client and server timeout/retry settings.
+
+        Called by Providers.__init__; no request is sent during construction."""
         self.client, self.settings = client, settings
 
     def request(self, url, body=None, headers=None, method="POST", attempts=None):
+        """Send JSON and return the decoded successful response within budgets.
+
+        Called through Providers.request for embeddings and vector operations.
+        url/body/headers/method define the request; attempts optionally overrides
+        retry count. Retries transient statuses/transport errors, never billing
+        exhaustion, and shares research/agent deadlines. Raises AppError on
+        classified failures; the supplied method/path may perform remote writes."""
         operation = (
             "embedding"
             if url.endswith("/embeddings")

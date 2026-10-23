@@ -480,6 +480,12 @@ def execute(args, settings):
 
 
 def main():
+    """Parse terminal arguments, load server settings and dispatch a CLI command.
+
+    Entry point used by run.py and the package launcher. execute owns the
+    selected command; commands can serve HTTP, ingest files, evaluate answers
+    or perform explicitly requested maintenance, depending on their flags.
+    """
     args = parser().parse_args()
     settings = Settings(_env_file=ROOT / ".env")
     if args.data_dir:

@@ -7,6 +7,14 @@ MONTHS = {name.lower(): i for i, name in enumerate(
 
 
 def resolve_scope(question, documents, tickers, periods=None, history=None):
+    """Resolve question mentions against the catalog and UI-selected boundaries.
+
+    Called by ResearchEndpoints for preflight/chat and by the research policy
+    node for direct callers. documents are catalog dictionaries; periods are
+    selected filing end dates. Returns a resolved/clarification/insufficiency
+    dictionary with requested financial periods and authorized source filings.
+    History can supply follow-up context. Performs no model or vector calls.
+    """
     question = re.sub(r'\b((?:19|20|21)\d{2})\s*[-/]?\s*Q([1-4])\b', r'Q\2 \1', question, flags=re.I)
     question = re.sub(r'\bQ([1-4])\s*FY\s*((?:19|20|21)\d{2})\b', r'Q\1 \2', question, flags=re.I)
     periods = periods or []
